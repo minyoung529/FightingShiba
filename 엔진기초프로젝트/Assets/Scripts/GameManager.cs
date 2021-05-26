@@ -7,20 +7,27 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
+    [Header("점수")]
     [SerializeField]
     private Text textScore = null;
     [SerializeField]
-    private Text textLife = null;
-    [SerializeField]
     private Text textHighScore = null;
 
+    [Header("배경 오브젝트")]
     [SerializeField]
     private GameObject cloud1 = null;
     [SerializeField]
     private GameObject cloud2 = null;
     [SerializeField]
     private GameObject yellowButterfly = null;
+
+    [Header("생명")]
+    [SerializeField]
+    private GameObject heart1 = null;
+    [SerializeField]
+    private GameObject heart2 = null;
+    [SerializeField]
+    private GameObject heart3 = null;
 
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
@@ -35,7 +42,6 @@ public class GameManager : MonoBehaviour
     {
         poolManager = FindObjectOfType<PoolManager>();
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
-        //StartCoroutine(SpawnEnemy());
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
        // UpdateUI();
@@ -44,7 +50,6 @@ public class GameManager : MonoBehaviour
     public void UpdateUI()
     {
         textScore.text = string.Format("SCORE\n{0}", score);
-        textLife.text = string.Format("LIFE\n{0}", life);
         textHighScore.text = string.Format("HIGHSCORE\n{0}", highScore);
     }
 
@@ -68,10 +73,23 @@ public class GameManager : MonoBehaviour
     {
         life--;
         //UpdateUI();
+        destroyHeart();
         if (life <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
+    }
+
+    private void destroyHeart()
+    {
+        if (life == 2)
+            heart3.SetActive(false);
+
+        else if (life == 1)
+            heart2.SetActive(false);
+
+        else if (life == 0)
+            heart1.SetActive(false);
     }
 
     //private IEnumerator SpawnEnemy()

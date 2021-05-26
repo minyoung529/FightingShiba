@@ -1207,11 +1207,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textScore: {fileID: 0}
-  textLife: {fileID: 0}
   textHighScore: {fileID: 0}
   cloud1: {fileID: 5881459917966850042, guid: 9e8b398799eb2f54e8e909a7334c7599, type: 3}
   cloud2: {fileID: 6873086254450879962, guid: dc6f3f4475d919342940f26e61bb917a, type: 3}
   yellowButterfly: {fileID: 1144305596572785861, guid: 89a9c0f1ca5c9a540b033badf3b7cca5, type: 3}
+  heart1: {fileID: 394983557}
+  heart2: {fileID: 1599746678}
+  heart3: {fileID: 1760141784}
 --- !u!4 &1935711153
 Transform:
   m_ObjectHideFlags: 0
