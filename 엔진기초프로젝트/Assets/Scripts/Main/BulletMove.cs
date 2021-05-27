@@ -19,9 +19,6 @@ public class BulletMove : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.StopGame())
-            return;
-
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.SetParent(null);
         CheckLimit();

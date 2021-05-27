@@ -27,15 +27,6 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.StopGame())
-        {
-            //StopCoroutine(Fire());
-            return;
-        }
-
-        else
-            StartCoroutine(Fire());
-
         if (Input.GetMouseButton(0))
         {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -84,7 +75,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDamaged && gameManager.StopGame()) return;
+        if (isDamaged) return;
 
         if (collision.CompareTag("EnemyBullet"))
         {

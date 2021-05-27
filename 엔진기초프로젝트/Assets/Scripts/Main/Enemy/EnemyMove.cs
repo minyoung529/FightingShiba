@@ -52,7 +52,7 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (isDead || gameManager.StopGame()) return;
+        if (isDead) return;
 
         if(transform.position.x>=7f)
         {

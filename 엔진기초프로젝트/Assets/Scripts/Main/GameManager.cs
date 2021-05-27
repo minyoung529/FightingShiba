@@ -21,32 +21,22 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject yellowButterfly = null;
 
-    [Header("생명")]
-    [SerializeField]
-    private GameObject heart1 = null;
-    [SerializeField]
-    private GameObject heart2 = null;
-    [SerializeField]
-    private GameObject heart3 = null;
-
-    [Header("게임 중지 팝업")]
-    [SerializeField]
-    private GameObject stopPopUp = null;
-
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
     private int score = 0;
-    private int life = 3;
+    public int life { get; private set; } = 3;
     private int highScore = 0;
 
     public PoolManager poolManager{ get; private set; }
+    private UIManager uiManager = null;
 
     private bool isStop = false;
 
     void Start()
     {
         poolManager = FindObjectOfType<PoolManager>();
+        uiManager = FindObjectOfType<UIManager>();
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
@@ -79,58 +69,22 @@ public class GameManager : MonoBehaviour
     {
         life--;
         //UpdateUI();
-        destroyHeart();
+        uiManager.destroyHeart();
         if (life <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
     }
 
-    private void destroyHeart()
-    {
-        if (life == 2)
-            heart3.SetActive(false);
-
-        else if (life == 1)
-            heart2.SetActive(false);
-
-        else if (life == 0)
-            heart1.SetActive(false);
-    }
-
-    //private IEnumerator SpawnEnemy()
-    //{
-    //}
-
-    public void OnClickStop()
-    {
-        StopGame();
-        stopPopUp.SetActive(true);
-    }
-
-    public void OnClickMenu()
-    {
-        SceneManager.LoadScene("Lobby");
-        isStop = false;
-    }
-
-    public void OnClickNewGame()
-    {
-        SceneManager.LoadScene("Main");
-        isStop = false;
-        stopPopUp.SetActive(false);
-    }
-
-    public void OnClickContinue()
-    {
-        isStop = false;
-        stopPopUp.SetActive(false);
-    }
-
-    public bool StopGame()
+    public void StopGame()
     {
         isStop = true;
-        return isStop;
+        Time.timeScale = 0;
     }
 
+    public void ContinueGame()
+    {
+        isStop = false;
+        Time.timeScale = 1;
+    }
 }
