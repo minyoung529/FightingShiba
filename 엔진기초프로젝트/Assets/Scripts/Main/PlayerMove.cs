@@ -23,11 +23,19 @@ public class PlayerMove : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(Fire());
-
     }
 
     void Update()
     {
+        if (gameManager.StopGame())
+        {
+            //StopCoroutine(Fire());
+            return;
+        }
+
+        else
+            StartCoroutine(Fire());
+
         if (Input.GetMouseButton(0))
         {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -74,9 +82,9 @@ public class PlayerMove : MonoBehaviour
         return result;
     }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDamaged) return;
+        if (isDamaged && gameManager.StopGame()) return;
 
         if (collision.CompareTag("EnemyBullet"))
         {

@@ -104,7 +104,33 @@ public class GameManager : MonoBehaviour
 
     public void OnClickStop()
     {
+        StopGame();
+        stopPopUp.SetActive(true);
+    }
+
+    public void OnClickMenu()
+    {
+        SceneManager.LoadScene("Lobby");
+        isStop = false;
+    }
+
+    public void OnClickNewGame()
+    {
+        SceneManager.LoadScene("Main");
+        isStop = false;
+        stopPopUp.SetActive(false);
+    }
+
+    public void OnClickContinue()
+    {
+        isStop = false;
+        stopPopUp.SetActive(false);
+    }
+
+    public bool StopGame()
+    {
         isStop = true;
+        return isStop;
     }
 
 }

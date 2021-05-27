@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
+    #region 변수목록
+    [Header("처치시 주는 점수")]
     [SerializeField]
     private int score = 100;
+
+    [Header("Enemy 체력")]
     [SerializeField]
     private int hp = 50;
+
+    [Header("Enemy 빠르기")]
     [SerializeField]
     protected float speed = 5f;
+
     private bool isDamaged = false;
     protected bool isDead = false;
+
     protected GameManager gameManager = null;
     private Animator animator = null;
     private SpriteRenderer spriteRenderer = null;
+
+    [Header("총알 딜레이")]
+    [SerializeField]
+    private float fireRate = 0.8f;
+    private GameObject bullet = null;
 
     private float timer = 0f;
     private Vector3 diff = Vector3.zero;
     private PlayerMove player = null;
     private float rotationZ = 0f;
 
-    [SerializeField]
-    private float fireRate = 0.8f;
-
+    [Header("적 생성시 필요한 변수")]
     [SerializeField]
     private Transform enemyBulletPosition = null;
     [SerializeField]
     private GameObject enemyBulletPrefab = null;
-
-    private GameObject bullet = null;
+    #endregion
 
     protected virtual void Start()
     {
@@ -42,7 +52,7 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (isDead) return;
+        if (isDead || gameManager.StopGame()) return;
 
         if(transform.position.x>=7f)
         {
