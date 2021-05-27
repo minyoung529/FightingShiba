@@ -10,12 +10,7 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
-        if(QuitPopUp.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
-        {
-            QuitPopUp.SetActive(false);
-        }
-
-        else if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             QuitPopUp.SetActive(true);
         }
@@ -23,7 +18,7 @@ public class LobbyManager : MonoBehaviour
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Main");
     }
 
     public void OnClickCheckQuit()
@@ -34,5 +29,15 @@ public class LobbyManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void NotQuit()
+    {
+        QuitPopUp.SetActive(false);
+    }
+
+    public void OnClickStore()
+    {
+        SceneManager.LoadScene("Store");
     }
 }

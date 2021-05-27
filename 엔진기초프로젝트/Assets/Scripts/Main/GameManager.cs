@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject heart3 = null;
 
+    [Header("게임 중지 팝업")]
+    [SerializeField]
+    private GameObject stopPopUp = null;
+
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
@@ -37,6 +41,8 @@ public class GameManager : MonoBehaviour
     private int highScore = 0;
 
     public PoolManager poolManager{ get; private set; }
+
+    private bool isStop = false;
 
     void Start()
     {
@@ -95,5 +101,10 @@ public class GameManager : MonoBehaviour
     //private IEnumerator SpawnEnemy()
     //{
     //}
+
+    public void OnClickStop()
+    {
+        isStop = true;
+    }
 
 }
