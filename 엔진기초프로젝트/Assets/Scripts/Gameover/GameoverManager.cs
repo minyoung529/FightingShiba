@@ -9,4 +9,9 @@ public class GameoverManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void OnClickLobby()
+    {
+        SceneManager.LoadScene("Lobby");
+    }
 }

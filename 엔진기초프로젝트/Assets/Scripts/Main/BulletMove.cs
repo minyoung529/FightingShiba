@@ -6,15 +6,15 @@ public class BulletMove : MonoBehaviour
 {
     [SerializeField]
     private float speed = 10f;
-    [SerializeField]
-    private float rotationSpeed = 2f;
     
-    private float rotationY = 0f;
+    private float damage = 1f;
 
     private GameManager gameManager = null;
+    private UIManager uiManager = null;
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     void Update()
@@ -50,6 +50,14 @@ public class BulletMove : MonoBehaviour
     {
         transform.SetParent(gameManager.poolManager.transform, false);
         gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            uiManager.EnemyHPBar(damage);
+        }
     }
 
 }

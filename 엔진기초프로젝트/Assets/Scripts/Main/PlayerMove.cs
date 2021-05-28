@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //  rigid.MovePosition(targetPosition);
+
             targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
             targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
 
@@ -55,7 +55,6 @@ public class PlayerMove : MonoBehaviour
         //자식이 있을 경우(재활용 가능)
         if (gameManager.poolManager.transform.childCount > 0)
         {
-            Debug.Log("아ㅏㅇ");
             result = gameManager.poolManager.transform.GetChild(0).gameObject;
             result.transform.position = bulletPosition.position;
             result.transform.SetParent(null);

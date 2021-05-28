@@ -22,18 +22,31 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text textDelayTime = null;
 
+    [Header("딜레이 타임 텍스트")]
+    [SerializeField]
+    private Slider enemyHPBar;
+
+    [Header("점수")]
+    [SerializeField]
+    private Text textScore = null;
+    [SerializeField]
+    private Text textHighScore = null;
+
+    private int score = 0;
+    private int highScore = 0;
+
 
     private GameManager gameManager = null;
 
-    private int time = 3;
-    private float delayTime = 3f;
+    private int countTime = 3;
 
     private void Start()
     {
+        highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    public void destroyHeart()
+    public void DestroyHeart()
     {
         if (gameManager.life == 2)
             heart3.SetActive(false);
@@ -45,6 +58,22 @@ public class UIManager : MonoBehaviour
             heart1.SetActive(false);
     }
 
+    public void UpdateUI()
+    {
+        textScore.text = string.Format("SCORE\n{0}", score);
+        textHighScore.text = string.Format("HIGHSCORE\n{0}", highScore);
+    }
+
+    public void AddScore(int addScore)
+    {
+        this.score += addScore;
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HIGHSCORE", highScore);
+        }
+        UpdateUI();
+    }
 
     public void OnClickStop()
     {
@@ -65,50 +94,30 @@ public class UIManager : MonoBehaviour
 
     public void OnClickContinue()
     {
+        countTime = 3;
         stopPopUp.SetActive(false);
-        //StartCoroutine(Delay());
-        gameManager.ContinueGame();
-        StartCoroutine(continuedelay());
+        StartCoroutine(ContinueDelay());
     }
 
-    //private IEnumerator Delay()
-    //{
-        
-    //    //Debug.Log(delayTime);
-    //    //while(true)
-    //    //{
-    //    //    delayTime -= Time.deltaTime;
-
-    //    //    if (delayTime == 3)
-    //    //    {
-    //    //        time = 3;
-    //    //        textDelayTime.text = string.Format("{0}", time);
-    //    //    }
-
-    //    //    else if (delayTime == 2)
-    //    //    {
-    //    //        time = 2;
-    //    //        textDelayTime.text = string.Format("{0}", time);
-    //    //    }
-
-    //    //    else if (delayTime == 1)
-    //    //    {
-    //    //        time = 1;
-    //    //        textDelayTime.text = string.Format("{0}", time);
-    //    //    }
-    //    //    if (delayTime <= 0)
-    //    //        yield return 0;
-    //    //}
-        
-    //}
-    private IEnumerator continuedelay()
+    
+    private IEnumerator ContinueDelay()
     {
-        while (time > 0)
+        while (countTime > 0)
         {
-            textDelayTime.text = string.Format("{0}", time);
-            Debug.Log(time);
-            time--;
-            yield return new WaitForSeconds(1f);
+            textDelayTime.text = string.Format("{0}", countTime);
+            countTime--;
+            yield return new WaitForSecondsRealtime(1f);
+
+            if(countTime == 0)
+                textDelayTime.text = string.Format("");
         }
+
+        gameManager.ContinueGame();
+        yield return 0;
+    }
+
+    public void EnemyHPBar(float damage)
+    {
+        enemyHPBar.value += damage;
     }
 }

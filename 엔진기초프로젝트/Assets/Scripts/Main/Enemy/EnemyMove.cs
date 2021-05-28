@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour
 
     [Header("Enemy 체력")]
     [SerializeField]
-    private int hp = 50;
+    private float hp = 100f;
 
     [Header("Enemy 빠르기")]
     [SerializeField]
@@ -30,6 +30,7 @@ public class EnemyMove : MonoBehaviour
     private GameObject bullet = null;
 
     private float timer = 0f;
+    private float circleTimer = 0f;
     private Vector3 diff = Vector3.zero;
     private PlayerMove player = null;
     private float rotationZ = 0f;
@@ -54,17 +55,22 @@ public class EnemyMove : MonoBehaviour
     {
         if (isDead) return;
 
-        if(transform.position.x>=7f)
+        if (transform.position.x >= 6.5f)
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
+
+        EnemyAttack();
+
+        if (hp < 90)
+            return;
 
         Fire();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDead) return; //한번만 죽임, 죽이면 총알 통과
+        if (isDead) return;
 
         if (collision.CompareTag("Bullet"))
         {
@@ -84,7 +90,7 @@ public class EnemyMove : MonoBehaviour
     private IEnumerator Damaged()
     {
         hp--;
-        spriteRenderer.material.SetColor("_Color", new Color(1f, 0f, 0f, 0f));
+        spriteRenderer.material.SetColor("_Color", new Color(0.5f, 0.5f, 0.5f, 0f));
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
         isDamaged = false;
@@ -95,7 +101,6 @@ public class EnemyMove : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
-
 
     private void Fire()
     {
@@ -108,14 +113,58 @@ public class EnemyMove : MonoBehaviour
             rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
             timer = 0f;
-            bullet = Instantiate(enemyBulletPrefab, transform);
-            bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotationZ-180f);
+            bullet = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
+            bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 180f);
             bullet.transform.SetParent(null);
         }
 
         if (transform.position.x < gameManager.MinPosition.x - 2f)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void EnemyAttack()
+    {
+        if (hp < 90)
+        {
+
+            Circle();
+            //fireRate = 0.65f;
+        }
+
+        else if (hp == 75)
+        {
+            //fireRate = 0.55f;
+        }
+
+        if (hp == 60)
+        {
+            
+        }
+
+        else if (hp == 50)
+        {
+            
+        }
+    }
+
+    private void Circle()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= 3f)
+        {
+            for (int i = 0; i < 360; i += 13)
+            {
+                Debug.Log("아아");
+                GameObject circleBullet = Instantiate(enemyBulletPrefab);
+
+                timer = 0f;
+
+                circleBullet.transform.position = enemyBulletPosition.transform.position;
+                circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);
+            }
         }
     }
 

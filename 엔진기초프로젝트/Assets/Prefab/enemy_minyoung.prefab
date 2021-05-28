@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4023365756134423890}
   m_Layer: 0
   m_Name: enemy_minyoung
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.54, y: 8.84}
+    oldSize: {x: 5.72, y: 7.98}
     newSize: {x: 5.54, y: 8.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   score: 100
   hp: 2
   speed: 5
+  fireRate: 1
   enemyBulletPosition: {fileID: 0}
   enemyBulletPrefab: {fileID: 4928271293999648274, guid: 01156cbd4da8a8a499881f2e8c3945f1, type: 3}
 --- !u!95 &-1175894136056144303
