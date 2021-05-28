@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("플레이어 스피드")]
     [SerializeField]
     private float speed = 5f;
+    [Header("총알 포지션")]
     [SerializeField]
     private Transform bulletPosition = null;
+    [Header("총알 프리팹")]
     [SerializeField]
     private GameObject bulletPrefab = null;
+    [Header("총알 딜레이 시간")]
     [SerializeField]
     private float fireRate = 0.5f;
 
@@ -48,11 +52,11 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    //instantiating or pooling player bullet
     private GameObject InstantiateOrPool()
     {
         GameObject result = null;
 
-        //자식이 있을 경우(재활용 가능)
         if (gameManager.poolManager.transform.childCount > 0)
         {
             result = gameManager.poolManager.transform.GetChild(0).gameObject;
@@ -61,7 +65,6 @@ public class PlayerMove : MonoBehaviour
             result.SetActive(true);
         }
 
-        //없다면 instantiate
         else
         {
             GameObject newBullet = Instantiate(bulletPrefab, bulletPosition);
@@ -82,6 +85,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    // Damage effect
     private IEnumerator Damage()
     {
         isDamaged = true;

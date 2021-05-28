@@ -61,10 +61,6 @@ public class EnemyMove : MonoBehaviour
         }
 
         EnemyAttack();
-
-        if (hp < 90)
-            return;
-
         Fire();
     }
 
@@ -128,22 +124,20 @@ public class EnemyMove : MonoBehaviour
     {
         if (hp < 90)
         {
+            fireRate = 0.65f;
+        }
 
+        if (hp < 75)
+        {
+            fireRate = 0.55f;
+        }
+
+        if (hp < 60)
+        {
             Circle();
-            //fireRate = 0.65f;
         }
 
-        else if (hp == 75)
-        {
-            //fireRate = 0.55f;
-        }
-
-        if (hp == 60)
-        {
-            
-        }
-
-        else if (hp == 50)
+        if (hp == 50)
         {
             
         }
@@ -151,16 +145,15 @@ public class EnemyMove : MonoBehaviour
 
     private void Circle()
     {
-        timer += Time.deltaTime;
+        circleTimer += Time.deltaTime;
 
-        if (timer >= 3f)
+        if (circleTimer >= 3f)
         {
-            for (int i = 0; i < 360; i += 13)
+            for (int i = -90; i < 90; i += 13)
             {
-                Debug.Log("¾Æ¾Æ");
                 GameObject circleBullet = Instantiate(enemyBulletPrefab);
 
-                timer = 0f;
+                circleTimer = 0f;
 
                 circleBullet.transform.position = enemyBulletPosition.transform.position;
                 circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);

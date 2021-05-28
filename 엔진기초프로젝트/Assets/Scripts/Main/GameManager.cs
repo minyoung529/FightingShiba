@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public int life { get; private set; } = 3;
 
     public PoolManager poolManager{ get; private set; }
-    private UIManager uiManager = null;
+    public UIManager uiManager { get; private set; }
 
     void Start()
     {

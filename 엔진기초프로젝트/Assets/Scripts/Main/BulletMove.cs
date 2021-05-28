@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class BulletMove : MonoBehaviour
 {
+    [Header("ÃÑ¾Ë ½ºÇÇµå")]
     [SerializeField]
     private float speed = 10f;
     
     private float damage = 1f;
 
     private GameManager gameManager = null;
-    private UIManager uiManager = null;
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        uiManager = FindObjectOfType<UIManager>();
     }
 
     void Update()
@@ -56,7 +55,7 @@ public class BulletMove : MonoBehaviour
     {
         if(collision.CompareTag("Enemy"))
         {
-            uiManager.EnemyHPBar(damage);
+            gameManager.uiManager.EnemyHPBar(damage);
         }
     }
 
