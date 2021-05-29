@@ -106,12 +106,12 @@ TextureImporter:
       name: enemies_20
       rect:
         serializedVersion: 2
-        x: 67
-        y: 24
-        width: 525
-        height: 795
+        x: 2
+        y: 0
+        width: 495
+        height: 736
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -127,12 +127,12 @@ TextureImporter:
       name: enemies_21
       rect:
         serializedVersion: 2
-        x: 638
-        y: 29
-        width: 543
-        height: 795
+        x: 580
+        y: 0
+        width: 497
+        height: 736
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,12 +148,12 @@ TextureImporter:
       name: enemies_22
       rect:
         serializedVersion: 2
-        x: 1227
-        y: 36
-        width: 552
-        height: 794
+        x: 1184
+        y: 0
+        width: 497
+        height: 736
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,12 +169,12 @@ TextureImporter:
       name: enemies_23
       rect:
         serializedVersion: 2
-        x: 1807
-        y: 24
-        width: 539
-        height: 813
+        x: 1751
+        y: 0
+        width: 497
+        height: 736
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,12 +190,12 @@ TextureImporter:
       name: enemies_25
       rect:
         serializedVersion: 2
-        x: 2376
-        y: 15
-        width: 540
-        height: 831
+        x: 2323
+        y: 0
+        width: 507
+        height: 736
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

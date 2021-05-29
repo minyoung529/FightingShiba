@@ -15,11 +15,11 @@ C:/Users/USER/Documents/shibashootingproject/엔진기초프로젝트
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-9460
+7089
 Successfully changed project path to: C:/Users/USER/Documents/shibashootingproject/엔진기초프로젝트
 C:/Users/USER/Documents/shibashootingproject/엔진기초프로젝트
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 36.24 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 42.01 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.4f1 (0abb6314276a)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/Resources/UnitySubsystems
@@ -35,91 +35,179 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56932
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56908
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001705 seconds.
+Registered in 0.002276 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 33.95 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 40.52 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.058 seconds
+- Completed reload, in  2.477 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.001142 seconds.
+Registered in 0.000922 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 35.69 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 54.99 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.025 seconds
+- Completed reload, in  1.046 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 0.34 ms, found 1 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.43 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1822 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 85.5 MB.
+Unloading 1821 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 85.4 MB.
 System memory in use after: 85.4 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2266.
-Total: 3.242000 ms (FindLiveObjects: 0.247300 ms CreateObjectMapping: 0.116900 ms MarkObjects: 2.692200 ms  DeleteObjects: 0.184800 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2265.
+Total: 2.628900 ms (FindLiveObjects: 0.207700 ms CreateObjectMapping: 0.061400 ms MarkObjects: 2.203500 ms  DeleteObjects: 0.155300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   requireTextureImportCompression: false -> true
 ========================================================================
 Received Import Request.
-  path: Assets/Prefab/Bullet/unitybullet.prefab
-  artifactKey: Guid(9d6545857a3facd43ab9bcb9624addf8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Bullet/unitybullet.prefab using Guid(9d6545857a3facd43ab9bcb9624addf8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69351edf2443b1b9ca8c3a23297e542d') in 0.104568 seconds
-  Import took 0.107778 seconds .
+  path: Assets/Sprites/enemies.png
+  artifactKey: Guid(d0685cc1091682a4ebc62687ad52ed5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/enemies.png using Guid(d0685cc1091682a4ebc62687ad52ed5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d682664963023e9efa823320079a820') in 0.126393 seconds
+  Import took 0.130202 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 87.213233 seconds.
+  path: Assets/Sprites/enemies.png
+  artifactKey: Guid(d0685cc1091682a4ebc62687ad52ed5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/enemies.png using Guid(d0685cc1091682a4ebc62687ad52ed5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d281329e451760cfc94f83a12955038') in 0.095592 seconds
+  Import took 0.099508 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 236.510810 seconds.
+  path: Assets/Prefab/enemy_minyoung.prefab
+  artifactKey: Guid(aad77ad6515a2074abb26d024805f49f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/enemy_minyoung.prefab using Guid(aad77ad6515a2074abb26d024805f49f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '607bbb4eddf53345e0a0a8a5dc57caff') in 0.055017 seconds
+  Import took 0.058750 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 27.612715 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7ddc0320213c40bb0d4bac81e2c6ab6') in 0.005543 seconds
+  Import took 0.008843 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 361.529103 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29f2f1b03926914771ca04f8ddec3c07') in 0.013572 seconds
+  Import took 0.017818 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.963878 seconds.
+  path: Assets/Animation/EnemyAnimation.anim
+  artifactKey: Guid(1b1031b2988fcd84b92e2421d55f0072) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/EnemyAnimation.anim using Guid(1b1031b2988fcd84b92e2421d55f0072) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dcaac0012707cba8d100b68c78f76c0a') in 0.015683 seconds
+  Import took 0.019019 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 53.147546 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f31a6829c414c8fb4fb6fe089ae54937') in 0.005889 seconds
+  Import took 0.010582 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 989.150999 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cadbb6e3c9ea07df197db8c238ad2cc0') in 0.012519 seconds
+  Import took 0.016130 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.713865 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a49c4fd82f58538c34d2d97ff80692a0') in 0.005153 seconds
+  Import took 0.009076 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 509.810162 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8292d6d941b6dca953950306fc8167e7') in 0.005458 seconds
+  Import took 0.010688 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 241.893733 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '054e67a67ae251ffa1dcaa38690ea500') in 0.006137 seconds
+  Import took 0.009418 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 63.885880 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '804a7a92d640a6c1549944b75a4f1221') in 0.013984 seconds
+  Import took 0.017403 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 325.814900 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27904dd0d715bd4e56c6d32a4ef85680') in 0.015588 seconds
+  Import took 0.019255 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 164.709356 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0192ed76abc8ddb5566148ef69cf52a1') in 0.013971 seconds
+  Import took 0.017244 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 100.417066 seconds.
+  path: Assets/Animation/enemy_minyoung.controller
+  artifactKey: Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/enemy_minyoung.controller using Guid(ed32ec968c47dca47adbe8459d14cf97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6066613f5386aa2185adc3122361d547') in 0.013107 seconds
+  Import took 0.016524 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.000932 seconds.
+Registered in 0.000909 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 0.45 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.913 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.35 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1818 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 88.3 MB.
-System memory in use after: 88.3 MB.
-
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2277.
-Total: 2.373400 ms (FindLiveObjects: 0.398600 ms CreateObjectMapping: 0.172000 ms MarkObjects: 1.695900 ms  DeleteObjects: 0.105800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  requireTextureImportCompression: false -> true
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000963 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.47 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.891 seconds
+- Completed reload, in  0.935 seconds
 Platform modules already initialized, skipping
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
 Refreshing native plugins compatible for Editor in 0.34 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1818 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 1817 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 88.3 MB.
-System memory in use after: 88.4 MB.
+System memory in use after: 88.3 MB.
 
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2281.
-Total: 2.450300 ms (FindLiveObjects: 0.204600 ms CreateObjectMapping: 0.168900 ms MarkObjects: 1.935000 ms  DeleteObjects: 0.140600 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2282.
+Total: 2.457400 ms (FindLiveObjects: 0.230600 ms CreateObjectMapping: 0.083800 ms MarkObjects: 2.037500 ms  DeleteObjects: 0.104100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   requireTextureImportCompression: false -> true
@@ -127,23 +215,23 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.000833 seconds.
+Registered in 0.000854 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.30 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 0.36 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.866 seconds
+- Completed reload, in  1.089 seconds
 Platform modules already initialized, skipping
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.37 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 0.42 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1818 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 1817 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 88.4 MB.
 System memory in use after: 88.4 MB.
 
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2285.
-Total: 3.430200 ms (FindLiveObjects: 0.242000 ms CreateObjectMapping: 0.112900 ms MarkObjects: 2.904300 ms  DeleteObjects: 0.169900 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2286.
+Total: 3.289300 ms (FindLiveObjects: 0.428900 ms CreateObjectMapping: 0.172400 ms MarkObjects: 2.547200 ms  DeleteObjects: 0.139300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   requireTextureImportCompression: false -> true
@@ -151,73 +239,24 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.001162 seconds.
+Registered in 0.000858 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.858 seconds
+- Completed reload, in  0.949 seconds
 Platform modules already initialized, skipping
 Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.33 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1818 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 88.4 MB.
-System memory in use after: 88.4 MB.
-
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2289.
-Total: 1.959000 ms (FindLiveObjects: 0.257000 ms CreateObjectMapping: 0.075200 ms MarkObjects: 1.539100 ms  DeleteObjects: 0.086400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  requireTextureImportCompression: false -> true
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000879 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.44 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.928 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.33 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1818 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 1817 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 88.4 MB.
 System memory in use after: 88.4 MB.
 
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2293.
-Total: 2.317300 ms (FindLiveObjects: 0.240500 ms CreateObjectMapping: 0.213100 ms MarkObjects: 1.716700 ms  DeleteObjects: 0.145900 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2290.
+Total: 2.323100 ms (FindLiveObjects: 0.337600 ms CreateObjectMapping: 0.071900 ms MarkObjects: 1.829800 ms  DeleteObjects: 0.082600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   requireTextureImportCompression: false -> true
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.000850 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.918 seconds
-Platform modules already initialized, skipping
-Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.43 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1818 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 88.4 MB.
-System memory in use after: 88.4 MB.
-
-Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2297.
-Total: 2.966000 ms (FindLiveObjects: 0.450000 ms CreateObjectMapping: 0.130600 ms MarkObjects: 2.230400 ms  DeleteObjects: 0.153900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  requireTextureImportCompression: false -> true
-  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file

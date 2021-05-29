@@ -40,6 +40,18 @@ public class EnemyMove : MonoBehaviour
     private Transform enemyBulletPosition = null;
     [SerializeField]
     private GameObject enemyBulletPrefab = null;
+
+    [Header("스프라이트")]
+    [SerializeField]
+    private Sprite firstMinyoung;
+    [SerializeField]
+    private Sprite secondMinyoung;
+    [SerializeField]
+    private Sprite thirdMinyoung;
+    [SerializeField]
+    private Sprite fourthMinyoung;
+
+
     #endregion
 
     protected virtual void Start()
@@ -122,41 +134,47 @@ public class EnemyMove : MonoBehaviour
 
     private void EnemyAttack()
     {
-        if (hp < 90)
+        if (hp == 90)
         {
             fireRate = 0.65f;
+            spriteRenderer.sprite = firstMinyoung;
         }
 
-        if (hp < 75)
+        if (hp == 75)
         {
             fireRate = 0.55f;
-        }
-
-        if (hp < 60)
-        {
-            Circle();
+            spriteRenderer.sprite = secondMinyoung;
         }
 
         if (hp == 50)
         {
-            
+            spriteRenderer.sprite = thirdMinyoung;
+        }
+
+        if (hp < 50)
+        {
+            Circle();
+        }
+
+        if (hp == 30)
+        {
+            spriteRenderer.sprite = fourthMinyoung;
         }
     }
 
     private void Circle()
     {
+
         circleTimer += Time.deltaTime;
 
         if (circleTimer >= 3f)
         {
             for (int i = -90; i < 90; i += 13)
             {
-                GameObject circleBullet = Instantiate(enemyBulletPrefab);
+                    GameObject circleBullet = Instantiate(enemyBulletPrefab);
 
-                circleTimer = 0f;
-
-                circleBullet.transform.position = enemyBulletPosition.transform.position;
-                circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);
+                    circleBullet.transform.position = enemyBulletPosition.transform.position;
+                    circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);
             }
         }
     }
