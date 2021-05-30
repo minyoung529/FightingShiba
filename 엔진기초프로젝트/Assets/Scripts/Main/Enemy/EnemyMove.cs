@@ -24,6 +24,8 @@ public class EnemyMove : MonoBehaviour
     private Animator animator = null;
     private SpriteRenderer spriteRenderer = null;
 
+    private SpeechBubble speechBubble = null;
+
     [Header("ÃÑ¾Ë µô·¹ÀÌ")]
     [SerializeField]
     private float fireRate = 0.8f;
@@ -51,7 +53,6 @@ public class EnemyMove : MonoBehaviour
     [SerializeField]
     private Sprite fourthMinyoung;
 
-
     #endregion
 
     protected virtual void Start()
@@ -61,6 +62,7 @@ public class EnemyMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         player = FindObjectOfType<PlayerMove>();
+        speechBubble = FindObjectOfType<SpeechBubble>();
     }
 
     protected virtual void Update()
@@ -78,6 +80,7 @@ public class EnemyMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (transform.position.x > 6.5f) return;
         if (isDead) return;
 
         if (collision.CompareTag("Bullet"))
@@ -144,6 +147,7 @@ public class EnemyMove : MonoBehaviour
         {
             fireRate = 0.55f;
             spriteRenderer.sprite = secondMinyoung;
+            speechBubble.ChangeToUnityTrow();
         }
 
         if (hp == 50)
@@ -178,5 +182,4 @@ public class EnemyMove : MonoBehaviour
             }
         }
     }
-
 }

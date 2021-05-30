@@ -144,6 +144,10 @@ MonoBehaviour:
   fireRate: 1
   enemyBulletPosition: {fileID: 0}
   enemyBulletPrefab: {fileID: 4928271293999648274, guid: 01156cbd4da8a8a499881f2e8c3945f1, type: 3}
+  firstMinyoung: {fileID: -6271420699411309263, guid: d0685cc1091682a4ebc62687ad52ed5c, type: 3}
+  secondMinyoung: {fileID: -5078133620036087085, guid: d0685cc1091682a4ebc62687ad52ed5c, type: 3}
+  thirdMinyoung: {fileID: 13176795997692230, guid: d0685cc1091682a4ebc62687ad52ed5c, type: 3}
+  fourthMinyoung: {fileID: 4349874989898575965, guid: d0685cc1091682a4ebc62687ad52ed5c, type: 3}
 --- !u!95 &-1175894136056144303
 Animator:
   serializedVersion: 3
