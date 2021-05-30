@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     [Header("딜레이 타임 텍스트")]
     [SerializeField]
     private Text textDelayTime = null;
+    [SerializeField]
+    private GameObject textDelayTimeObj = null;
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField]
@@ -79,6 +81,7 @@ public class UIManager : MonoBehaviour
     {
         gameManager.StopGame();
         stopPopUp.SetActive(true);
+        textDelayTimeObj.SetActive(false);
     }
 
     public void OnClickMenu()
@@ -102,6 +105,8 @@ public class UIManager : MonoBehaviour
     
     private IEnumerator ContinueDelay()
     {
+        textDelayTimeObj.SetActive(true);
+
         while (countTime > 0)
         {
             textDelayTime.text = string.Format("{0}", countTime);
