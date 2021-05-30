@@ -25,6 +25,8 @@ public class EnemyMove : MonoBehaviour
     private SpriteRenderer spriteRenderer = null;
 
     private SpeechBubble speechBubble = null;
+    [SerializeField]
+    private GameObject sBubble = null;
 
     [Header("ÃÑ¾Ë µô·¹ÀÌ")]
     [SerializeField]
@@ -33,6 +35,7 @@ public class EnemyMove : MonoBehaviour
 
     private float timer = 0f;
     private float circleTimer = 0f;
+    private float circleMaxTime = 3f;
     private Vector3 diff = Vector3.zero;
     private PlayerMove player = null;
     private float rotationZ = 0f;
@@ -74,8 +77,14 @@ public class EnemyMove : MonoBehaviour
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        EnemyAttack();
+        if (transform.position.x < 6.6f)
+            sBubble.SetActive(true);
+
         Fire();
+
+        EnemyAttack();
+
+        ChangeSprite();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -137,22 +146,16 @@ public class EnemyMove : MonoBehaviour
 
     private void EnemyAttack()
     {
-        if (hp == 90)
+        if (hp < 90)
         {
             fireRate = 0.65f;
-            spriteRenderer.sprite = firstMinyoung;
-        }
-
-        if (hp == 75)
-        {
-            fireRate = 0.55f;
-            spriteRenderer.sprite = secondMinyoung;
             speechBubble.ChangeToUnityTrow();
+            Debug.Log("¾Æ¾Æ");
         }
 
-        if (hp == 50)
+        if (hp < 75)
         {
-            spriteRenderer.sprite = thirdMinyoung;
+            fireRate = 0.4f;
         }
 
         if (hp < 50)
@@ -160,10 +163,35 @@ public class EnemyMove : MonoBehaviour
             Circle();
         }
 
+        if (hp < 30)
+        {
+            circleMaxTime = 1.5f;
+            Circle();
+        }
+    }
+
+    private void ChangeSprite()
+    {
+        if (hp == 90)
+        {
+            spriteRenderer.sprite = firstMinyoung;
+        }
+
+        if (hp == 75)
+        {
+            spriteRenderer.sprite = secondMinyoung;
+        }
+
+        if (hp == 50)
+        {
+            spriteRenderer.sprite = thirdMinyoung;
+        }
+
         if (hp == 30)
         {
             spriteRenderer.sprite = fourthMinyoung;
         }
+        
     }
 
     private void Circle()
@@ -175,10 +203,11 @@ public class EnemyMove : MonoBehaviour
         {
             for (int i = -90; i < 90; i += 13)
             {
-                    GameObject circleBullet = Instantiate(enemyBulletPrefab);
+                GameObject circleBullet = Instantiate(enemyBulletPrefab);
 
-                    circleBullet.transform.position = enemyBulletPosition.transform.position;
-                    circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);
+                circleBullet.transform.position = enemyBulletPosition.transform.position;
+                circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);
+                circleTimer = 0f;
             }
         }
     }

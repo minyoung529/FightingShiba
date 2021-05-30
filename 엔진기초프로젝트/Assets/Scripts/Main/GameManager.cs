@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("³È³È");
+        Time.timeScale = 1;
+
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
         MinPosition = new Vector2(-9f, -4f);

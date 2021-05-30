@@ -19,6 +19,11 @@ public class EnemyBulletMove : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime, Space.Self);
+
+        if(transform.position.x < gameManager.MinPosition.x)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -37,7 +37,6 @@ public class UIManager : MonoBehaviour
     private int score = 0;
     private int highScore = 0;
 
-
     private GameManager gameManager = null;
 
     private int countTime = 3;
@@ -91,8 +90,9 @@ public class UIManager : MonoBehaviour
 
     public void OnClickNewGame()
     {
-        SceneManager.LoadScene("Main");
         stopPopUp.SetActive(false);
+        SceneManager.LoadScene("Main");
+        
     }
 
     public void OnClickContinue()

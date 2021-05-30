@@ -45,6 +45,7 @@ public class BulletMove : MonoBehaviour
             Despawn();
         }
     }
+
     private void Despawn()
     {
         transform.SetParent(gameManager.poolManager.transform, false);
@@ -58,5 +59,4 @@ public class BulletMove : MonoBehaviour
             gameManager.uiManager.EnemyHPBar(damage);
         }
     }
-
 }
