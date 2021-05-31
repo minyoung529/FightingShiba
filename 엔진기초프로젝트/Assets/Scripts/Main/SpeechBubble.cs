@@ -6,7 +6,7 @@ public class SpeechBubble : MonoBehaviour
 {
     [Header("말풍선 스프라이트")]
     [SerializeField]
-    Sprite speechBuble_UnityThrow;
+    private Sprite speechBuble_UnityThrow;
 
     private SpriteRenderer spriteRenderer = null;
 

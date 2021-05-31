@@ -25,8 +25,6 @@ public class EnemyMove : MonoBehaviour
     private SpriteRenderer spriteRenderer = null;
 
     private SpeechBubble speechBubble = null;
-    [SerializeField]
-    private GameObject sBubble = null;
 
     [Header("ÃÑ¾Ë µô·¹ÀÌ")]
     [SerializeField]
@@ -55,7 +53,6 @@ public class EnemyMove : MonoBehaviour
     private Sprite thirdMinyoung;
     [SerializeField]
     private Sprite fourthMinyoung;
-
     #endregion
 
     protected virtual void Start()
@@ -76,9 +73,6 @@ public class EnemyMove : MonoBehaviour
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
-
-        if (transform.position.x < 6.6f)
-            sBubble.SetActive(true);
 
         Fire();
 
@@ -150,7 +144,6 @@ public class EnemyMove : MonoBehaviour
         {
             fireRate = 0.65f;
             speechBubble.ChangeToUnityTrow();
-            Debug.Log("¾Æ¾Æ");
         }
 
         if (hp < 75)
@@ -161,6 +154,7 @@ public class EnemyMove : MonoBehaviour
         if (hp < 50)
         {
             Circle();
+            Debug.Log("¾Æ¾Æ");
         }
 
         if (hp < 30)
@@ -172,26 +166,25 @@ public class EnemyMove : MonoBehaviour
 
     private void ChangeSprite()
     {
-        if (hp == 90)
+        if (hp < 90)
         {
             spriteRenderer.sprite = firstMinyoung;
         }
 
-        if (hp == 75)
+        if (hp < 75)
         {
             spriteRenderer.sprite = secondMinyoung;
         }
 
-        if (hp == 50)
+        if (hp < 50)
         {
             spriteRenderer.sprite = thirdMinyoung;
         }
 
-        if (hp == 30)
+        if (hp < 30)
         {
             spriteRenderer.sprite = fourthMinyoung;
         }
-        
     }
 
     private void Circle()

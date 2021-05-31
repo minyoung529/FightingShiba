@@ -57,7 +57,7 @@ public class PlayerMove : MonoBehaviour
     {
         GameObject result = null;
 
-        if (gameManager.poolManager.transform.childCount > 0)
+        if (gameManager.poolManager.transform.childCount > 0 && gameManager.poolManager.transform.GetChild(0).CompareTag("Bullet"))
         {
             result = gameManager.poolManager.transform.GetChild(0).gameObject;
             result.transform.position = bulletPosition.position;
