@@ -19,14 +19,13 @@ public class GameManager : MonoBehaviour
     public Vector2 MaxPosition { get; private set; }
 
    
-    public int life { get; private set; } = 3;
+    public int life { get; private set; } = 10;
 
     public PoolManager poolManager{ get; private set; }
     public UIManager uiManager { get; private set; }
 
     void Start()
     {
-        Debug.Log("³È³È");
         Time.timeScale = 1;
 
         poolManager = FindObjectOfType<PoolManager>();

@@ -23,8 +23,11 @@ public class EnemyMove : MonoBehaviour
     protected GameManager gameManager = null;
     private Animator animator = null;
     private SpriteRenderer spriteRenderer = null;
-
     private SpeechBubble speechBubble = null;
+
+   // [Header("¸»Ç³¼±")]
+    //[SerializeField]
+    //private GameObject sb = null;
 
     [Header("ÃÑ¾Ë µô·¹ÀÌ")]
     [SerializeField]
@@ -74,6 +77,11 @@ public class EnemyMove : MonoBehaviour
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
+        if(transform.position.x < 7f)
+        {
+            //sb.SetActive(true);
+        }
+
         Fire();
 
         EnemyAttack();
@@ -92,13 +100,6 @@ public class EnemyMove : MonoBehaviour
             isDamaged = true;
             Destroy(collision.gameObject);
             StartCoroutine(Damaged());
-
-            if (hp <= 0)
-            {
-                isDead = true;
-                gameManager.AddScore(score);
-                StartCoroutine(Dead());
-            }
         }
     }
     private IEnumerator Damaged()
@@ -143,45 +144,68 @@ public class EnemyMove : MonoBehaviour
         if (hp < 90)
         {
             fireRate = 0.65f;
-            speechBubble.ChangeToUnityTrow();
+            speechBubble.ChangeSprites(1);
         }
 
-        if (hp < 75)
+        if (hp < 80)
         {
-            fireRate = 0.4f;
+            speechBubble.ChangeSprites(2);
+        }    
+
+        if (hp < 70)
+        {
+            speechBubble.ChangeSprites(3);
+            fireRate = 0.5f;
+        }
+
+        if (hp < 60)
+        {
+            speechBubble.ChangeSprites(4);
         }
 
         if (hp < 50)
         {
             Circle();
-            Debug.Log("¾Æ¾Æ");
+            speechBubble.ChangeSprites(5);
+        }
+
+        if (hp < 40)
+        {
+            circleMaxTime = 2f;
+            speechBubble.ChangeSprites(6);
         }
 
         if (hp < 30)
         {
             circleMaxTime = 1.5f;
-            Circle();
+            speechBubble.ChangeSprites(7);
+        }
+
+        if (hp < 20)
+        {
+            circleMaxTime = 1.5f;
+            speechBubble.ChangeSprites(8);
         }
     }
 
     private void ChangeSprite()
     {
-        if (hp < 90)
+        if (hp < 80)
         {
             spriteRenderer.sprite = firstMinyoung;
         }
 
-        if (hp < 75)
+        if (hp < 60)
         {
             spriteRenderer.sprite = secondMinyoung;
         }
 
-        if (hp < 50)
+        if (hp < 40)
         {
             spriteRenderer.sprite = thirdMinyoung;
         }
 
-        if (hp < 30)
+        if (hp < 20)
         {
             spriteRenderer.sprite = fourthMinyoung;
         }

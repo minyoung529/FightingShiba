@@ -2199,7 +2199,7 @@ GameObject:
   - component: {fileID: 2076042768}
   m_Layer: 0
   m_Name: SpeechBubble
-  m_TagString: Untagged
+  m_TagString: SpeechBubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2281,7 +2281,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05a66c2fc84c32478ead91143123a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speechBuble_UnityThrow: {fileID: 21300000, guid: dfe3c540e7ec60c44bdde5f93c727797, type: 3}
+  speechBuble_1_1: {fileID: 6072754303996768125, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
+  speechBuble_1_2: {fileID: -8858239839952970905, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
+  speechBuble_2_1: {fileID: 5583990340439901969, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
+  speechBuble_2_2: {fileID: -4378477350760380897, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
+  speechBuble_3_1: {fileID: 3024396545225550086, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
+  speechBuble_3_2: {fileID: 4975424661074265048, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
+  speechBuble_4_1: {fileID: -7184225837295173951, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
+  speechBuble_4_2: {fileID: 1273627727107152391, guid: 822e1db5cb70e6f46a65ab5199def7f9, type: 3}
 --- !u!1001 &5563273849466125072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2293,6 +2300,10 @@ PrefabInstance:
       propertyPath: hp
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1675407848794684750, guid: aad77ad6515a2074abb26d024805f49f, type: 3}
+      propertyPath: sb
+      value: 
+      objectReference: {fileID: 2076042765}
     - target: {fileID: 1675407848794684750, guid: aad77ad6515a2074abb26d024805f49f, type: 3}
       propertyPath: speed
       value: 5
@@ -2316,7 +2327,7 @@ PrefabInstance:
     - target: {fileID: 1675407848794684750, guid: aad77ad6515a2074abb26d024805f49f, type: 3}
       propertyPath: fourthMinyoung
       value: 
-      objectReference: {fileID: 4349874989898575965, guid: d0685cc1091682a4ebc62687ad52ed5c, type: 3}
+      objectReference: {fileID: 21300000, guid: cf63a18ff8e974a48aedeacd23b04bc1, type: 3}
     - target: {fileID: 1675407848794684750, guid: aad77ad6515a2074abb26d024805f49f, type: 3}
       propertyPath: secondMinyoung
       value: 
@@ -2395,11 +2406,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5563273849379800710, guid: aad77ad6515a2074abb26d024805f49f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 5.72
+      value: 4.97
       objectReference: {fileID: 0}
     - target: {fileID: 5563273849379800710, guid: aad77ad6515a2074abb26d024805f49f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 7.98
+      value: 7.3651853
       objectReference: {fileID: 0}
     - target: {fileID: 5563273849379800710, guid: aad77ad6515a2074abb26d024805f49f, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x

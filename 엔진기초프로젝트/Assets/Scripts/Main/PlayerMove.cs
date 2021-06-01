@@ -63,6 +63,8 @@ public class PlayerMove : MonoBehaviour
             result.transform.position = bulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
+
+            gameManager.uiManager.AddScore(1);
         }
 
         else
@@ -71,6 +73,8 @@ public class PlayerMove : MonoBehaviour
             newBullet.transform.position = bulletPosition.position;
             newBullet.transform.SetParent(null);
             result = newBullet;
+
+            gameManager.uiManager.AddScore(1);
         }
         return result;
     }

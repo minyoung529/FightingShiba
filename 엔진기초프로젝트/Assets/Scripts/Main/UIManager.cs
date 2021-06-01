@@ -45,6 +45,8 @@ public class UIManager : MonoBehaviour
     {
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
         gameManager = FindObjectOfType<GameManager>();
+
+        UpdateUI();
     }
 
     public void DestroyHeart()
@@ -61,8 +63,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        textScore.text = string.Format("SCORE\n{0}", score);
-        textHighScore.text = string.Format("HIGHSCORE\n{0}", highScore);
+        textScore.text = string.Format("SCORE {0}", score);
+        //textHighScore.text = string.Format("HIGHSCORE\n{0}", highScore);
     }
 
     public void AddScore(int addScore)
@@ -102,7 +104,6 @@ public class UIManager : MonoBehaviour
         StartCoroutine(ContinueDelay());
     }
 
-    
     private IEnumerator ContinueDelay()
     {
         textDelayTimeObj.SetActive(true);

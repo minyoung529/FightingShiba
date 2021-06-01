@@ -57,6 +57,7 @@ public class BulletMove : MonoBehaviour
         if(collision.CompareTag("Enemy"))
         {
             gameManager.uiManager.EnemyHPBar(damage);
+            gameManager.uiManager.AddScore(5);
         }
     }
 }
