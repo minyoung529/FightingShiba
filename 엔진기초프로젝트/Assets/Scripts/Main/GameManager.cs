@@ -15,13 +15,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject yellowButterfly = null;
 
+    [Header("æ∆¿Ã≈€")]
+    [SerializeField]
+    private GameObject itemPrefab = null;
+
+    private List<Sprite> itemList = new List<Sprite>();
+
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
-   
+
     public int life { get; private set; } = 10;
 
-    public PoolManager poolManager{ get; private set; }
+    public PoolManager poolManager { get; private set; }
     public UIManager uiManager { get; private set; }
 
     void Start()
@@ -32,7 +38,7 @@ public class GameManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
-       // UpdateUI();
+        // UpdateUI();
     }
 
     public void Dead()
@@ -58,5 +64,27 @@ public class GameManager : MonoBehaviour
     public void AddScore(int score)
     {
         uiManager.AddScore(score);
+    }
+
+    private IEnumerator SpawnEnemy()
+    {
+        float randomY = 0;
+        float randomDelay = 0;
+
+        while (true)
+        {
+            randomY = Random.Range(-1.3f, 1.3f);
+            randomDelay = Random.Range(10f, 15f);
+
+            for (int i = 0; i < 5; i++)
+            {
+                Instantiate(itemPrefab, new Vector2(5f, randomY), Quaternion.identity);
+                yield return new WaitForSeconds(1f);
+
+            }
+
+            yield return new WaitForSeconds(randomDelay);
+        }
+
     }
 }

@@ -956,3 +956,84 @@ Total: 1.958700 ms (FindLiveObjects: 0.196900 ms CreateObjectMapping: 0.045700 m
 AssetImportParameters requested are different than current active one (requested -> active):
   requireTextureImportCompression: false -> true
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 2258.568842 seconds.
+  path: Assets/Sprites/Items.png
+  artifactKey: Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Items.png using Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60059992efca23a6f86522dc7c56e3e4') in 0.107561 seconds
+  Import took 0.113000 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.081741 seconds.
+  path: Assets/Sprites/Items.png
+  artifactKey: Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Items.png using Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e1cc7e65d453ebb04bbf9a5df112bed') in 0.016475 seconds
+  Import took 0.019669 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.014030 seconds.
+  path: Assets/Sprites/Items.png
+  artifactKey: Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Items.png using Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e1cc7e65d453ebb04bbf9a5df112bed') in 0.016143 seconds
+  Import took 0.019643 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 22.712518 seconds.
+  path: Assets/Sprites/Items.png
+  artifactKey: Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Items.png using Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2653bf9f94b416d59699f2f066534985') in 0.023686 seconds
+  Import took 0.027223 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000821 seconds.
+  path: Assets/Sprites/Items.png
+  artifactKey: Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Items.png using Guid(8bdd992fa77caa648bb935f2b5449e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2653bf9f94b416d59699f2f066534985') in 0.026024 seconds
+  Import took 0.029617 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 27.574388 seconds.
+  path: Assets/Scripts/Main/GameManager.cs
+  artifactKey: Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Main/GameManager.cs using Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fbe12921df557c41771812b40033cc2') in 0.014431 seconds
+  Import took 0.017465 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001284 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.162 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.39 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1818 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.7 MB.
+System memory in use after: 88.8 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2421.
+Total: 2.187700 ms (FindLiveObjects: 0.320200 ms CreateObjectMapping: 0.113300 ms MarkObjects: 1.672800 ms  DeleteObjects: 0.080300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 433.039112 seconds.
+  path: Assets/Scripts/Main/GameManager.cs
+  artifactKey: Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Main/GameManager.cs using Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13f4a876e911c3e8bfa7fa93eebca424') in 0.008061 seconds
+  Import took 0.011212 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
