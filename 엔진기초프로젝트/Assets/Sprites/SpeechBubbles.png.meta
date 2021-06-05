@@ -26,6 +26,9 @@ TextureImporter:
   - first:
       213: -8858239839952970905
     second: SpeechBubbles_7
+  - first:
+      213: -3656414749302652601
+    second: SpeechBubbles_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,9 +133,9 @@ TextureImporter:
       name: SpeechBubbles_0
       rect:
         serializedVersion: 2
-        x: 62
-        y: 153
-        width: 492
+        x: 53
+        y: 152
+        width: 493
         height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -151,10 +154,10 @@ TextureImporter:
       name: SpeechBubbles_1
       rect:
         serializedVersion: 2
-        x: 694
-        y: 164
+        x: 685
+        y: 163
         width: 491
-        height: 127
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +175,10 @@ TextureImporter:
       name: SpeechBubbles_2
       rect:
         serializedVersion: 2
-        x: 1302
-        y: 182
+        x: 1293
+        y: 181
         width: 493
-        height: 128
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +196,8 @@ TextureImporter:
       name: SpeechBubbles_3
       rect:
         serializedVersion: 2
-        x: 1915
-        y: 170
+        x: 1905
+        y: 169
         width: 492
         height: 128
       alignment: 0
@@ -214,8 +217,8 @@ TextureImporter:
       name: SpeechBubbles_4
       rect:
         serializedVersion: 2
-        x: 62
-        y: 0
+        x: 2434
+        y: 170
         width: 492
         height: 128
       alignment: 0
@@ -235,10 +238,10 @@ TextureImporter:
       name: SpeechBubbles_5
       rect:
         serializedVersion: 2
-        x: 694
-        y: 11
-        width: 491
-        height: 127
+        x: 53
+        y: 0
+        width: 493
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,10 +259,10 @@ TextureImporter:
       name: SpeechBubbles_6
       rect:
         serializedVersion: 2
-        x: 1302
-        y: 29
-        width: 493
-        height: 128
+        x: 685
+        y: 10
+        width: 491
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,10 +280,10 @@ TextureImporter:
       name: SpeechBubbles_7
       rect:
         serializedVersion: 2
-        x: 1915
-        y: 17
-        width: 492
-        height: 128
+        x: 1293
+        y: 27
+        width: 493
+        height: 129
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,6 +293,27 @@ TextureImporter:
       bones: []
       spriteID: 76bd36c6cc5311580800000000000000
       internalID: -8858239839952970905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpeechBubbles_8
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 16
+        width: 492
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7410154782ec14dc0800000000000000
+      internalID: -3656414749302652601
       vertices: []
       indices: 
       edges: []

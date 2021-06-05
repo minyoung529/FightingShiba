@@ -22,6 +22,11 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer spriteRenderer = null;
 
     private bool isDamaged = false;
+    private bool isBig = false;
+    private bool isItem = false;
+
+    private float countTime;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -41,6 +46,7 @@ public class PlayerMove : MonoBehaviour
             transform.localPosition =
                 Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
         }
+        Debug.Log(isItem);
     }
 
     private IEnumerator Fire()
@@ -85,7 +91,16 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.CompareTag("EnemyBullet"))
         {
+            Destroy(collision.gameObject);
+            if (isBig) return;
             StartCoroutine(Damage());
+        }
+
+        else if(collision.CompareTag("Item"))
+        {
+            if (isItem) return;
+            isItem = true;
+            Destroy(collision.gameObject);
         }
     }
 
@@ -103,5 +118,60 @@ public class PlayerMove : MonoBehaviour
         }
 
         isDamaged = false;
+    }
+
+    public void Item(string item)
+    {
+        if (isItem) return;
+
+        if(item == "BigItem")
+        StartCoroutine("ItemBig");
+
+        else if (item == "SlowItem")
+        StartCoroutine("ItemSlow");
+
+        countTime = 0f;
+    }
+
+    public IEnumerator ItemBig()
+    {
+        isBig = true;
+
+        gameObject.transform.localScale = new Vector2(1.5f, 1.5f);
+        yield return new WaitForSeconds(5f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            yield return new WaitForSeconds(0.2f);
+            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        gameObject.transform.localScale = new Vector2(0.9f, 0.9f);
+        countTime = 6f;
+        isBig = false;
+        isItem = false;
+        StopCoroutine("ItemBig");
+
+    }
+
+    public IEnumerator ItemSlow()
+    {
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(5f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            yield return new WaitForSecondsRealtime(0.2f);
+            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
+
+        countTime = 6f;
+        Time.timeScale = 1f;
+        isItem = false;
+        StopCoroutine("ItemSlow");
     }
 }

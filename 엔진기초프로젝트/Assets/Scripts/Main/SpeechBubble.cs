@@ -27,7 +27,6 @@ public class SpeechBubble : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
     }
 
     public void ChangeSprites(int a)
@@ -64,6 +63,10 @@ public class SpeechBubble : MonoBehaviour
 
             case 8:
                 spriteRenderer.sprite = speechBuble_4_2;
+                break;
+
+            default:
+                spriteRenderer.sprite = null;
                 break;
         }
     }

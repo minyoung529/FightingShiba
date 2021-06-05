@@ -7,22 +7,16 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [Header("생명")]
-    [SerializeField]
-    private GameObject heart1 = null;
-    [SerializeField]
-    private GameObject heart2 = null;
-    [SerializeField]
-    private GameObject heart3 = null;
+    [SerializeField] private GameObject heart1;
+    [SerializeField] private GameObject heart2;
+    [SerializeField] private GameObject heart3;
 
     [Header("게임 중지 팝업")]
-    [SerializeField]
-    private GameObject stopPopUp = null;
+    [SerializeField] private GameObject stopPopUp;
 
     [Header("딜레이 타임 텍스트")]
-    [SerializeField]
-    private Text textDelayTime = null;
-    [SerializeField]
-    private GameObject textDelayTimeObj = null;
+    [SerializeField] private Text textDelayTime;
+    [SerializeField] private GameObject textDelayTimeObj ;
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField]
@@ -34,12 +28,20 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text textHighScore = null;
 
+    [Header("아이템 스프라이트")]
+    [SerializeField]
+    Sprite itemBig;
+    [SerializeField]
+    Sprite itemSlow;
+    [SerializeField]
+    SpriteRenderer item;
+
     private int score = 0;
     private int highScore = 0;
+    private int countTime = 3;
 
     private GameManager gameManager = null;
 
-    private int countTime = 3;
 
     private void Start()
     {
@@ -125,5 +127,20 @@ public class UIManager : MonoBehaviour
     public void EnemyHPBar(float damage)
     {
         enemyHPBar.value += damage;
+    }
+
+    public void RandomItem(int randomNum)
+    {
+        switch (randomNum)
+        {
+            case 1:
+                item.sprite = itemBig;
+                Debug.Log("크게크게");
+                break;
+
+            case 2:
+                item.sprite = itemSlow;
+                break;
+        }
     }
 }

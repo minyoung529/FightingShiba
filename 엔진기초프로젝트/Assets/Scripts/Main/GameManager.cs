@@ -19,26 +19,25 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject itemPrefab = null;
 
-    private List<Sprite> itemList = new List<Sprite>();
-
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
 
-    public int life { get; private set; } = 10;
+    public int life { get; private set; } = 3;
 
     public PoolManager poolManager { get; private set; }
     public UIManager uiManager { get; private set; }
+    public Item item;
 
     void Start()
     {
         Time.timeScale = 1;
-
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
-        // UpdateUI();
+
+        StartCoroutine(SpawnEnemy());
     }
 
     public void Dead()
@@ -68,23 +67,24 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnEnemy()
     {
-        float randomY = 0;
-        float randomDelay = 0;
+        float randomY = 0f;
+        float randomDelay = 0f;
+        int randomNum = 0;
 
         while (true)
         {
-            randomY = Random.Range(-1.3f, 1.3f);
+            randomY = Random.Range(-3.5f, 3.5f);
             randomDelay = Random.Range(10f, 15f);
+            randomNum = Random.Range(1, 3);
 
-            for (int i = 0; i < 5; i++)
+            yield return new WaitForSeconds(1f);
+
+            for (int i = 0; i < 1; i++)
             {
-                Instantiate(itemPrefab, new Vector2(5f, randomY), Quaternion.identity);
+                uiManager.RandomItem(randomNum);
+                Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
                 yield return new WaitForSeconds(1f);
-
             }
-
-            yield return new WaitForSeconds(randomDelay);
         }
-
     }
 }

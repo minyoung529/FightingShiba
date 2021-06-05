@@ -83,9 +83,7 @@ public class EnemyMove : MonoBehaviour
         }
 
         Fire();
-
         EnemyAttack();
-
         ChangeSprite();
     }
 
@@ -218,7 +216,7 @@ public class EnemyMove : MonoBehaviour
 
         if (circleTimer >= 3f)
         {
-            for (int i = -90; i < 90; i += 13)
+            for (int i = -90; i < 90; i += 15)
             {
                 GameObject circleBullet = Instantiate(enemyBulletPrefab);
 
