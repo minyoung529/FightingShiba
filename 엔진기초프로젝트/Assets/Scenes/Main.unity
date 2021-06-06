@@ -2146,7 +2146,7 @@ MonoBehaviour:
   cloud2: {fileID: 6873086254450879962, guid: dc6f3f4475d919342940f26e61bb917a, type: 3}
   yellowButterfly: {fileID: 1144305596572785861, guid: 89a9c0f1ca5c9a540b033badf3b7cca5, type: 3}
   itemPrefab: {fileID: 5781131234313542667, guid: e0a84083140fe344ca61e973973e1b49, type: 3}
-  item: {fileID: 0}
+  coinPrefab: {fileID: 8374166679680285943, guid: fe417ac59516b04408cb93a3b59695a5, type: 3}
 --- !u!4 &1935711153
 Transform:
   m_ObjectHideFlags: 0

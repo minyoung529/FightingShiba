@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [Header("æ∆¿Ã≈€")]
     [SerializeField]
     private GameObject itemPrefab = null;
+    [SerializeField]
+    private GameObject coinPrefab = null;
 
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
@@ -27,7 +29,6 @@ public class GameManager : MonoBehaviour
 
     public PoolManager poolManager { get; private set; }
     public UIManager uiManager { get; private set; }
-    public Item item;
 
     void Start()
     {
@@ -83,6 +84,27 @@ public class GameManager : MonoBehaviour
             {
                 uiManager.RandomItem(randomNum);
                 Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
+                yield return new WaitForSeconds(1f);
+            }
+        }
+    }
+
+    private IEnumerator SpawnCoin()
+    {
+        float randomY = 0f;
+        float randomDelay = 0f;
+        int randomNum = 0;
+
+        while (true)
+        {
+            randomY = Random.Range(-3.5f, 3.5f);
+            randomDelay = Random.Range(5f, 10f);
+
+            yield return new WaitForSeconds(1f);
+
+            for (int i = 0; i < 1; i++)
+            {
+                Instantiate(coinPrefab, new Vector2(12f, randomY), Quaternion.identity);
                 yield return new WaitForSeconds(1f);
             }
         }
