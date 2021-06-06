@@ -15,11 +15,11 @@ C:/Users/USER/Documents/shibashootingproject/엔진기초프로젝트
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-14377
+10648
 Successfully changed project path to: C:/Users/USER/Documents/shibashootingproject/엔진기초프로젝트
 C:/Users/USER/Documents/shibashootingproject/엔진기초프로젝트
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 40.53 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 34.35 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.4f1 (0abb6314276a)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/Resources/UnitySubsystems
@@ -35,45 +35,205 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56408
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56112
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001800 seconds.
+Registered in 0.002079 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 51.42 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 37.28 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.337 seconds
+- Completed reload, in  2.334 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.000961 seconds.
+Registered in 0.000861 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 51.69 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 76.88 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.167 seconds
+- Completed reload, in  0.985 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
 Refreshing native plugins compatible for Editor in 0.39 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1823 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 1824 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 85.5 MB.
 System memory in use after: 85.5 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2267.
-Total: 2.407500 ms (FindLiveObjects: 0.169800 ms CreateObjectMapping: 0.073700 ms MarkObjects: 1.989800 ms  DeleteObjects: 0.173000 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2268.
+Total: 2.212300 ms (FindLiveObjects: 0.270900 ms CreateObjectMapping: 0.078300 ms MarkObjects: 1.765100 ms  DeleteObjects: 0.096900 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   requireTextureImportCompression: false -> true
 ========================================================================
 Received Import Request.
+  path: Assets/Scripts/Main/CoinMove.cs
+  artifactKey: Guid(47e5c9e2cf5cab8409fd6197c3eb3485) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Main/CoinMove.cs using Guid(47e5c9e2cf5cab8409fd6197c3eb3485) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a014a04ae81cf06bf1a4165290123b43') in 0.039488 seconds
+  Import took 0.042163 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.206447 seconds.
+  path: Assets/Prefab/Coin.prefab
+  artifactKey: Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Coin.prefab using Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c6bb4b99f3162ced14f913005e55c31') in 0.089182 seconds
+  Import took 0.092710 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001132 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.896 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.71 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1820 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.4 MB.
+System memory in use after: 88.4 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2279.
+Total: 3.235900 ms (FindLiveObjects: 0.248300 ms CreateObjectMapping: 0.115900 ms MarkObjects: 2.750700 ms  DeleteObjects: 0.119400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 70.274105 seconds.
+  path: Assets/Scripts/Main/CoinMove.cs
+  artifactKey: Guid(47e5c9e2cf5cab8409fd6197c3eb3485) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Main/CoinMove.cs using Guid(47e5c9e2cf5cab8409fd6197c3eb3485) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a2ae78d473764612688675a9b1cdb77') in 0.012533 seconds
+  Import took 0.017326 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000977 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.839 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1820 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.4 MB.
+System memory in use after: 88.4 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2283.
+Total: 2.007300 ms (FindLiveObjects: 0.158700 ms CreateObjectMapping: 0.062600 ms MarkObjects: 1.703900 ms  DeleteObjects: 0.080800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 111.468559 seconds.
+  path: Assets/Prefab/Coin.prefab
+  artifactKey: Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Coin.prefab using Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8841c1f1ca62872a82ba60d712210361') in 0.055311 seconds
+  Import took 0.060753 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.820220 seconds.
+  path: ProjectSettings/TagManager.asset
+  artifactKey: Guid(00000000000000003000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing ProjectSettings/TagManager.asset using Guid(00000000000000003000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fbd7707dbda979c641e6a23be6af67c') in 0.010046 seconds
+  Import took 0.013331 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001950 seconds.
+  path: ProjectSettings/TagManager.asset
+  artifactKey: Guid(00000000000000003000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing ProjectSettings/TagManager.asset using Guid(00000000000000003000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fbd7707dbda979c641e6a23be6af67c') in 0.003677 seconds
+  Import took 0.006381 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016972 seconds.
+  path: Assets/Prefab/Coin.prefab
+  artifactKey: Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Coin.prefab using Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '850518d387484d29a7b459464f658dd6') in 0.011663 seconds
+  Import took 0.015035 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.866192 seconds.
+  path: Assets/Prefab/Coin.prefab
+  artifactKey: Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Coin.prefab using Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f7c9c3431f2b72d54fc1eb35af29db0') in 0.014199 seconds
+  Import took 0.017707 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016329 seconds.
+  path: Assets/Prefab/Coin.prefab
+  artifactKey: Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Coin.prefab using Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f7c9c3431f2b72d54fc1eb35af29db0') in 0.013437 seconds
+  Import took 0.016881 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.867091 seconds.
+  path: Assets/Prefab/Coin.prefab
+  artifactKey: Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Coin.prefab using Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbbb4e26c582bb7ad75b20a2ec921e85') in 0.011360 seconds
+  Import took 0.014302 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.018306 seconds.
+  path: Assets/Prefab/Coin.prefab
+  artifactKey: Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Coin.prefab using Guid(fe417ac59516b04408cb93a3b59695a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbbb4e26c582bb7ad75b20a2ec921e85') in 0.012873 seconds
+  Import took 0.016262 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.687265 seconds.
   path: Assets/Prefab/Item.prefab
   artifactKey: Guid(e0a84083140fe344ca61e973973e1b49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Item.prefab using Guid(e0a84083140fe344ca61e973973e1b49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af6aca9b4511a9a7c029475a8a68c204') in 0.144404 seconds
-  Import took 0.147881 seconds .
+Start importing Assets/Prefab/Item.prefab using Guid(e0a84083140fe344ca61e973973e1b49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af6aca9b4511a9a7c029475a8a68c204') in 0.018152 seconds
+  Import took 0.021265 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001216 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.30 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.824 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1820 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.4 MB.
+System memory in use after: 88.5 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2288.
+Total: 1.954500 ms (FindLiveObjects: 0.253800 ms CreateObjectMapping: 0.057300 ms MarkObjects: 1.556300 ms  DeleteObjects: 0.086100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

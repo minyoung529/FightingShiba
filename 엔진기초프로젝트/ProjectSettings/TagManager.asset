@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - SpeechBubble
   - Item
+  - Coin
   layers:
   - Default
   - TransparentFX

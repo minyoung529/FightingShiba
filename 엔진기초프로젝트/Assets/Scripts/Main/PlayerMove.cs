@@ -102,6 +102,11 @@ public class PlayerMove : MonoBehaviour
             isItem = true;
             Destroy(collision.gameObject);
         }
+
+        else if (collision.CompareTag("Coin"))
+        {
+            gameManager.uiManager.AddCoin(1);
+        }
     }
 
     // Damage effect

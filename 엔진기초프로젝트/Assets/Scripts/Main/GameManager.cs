@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         MaxPosition = new Vector2(9f, 4f);
 
         StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnCoin());
     }
 
     public void Dead()
@@ -47,7 +48,11 @@ public class GameManager : MonoBehaviour
         uiManager.DestroyHeart();
         if (life <= 0)
         {
-            SceneManager.LoadScene("GameOver");
+            if (uiManager.EnemyHP() >= 100)
+                SceneManager.LoadScene("GameClear");
+
+            else
+                SceneManager.LoadScene("GameOver");
         }
     }
 

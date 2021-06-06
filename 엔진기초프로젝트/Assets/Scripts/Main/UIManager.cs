@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
     private Text textScore = null;
     [SerializeField]
     private Text textHighScore = null;
+    [SerializeField]
+    private Text textCoin = null;
 
     [Header("아이템 스프라이트")]
     [SerializeField]
@@ -38,6 +40,7 @@ public class UIManager : MonoBehaviour
 
     private int score = 0;
     private int highScore = 0;
+    private int coin = 0;
     private int countTime = 3;
 
     private GameManager gameManager = null;
@@ -46,6 +49,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
+        coin = PlayerPrefs.GetInt("COIN", 0);
         gameManager = FindObjectOfType<GameManager>();
 
         UpdateUI();
@@ -66,7 +70,8 @@ public class UIManager : MonoBehaviour
     public void UpdateUI()
     {
         textScore.text = string.Format("SCORE {0}", score);
-        //textHighScore.text = string.Format("HIGHSCORE\n{0}", highScore);
+        textHighScore.text = string.Format("HIGHSCORE {0}", highScore);
+        textCoin.text = string.Format("{0}", coin);
     }
 
     public void AddScore(int addScore)
@@ -77,6 +82,13 @@ public class UIManager : MonoBehaviour
             highScore = score;
             PlayerPrefs.SetInt("HIGHSCORE", highScore);
         }
+        UpdateUI();
+    }
+
+    public void AddCoin(int addCoin)
+    {
+        this.coin += addCoin;
+        PlayerPrefs.SetInt("COIN", coin);
         UpdateUI();
     }
 
@@ -127,6 +139,11 @@ public class UIManager : MonoBehaviour
     public void EnemyHPBar(float damage)
     {
         enemyHPBar.value += damage;
+    }
+
+    public float EnemyHP()
+    {
+        return enemyHPBar.value;
     }
 
     public void RandomItem(int randomNum)
