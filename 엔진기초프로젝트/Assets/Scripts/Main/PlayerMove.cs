@@ -16,16 +16,20 @@ public class PlayerMove : MonoBehaviour
     [Header("ÃÑ¾Ë µô·¹ÀÌ ½Ã°£")]
     [SerializeField]
     private float fireRate = 0.5f;
+    [Header("À½¾Ç")]
+    [SerializeField]
+    private AudioSource music;
 
     private Vector2 targetPosition = Vector2.zero;
     private GameManager gameManager = null;
     private SpriteRenderer spriteRenderer = null;
 
     private bool isDamaged = false;
-    private bool isBig = false;
+    public bool IsBig { get; private set; } = false;
     private bool isItem = false;
 
     private float countTime;
+    public float bigCooltime = 3f;
 
     void Start()
     {
@@ -92,7 +96,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.CompareTag("EnemyBullet"))
         {
             Destroy(collision.gameObject);
-            if (isBig) return;
+            if (IsBig) return;
             StartCoroutine(Damage());
         }
 
@@ -140,10 +144,10 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator ItemBig()
     {
-        isBig = true;
+        IsBig = true;
 
         gameObject.transform.localScale = new Vector2(1.5f, 1.5f);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(bigCooltime);
 
         for (int i = 0; i < 5; i++)
         {
@@ -155,7 +159,7 @@ public class PlayerMove : MonoBehaviour
 
         gameObject.transform.localScale = new Vector2(0.9f, 0.9f);
         countTime = 6f;
-        isBig = false;
+        IsBig = false;
         isItem = false;
         StopCoroutine("ItemBig");
 
@@ -163,7 +167,9 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator ItemSlow()
     {
+        isItem = true;
         Time.timeScale = 0.5f;
+        music.pitch = 0.7f;
         yield return new WaitForSecondsRealtime(5f);
 
         for (int i = 0; i < 5; i++)
@@ -176,6 +182,7 @@ public class PlayerMove : MonoBehaviour
 
         countTime = 6f;
         Time.timeScale = 1f;
+        music.pitch = 1f;
         isItem = false;
         StopCoroutine("ItemSlow");
     }

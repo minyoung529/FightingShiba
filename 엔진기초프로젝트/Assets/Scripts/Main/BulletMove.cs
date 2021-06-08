@@ -11,9 +11,11 @@ public class BulletMove : MonoBehaviour
     private float damage = 1f;
 
     private GameManager gameManager = null;
+    private PlayerMove playerMove = null;
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        playerMove = FindObjectOfType<PlayerMove>();
     }
 
     void Update()
@@ -54,6 +56,9 @@ public class BulletMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (playerMove.IsBig) damage = 3f;
+        else damage = 1f;
+
         if(collision.CompareTag("Enemy"))
         {
             gameManager.uiManager.EnemyHPBar(damage);

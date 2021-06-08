@@ -21,20 +21,25 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject coinPrefab = null;
 
+    
+
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
 
-    public int life { get; private set; } = 3;
+    public int life { get; private set; } = 100;
 
     public PoolManager poolManager { get; private set; }
     public UIManager uiManager { get; private set; }
+    public PlayerMove playerMove { get; private set; }
+
 
     void Start()
     {
         Time.timeScale = 1;
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
+        playerMove = FindObjectOfType<PlayerMove>();
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
 
@@ -98,7 +103,6 @@ public class GameManager : MonoBehaviour
     {
         float randomY = 0f;
         float randomDelay = 0f;
-        int randomNum = 0;
 
         while (true)
         {

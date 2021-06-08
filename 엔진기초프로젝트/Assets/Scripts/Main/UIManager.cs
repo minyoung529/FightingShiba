@@ -38,6 +38,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     SpriteRenderer item;
 
+    [Header("À½¾Ç")]
+    [SerializeField]
+    private AudioSource music;
+
     private int score = 0;
     private int highScore = 0;
     private int coin = 0;
@@ -97,6 +101,7 @@ public class UIManager : MonoBehaviour
         gameManager.StopGame();
         stopPopUp.SetActive(true);
         textDelayTimeObj.SetActive(false);
+        music.Stop();
     }
 
     public void OnClickMenu()
@@ -133,6 +138,7 @@ public class UIManager : MonoBehaviour
         }
 
         gameManager.ContinueGame();
+        music.Play();
         yield return 0;
     }
 
