@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 targetPosition = Vector2.zero;
     private GameManager gameManager = null;
     private SpriteRenderer spriteRenderer = null;
+    private Rigidbody2D rigid = null;
 
     private bool isDamaged = false;
     public bool IsBig { get; private set; } = false;
@@ -35,14 +36,29 @@ public class PlayerMove : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigid = GetComponent<Rigidbody2D>();
         StartCoroutine(Fire());
     }
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (gameManager.storeManager.isButterfly)
         {
-            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            rigid.gravityScale = 1.3f;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                rigid.velocity = Vector3.zero;
+                rigid.AddForce(Vector3.up * 270);
+            }
+            if (transform.position.y > 4.3f)
+                transform.position = new Vector3(-7.3f, 4.3f, 0);
+        }
+
+        else
+        {
+            if (Input.GetMouseButton(0))
+                targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
             targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
@@ -50,7 +66,9 @@ public class PlayerMove : MonoBehaviour
             transform.localPosition =
                 Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
         }
+        
     }
+
 
     private IEnumerator Fire()
     {
@@ -100,7 +118,7 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(Damage());
         }
 
-        else if(collision.CompareTag("Item"))
+        else if (collision.CompareTag("Item"))
         {
             if (isItem) return;
             isItem = true;
@@ -109,7 +127,16 @@ public class PlayerMove : MonoBehaviour
 
         else if (collision.CompareTag("Coin"))
         {
-            gameManager.uiManager.AddCoin(1);
+            if (gameManager.storeManager.isButterfly)
+            {
+                gameManager.uiManager.AddCoin(3);
+
+            }
+
+            else
+            {
+                gameManager.uiManager.AddCoin(1);
+            }
         }
     }
 
@@ -133,11 +160,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (isItem) return;
 
-        if(item == "BigItem")
-        StartCoroutine("ItemBig");
+        if (item == "BigItem")
+            StartCoroutine("ItemBig");
 
         else if (item == "SlowItem")
-        StartCoroutine("ItemSlow");
+            StartCoroutine("ItemSlow");
 
         countTime = 0f;
     }

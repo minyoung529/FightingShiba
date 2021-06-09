@@ -18,6 +18,10 @@ public class StoreManager : MonoBehaviour
     public bool isButterfly { get; private set; }
     public bool isMusic { get; private set; }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
 
     void Start()
     {
@@ -38,15 +42,23 @@ public class StoreManager : MonoBehaviour
     private void Insufficient(int _coin)
     {
         int coin = PlayerPrefs.GetInt("COIN");
+
         if (coin < _coin)
         {
             Debug.Log("잔액이 부족합니다.");
             return;
         }
+
+        else
+        {
+            coin -= 30;
+        }
     }
 
     public void Butterfly()
     {
+        Insufficient(30);
+
         isButterfly = true;
         SceneManager.LoadScene("Main");
     }

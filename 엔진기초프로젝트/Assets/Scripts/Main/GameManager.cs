@@ -31,12 +31,14 @@ public class GameManager : MonoBehaviour
     public PlayerMove playerMove { get; private set; }
     public StoreManager storeManager { get; private set; }
 
+
     void Start()
     {
         Time.timeScale = 1;
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
         playerMove = FindObjectOfType<PlayerMove>();
+        storeManager = FindObjectOfType<StoreManager>();
 
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
