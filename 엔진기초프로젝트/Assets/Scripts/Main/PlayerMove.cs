@@ -50,7 +50,6 @@ public class PlayerMove : MonoBehaviour
             transform.localPosition =
                 Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
         }
-        Debug.Log(isItem);
     }
 
     private IEnumerator Fire()
@@ -79,6 +78,7 @@ public class PlayerMove : MonoBehaviour
 
         else
         {
+            Debug.Log("积几局几局货均し");
             GameObject newBullet = Instantiate(bulletPrefab, bulletPosition);
             newBullet.transform.position = bulletPosition.position;
             newBullet.transform.SetParent(null);

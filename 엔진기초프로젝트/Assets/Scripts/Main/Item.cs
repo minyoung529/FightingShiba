@@ -21,6 +21,8 @@ public class Item : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
+
+        //if(transform.position)
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMove : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
-    [Header("ÃÑ¾Ë ½ºÇÇµå")]
     [SerializeField]
     private float speed = 10f;
-    
-    private float damage = 1f;
 
     private GameManager gameManager = null;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -18,12 +16,12 @@ public class BulletMove : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-        transform.SetParent(null);
+        transform.Translate(Vector2.left * speed * Time.deltaTime, Space.Self);
+
         CheckLimit();
     }
 
-    protected virtual void CheckLimit()
+    private void CheckLimit()
     {
         if (transform.position.y > gameManager.MaxPosition.y + 2f)
         {
@@ -46,21 +44,10 @@ public class BulletMove : MonoBehaviour
         }
     }
 
-    protected virtual void Despawn()
+    private void Despawn()
     {
         transform.SetParent(gameManager.poolManager.transform, false);
         gameObject.SetActive(false);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //if (gameManager.playerMove.IsBig) damage = 3f;
-        //else damage = 1f;
-
-        if(collision.CompareTag("Enemy"))
-        {
-            gameManager.uiManager.EnemyHPBar(damage);
-            gameManager.uiManager.AddScore(5);
-        }
-    }
 }
+

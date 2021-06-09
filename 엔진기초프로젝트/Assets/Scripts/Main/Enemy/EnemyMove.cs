@@ -25,7 +25,7 @@ public class EnemyMove : MonoBehaviour
     private SpriteRenderer spriteRenderer = null;
     private SpeechBubble speechBubble = null;
 
-   // [Header("¸»Ç³¼±")]
+    // [Header("¸»Ç³¼±")]
     //[SerializeField]
     //private GameObject sb = null;
 
@@ -66,6 +66,8 @@ public class EnemyMove : MonoBehaviour
 
         player = FindObjectOfType<PlayerMove>();
         speechBubble = FindObjectOfType<SpeechBubble>();
+
+        StartCoroutine(EnemyFire());
     }
 
     protected virtual void Update()
@@ -77,12 +79,11 @@ public class EnemyMove : MonoBehaviour
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        if(transform.position.x < 7f)
+        if (transform.position.x < 7f)
         {
             //sb.SetActive(true);
         }
 
-        Fire();
         EnemyAttack();
         ChangeSprite();
     }
@@ -96,7 +97,8 @@ public class EnemyMove : MonoBehaviour
         {
             if (isDamaged) return;
             isDamaged = true;
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
+            collision.transform.SetParent(gameManager.poolManager.transform, false);
             StartCoroutine(Damaged());
         }
     }
@@ -115,26 +117,46 @@ public class EnemyMove : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private IEnumerator EnemyFire()
+    {
+        while (true)
+        {
+            InstantiateOrPool();
+            yield return new WaitForSeconds(fireRate);
+        }
+    }
+
     private void Fire()
     {
-        timer += Time.deltaTime;
-        if (timer >= fireRate)
+        diff = player.transform.position - transform.position;
+        diff.Normalize();
+
+        rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+
+        timer = 0f;
+        bullet = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
+        bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 180f);
+        bullet.transform.SetParent(null);
+    }
+
+    private GameObject InstantiateOrPool()
+    {
+        GameObject result = null;
+
+        if (gameManager.poolManager.transform.childCount > 0 && gameManager.poolManager.transform.GetChild(0).CompareTag("EnemyBullet"))
         {
-            diff = player.transform.position - transform.position;
-            diff.Normalize();
-
-            rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-
-            timer = 0f;
-            bullet = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
-            bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 180f);
-            bullet.transform.SetParent(null);
+            result = gameManager.poolManager.transform.GetChild(0).gameObject;
+            result.transform.position = enemyBulletPosition.position;
+            result.transform.SetParent(null);
+            result.SetActive(true);
         }
 
-        if (transform.position.x < gameManager.MinPosition.x - 2f)
+        else
         {
-            Destroy(gameObject);
+            Fire();
         }
+
+        return result;
     }
 
     private void EnemyAttack()
@@ -148,7 +170,7 @@ public class EnemyMove : MonoBehaviour
         if (hp < 80)
         {
             speechBubble.ChangeSprites(2);
-        }    
+        }
 
         if (hp < 70)
         {
