@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour
     private bool isItem = false;
 
     private float countTime;
-    public float bigCooltime = 3f;
+    private float bigCooltime = 3f;
 
     void Start()
     {
@@ -42,33 +42,16 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.storeManager.isButterfly)
-        {
-            rigid.gravityScale = 1.3f;
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                rigid.velocity = Vector3.zero;
-                rigid.AddForce(Vector3.up * 270);
-            }
-            if (transform.position.y > 4.3f)
-                transform.position = new Vector3(-7.3f, 4.3f, 0);
-        }
+        if (Input.GetMouseButton(0))
+            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        else
-        {
-            if (Input.GetMouseButton(0))
-                targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
 
-            targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
-
-            transform.localPosition =
-                Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
-        }
-        
+        transform.localPosition =
+            Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
     }
-
 
     private IEnumerator Fire()
     {
@@ -96,7 +79,6 @@ public class PlayerMove : MonoBehaviour
 
         else
         {
-            Debug.Log("积几局几局货均し");
             GameObject newBullet = Instantiate(bulletPrefab, bulletPosition);
             newBullet.transform.position = bulletPosition.position;
             newBullet.transform.SetParent(null);
@@ -127,16 +109,7 @@ public class PlayerMove : MonoBehaviour
 
         else if (collision.CompareTag("Coin"))
         {
-            if (gameManager.storeManager.isButterfly)
-            {
-                gameManager.uiManager.AddCoin(3);
-
-            }
-
-            else
-            {
-                gameManager.uiManager.AddCoin(1);
-            }
+            gameManager.uiManager.AddCoin(1);
         }
     }
 

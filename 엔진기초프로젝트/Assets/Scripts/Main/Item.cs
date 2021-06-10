@@ -8,21 +8,22 @@ public class Item : MonoBehaviour
     Sprite itemBig, itemSlow;
     SpriteRenderer spriteRenderer = null;
 
-    private PlayerMove player = null;
+    private GameManager gameManager = null;
 
     private float speed = 8f;
 
-    private void Awake()
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        player = FindObjectOfType<PlayerMove>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
 
-        //if(transform.position)
+        if (transform.position.x < gameManager.MinPosition.x - 2f)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,14 +32,12 @@ public class Item : MonoBehaviour
         {
             if(spriteRenderer.sprite == itemBig)
             {
-                player.Item("BigItem");
-                Debug.Log("크게");
+                gameManager.playerMove.Item("BigItem");
             }
 
             else if (spriteRenderer.sprite == itemSlow)
             {
-                player.Item("SlowItem");
-                Debug.Log("느리게");
+                gameManager.playerMove.Item("SlowItem");
             }
         }
     }

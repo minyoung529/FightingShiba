@@ -15,6 +15,8 @@ public class CoinMove : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.left * Time.deltaTime * speed);
+        if (transform.position.x < gameManager.MinPosition.x - 2f)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -15,18 +15,21 @@ public class StoreManager : MonoBehaviour
     [SerializeField]
     private Image music;
 
-    public bool isButterfly { get; private set; }
-    public bool isMusic { get; private set; }
+    public bool isButterfly = false;
+    public bool isMusic = false;
 
+    public static StoreManager inst;
+    
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        StoreManager.inst = this;
     }
 
     void Start()
     {
         SetCoinText();
         gameManager = FindObjectOfType<GameManager>();
+        isButterfly = false;
     }
 
     public void SetCoinText()
@@ -48,17 +51,10 @@ public class StoreManager : MonoBehaviour
             Debug.Log("잔액이 부족합니다.");
             return;
         }
-
-        else
-        {
-            coin -= 30;
-        }
     }
 
     public void Butterfly()
     {
-        Insufficient(30);
-
         isButterfly = true;
         SceneManager.LoadScene("Main");
     }
@@ -67,5 +63,10 @@ public class StoreManager : MonoBehaviour
     {
         isMusic = true;
         SceneManager.LoadScene("Main");
+    }
+
+    public void IsButterfly(bool isMode)
+    {
+        isButterfly = isMode;
     }
 }

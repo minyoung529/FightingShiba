@@ -21,6 +21,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject coinPrefab = null;
 
+    [Header("¹ø°³")]
+    [SerializeField]
+    private GameObject lightningObj;
+    [SerializeField]
+    private Sprite defaultSprite;
+    [SerializeField]
+    private Sprite lightningSprite;
+    [SerializeField]
+    private SpriteRenderer lightningRenderer;
+    [SerializeField]
+    private Collider2D lightningcol;
+
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
@@ -29,7 +41,6 @@ public class GameManager : MonoBehaviour
     public PoolManager poolManager { get; private set; }
     public UIManager uiManager { get; private set; }
     public PlayerMove playerMove { get; private set; }
-    public StoreManager storeManager { get; private set; }
 
 
     void Start()
@@ -38,13 +49,13 @@ public class GameManager : MonoBehaviour
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
         playerMove = FindObjectOfType<PlayerMove>();
-        storeManager = FindObjectOfType<StoreManager>();
 
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
 
         StartCoroutine(SpawnEnemy());
         StartCoroutine(SpawnCoin());
+        StartCoroutine(SpawnLightning());
     }
 
     public void Dead()
@@ -116,6 +127,32 @@ public class GameManager : MonoBehaviour
                 Instantiate(coinPrefab, new Vector2(12f, randomY), Quaternion.identity);
                 yield return new WaitForSeconds(1f);
             }
+        }
+    }
+
+    private IEnumerator SpawnLightning()
+    {
+        float randomX;
+
+        while (true)
+        {
+            lightningObj.SetActive(false);
+            lightningcol.enabled = false;
+            yield return new WaitForSeconds(2f);
+
+            randomX = Random.Range(-8f, -3f);
+            transform.position = new Vector2(randomX, 0f);
+            lightningObj.SetActive(true);
+            Debug.Log("¾Æ");
+
+            lightningRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+            lightningRenderer.sprite = defaultSprite;
+            yield return new WaitForSeconds(0.6f);
+
+            lightningcol.enabled = true;
+            lightningRenderer.sprite = lightningSprite;
+            lightningRenderer.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(2f);
         }
     }
 }
