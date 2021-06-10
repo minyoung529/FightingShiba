@@ -139,6 +139,9 @@ public class PlayerMove : MonoBehaviour
         else if (item == "SlowItem")
             StartCoroutine("ItemSlow");
 
+        else if (item == "LightningItem")
+            //StartCoroutine("ItemSlow");
+
         countTime = 0f;
     }
 

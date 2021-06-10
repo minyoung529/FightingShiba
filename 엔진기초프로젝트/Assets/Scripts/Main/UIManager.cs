@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField] private Text textDelayTime;
-    [SerializeField] private GameObject textDelayTimeObj ;
+    [SerializeField] private GameObject textDelayTimeObj;
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField]
@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     Sprite itemSlow;
     [SerializeField]
     SpriteRenderer item;
+    [SerializeField]
+    Sprite itemLightning;
 
     [Header("음악")]
     [SerializeField]
@@ -113,7 +115,7 @@ public class UIManager : MonoBehaviour
     {
         stopPopUp.SetActive(false);
         SceneManager.LoadScene("Main");
-        
+
     }
 
     public void OnClickContinue()
@@ -133,7 +135,7 @@ public class UIManager : MonoBehaviour
             countTime--;
             yield return new WaitForSecondsRealtime(1f);
 
-            if(countTime == 0)
+            if (countTime == 0)
                 textDelayTime.text = string.Format("");
         }
 
@@ -156,13 +158,17 @@ public class UIManager : MonoBehaviour
     {
         switch (randomNum)
         {
+            
             case 1:
                 item.sprite = itemBig;
-                Debug.Log("크게크게");
                 break;
 
             case 2:
                 item.sprite = itemSlow;
+                break;
+
+            case 3:
+                item.sprite = itemLightning;
                 break;
         }
     }

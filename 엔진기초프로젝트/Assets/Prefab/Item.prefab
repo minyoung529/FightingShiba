@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemBig: {fileID: -7573354855677281409, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
   itemSlow: {fileID: 4337684191699249041, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
+  itemLightning: {fileID: 21300000, guid: dad66d1ae40ca4b44b7a0f98bc1e1943, type: 3}
 --- !u!58 &-4004058347165956676
 CircleCollider2D:
   m_ObjectHideFlags: 0

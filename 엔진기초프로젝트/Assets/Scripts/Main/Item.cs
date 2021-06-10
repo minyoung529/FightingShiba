@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField]
-    Sprite itemBig, itemSlow;
+    Sprite itemBig, itemSlow, itemLightning;
     SpriteRenderer spriteRenderer = null;
 
     private GameManager gameManager = null;
@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
     }
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
@@ -38,6 +39,11 @@ public class Item : MonoBehaviour
             else if (spriteRenderer.sprite == itemSlow)
             {
                 gameManager.playerMove.Item("SlowItem");
+            }
+
+            else if (spriteRenderer.sprite == itemLightning)
+            {
+                gameManager.playerMove.Item("LightningItem");
             }
         }
     }
