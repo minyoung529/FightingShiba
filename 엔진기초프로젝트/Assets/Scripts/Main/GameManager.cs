@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(SpawnItem());
         StartCoroutine(SpawnCoin());
-        StartCoroutine(SpawnLightning());
+        //StartCoroutine(SpawnLightning());
     }
 
     public void Dead()
@@ -133,16 +133,13 @@ public class GameManager : MonoBehaviour
     {
         float randomX;
 
-        while (true)
+        for(int i = 0; i<5;i++)
         {
-            lightningObj.SetActive(false);
-            lightningcol.enabled = false;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
             randomX = Random.Range(-8f, -3f);
-            transform.position = new Vector2(randomX, 0f);
+            lightningObj.transform.position = new Vector2(randomX, 0f);
             lightningObj.SetActive(true);
-            Debug.Log("¾Æ");
 
             lightningRenderer.color = new Color(1f, 1f, 1f, 0.5f);
             lightningRenderer.sprite = defaultSprite;
@@ -151,7 +148,11 @@ public class GameManager : MonoBehaviour
             lightningcol.enabled = true;
             lightningRenderer.sprite = lightningSprite;
             lightningRenderer.color = new Color(1f, 1f, 1f, 1f);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
+            lightningObj.SetActive(false);
+            lightningcol.enabled = false;
         }
+
+        StopCoroutine("SpawnLightning");
     }
 }

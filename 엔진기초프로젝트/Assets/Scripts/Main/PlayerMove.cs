@@ -140,7 +140,7 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine("ItemSlow");
 
         else if (item == "LightningItem")
-            //StartCoroutine("ItemSlow");
+            gameManager.StartCoroutine("SpawnLightning");
 
         countTime = 0f;
     }
