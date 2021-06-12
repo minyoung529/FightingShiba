@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool isDamaged = false;
     public bool IsBig { get; private set; } = false;
-    private bool isItem = false;
+    public bool isItem = false;
 
     private float countTime;
     private float bigCooltime = 3f;
@@ -67,7 +67,7 @@ public class PlayerMove : MonoBehaviour
     {
         GameObject result = null;
 
-        if (gameManager.poolManager.transform.childCount > 0 && gameManager.poolManager.transform.GetChild(0).CompareTag("Bullet"))
+        if (gameManager.poolManager.transform.childCount > 0)
         {
             result = gameManager.poolManager.transform.GetChild(0).gameObject;
             result.transform.position = bulletPosition.position;
@@ -103,7 +103,6 @@ public class PlayerMove : MonoBehaviour
         else if (collision.CompareTag("Item"))
         {
             if (isItem) return;
-            isItem = true;
             Destroy(collision.gameObject);
         }
 
@@ -139,15 +138,13 @@ public class PlayerMove : MonoBehaviour
         else if (item == "SlowItem")
             StartCoroutine("ItemSlow");
 
-        else if (item == "LightningItem")
-            gameManager.StartCoroutine("SpawnLightning");
-
         countTime = 0f;
     }
 
     public IEnumerator ItemBig()
     {
         IsBig = true;
+        isItem = true;
 
         gameObject.transform.localScale = new Vector2(1.5f, 1.5f);
         yield return new WaitForSeconds(bigCooltime);

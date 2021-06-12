@@ -143,9 +143,9 @@ public class EnemyMove : MonoBehaviour
     {
         GameObject result = null;
 
-        if (gameManager.poolManager.transform.childCount > 0 && gameManager.poolManager.transform.GetChild(0).CompareTag("EnemyBullet"))
+        if (gameManager.enemyPoolManager.transform.childCount > 0)
         {
-            result = gameManager.poolManager.transform.GetChild(0).gameObject;
+            result = gameManager.enemyPoolManager.transform.GetChild(0).gameObject;
             result.transform.position = enemyBulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);

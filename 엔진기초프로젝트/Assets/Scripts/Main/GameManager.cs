@@ -40,9 +40,10 @@ public class GameManager : MonoBehaviour
     public int RandomNum { get; private set; }  = 0;
 
     public PoolManager poolManager { get; private set; }
+    public EnemyPoolManager enemyPoolManager { get; private set; }
+
     public UIManager uiManager { get; private set; }
     public PlayerMove playerMove { get; private set; }
-
 
 
     void Start()
@@ -51,13 +52,14 @@ public class GameManager : MonoBehaviour
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
         playerMove = FindObjectOfType<PlayerMove>();
+        enemyPoolManager = FindObjectOfType<EnemyPoolManager>();
 
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
 
         StartCoroutine(SpawnItem());
         StartCoroutine(SpawnCoin());
-        //StartCoroutine(SpawnLightning());
+        StartCoroutine(SpawnLightning());
     }
 
     public void Dead()
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i<5;i++)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(15f);
 
             randomX = Random.Range(-8f, -3f);
             lightningObj.transform.position = new Vector2(randomX, 0f);
@@ -152,7 +154,5 @@ public class GameManager : MonoBehaviour
             lightningObj.SetActive(false);
             lightningcol.enabled = false;
         }
-
-        StopCoroutine("SpawnLightning");
     }
 }

@@ -40,11 +40,6 @@ public class Item : MonoBehaviour
             {
                 gameManager.playerMove.Item("SlowItem");
             }
-
-            else if (spriteRenderer.sprite == itemLightning)
-            {
-                gameManager.playerMove.Item("LightningItem");
-            }
         }
     }
 }
