@@ -99,6 +99,7 @@ public class PlayerMove : MonoBehaviour
         else if (collision.CompareTag("Coin"))
         {
             gameManager.uiManager.AddCoin(1);
+            gameManager.soundManager.CoinAudio();
         }
 
         if (isDamaged) return;
@@ -107,6 +108,7 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(collision.gameObject);
             if (IsBig) return;
+            gameManager.soundManager.DamagedAudio();
             StartCoroutine(Damage());
         }
 
@@ -135,22 +137,41 @@ public class PlayerMove : MonoBehaviour
     public void Item(string item)
     {
         if (item == "BigItem")
-            StartCoroutine(ItemBig());
+        {
+            gameManager.soundManager.ItemAudio();
+            StartCoroutine(ItemBig(1.5f));
+        }
 
         else if (item == "SlowItem")
+        {
+            gameManager.soundManager.ItemAudio();
             StartCoroutine(ItemSlow());
+        }
 
         else if (item == "LightningItem")
+        {
+            gameManager.soundManager.LightningAudio();
             gameManager.StartCoroutine("SpawnLightning");
+        }
 
+        else if (item == "HeartItem")
+        {
+            gameManager.soundManager.ItemAudio();
+            gameManager.ItemHeart();
+        }
+        else if (item == "SmallItem")
+        {
+            gameManager.soundManager.ItemAudio();
+            StartCoroutine(ItemBig(0.7f));
+        }
         countTime = 0f;
     }
 
-    public IEnumerator ItemBig()
+    public IEnumerator ItemBig(float scale)
     {
         IsBig = true;
 
-        gameObject.transform.localScale = new Vector2(1.5f, 1.5f);
+        gameObject.transform.localScale = new Vector2(scale, scale);
         yield return new WaitForSeconds(bigCooltime);
 
         for (int i = 0; i < 5; i++)
@@ -169,8 +190,8 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator ItemSlow()
     {
+        gameManager.soundManager.Slow();
         Time.timeScale = 0.5f;
-        music.pitch = 0.7f;
         yield return new WaitForSecondsRealtime(5f);
 
         for (int i = 0; i < 5; i++)

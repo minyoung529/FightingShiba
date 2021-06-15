@@ -5,7 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField]
-    Sprite itemBig, itemSlow, itemCoin, itemLightning;
+    Sprite itemBig, itemSlow, itemCoin, itemLightning, itemHeart, itemSmall;
     SpriteRenderer spriteRenderer = null;
 
     private GameManager gameManager = null;
@@ -53,12 +53,25 @@ public class Item : MonoBehaviour
 
             else if (spriteRenderer.sprite == itemCoin)
             {
+                gameManager.soundManager.ItemAudio();
                 gameManager.uiManager.AddCoin(5);
             }
 
             else if (spriteRenderer.sprite == itemLightning)
             {
                 gameManager.playerMove.Item("LightningItem");
+
+            }
+
+            else if (spriteRenderer.sprite == itemHeart)
+            {
+                gameManager.playerMove.Item("HeartItem");
+
+            }
+
+            else if (spriteRenderer.sprite == itemSmall)
+            {
+                gameManager.playerMove.Item("SmallItem");
 
             }
         }

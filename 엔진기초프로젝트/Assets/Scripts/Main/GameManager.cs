@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     public UIManager uiManager { get; private set; }
     public PlayerMove playerMove { get; private set; }
+    public SoundManager soundManager { get; private set; }
 
 
     void Start()
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
         playerMove = FindObjectOfType<PlayerMove>();
+        soundManager = FindObjectOfType<SoundManager>();
 
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
@@ -98,9 +100,9 @@ public class GameManager : MonoBehaviour
         {
             randomY = Random.Range(-3.5f, 3.5f);
             randomDelay = Random.Range(10f, 15f);
-            ramdomNum = Random.Range(0, 5);
+            ramdomNum = Random.Range(0, 7);
 
-            yield return new WaitForSeconds(randomDelay);
+            yield return new WaitForSeconds(3f);
 
             uiManager.RandomItem(ramdomNum);
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
@@ -161,5 +163,16 @@ public class GameManager : MonoBehaviour
             lightningcol.enabled = false;
         }
         yield break;
+    }
+
+    public void ItemHeart()
+    {
+        if (Life == 3) return;
+
+        if(Life < 3)
+        {
+            Life++;
+            uiManager.ActiveHeart();
+        }
     }
 }

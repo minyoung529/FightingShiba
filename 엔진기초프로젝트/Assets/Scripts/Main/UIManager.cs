@@ -31,16 +31,13 @@ public class UIManager : MonoBehaviour
     private Text textCoin = null;
 
     [Header("아이템 스프라이트")]
-    [SerializeField]
-    Sprite itemBig;
-    [SerializeField]
-    Sprite itemSlow;
-    [SerializeField]
-    Sprite itemCoin;
-    [SerializeField]
-    SpriteRenderer item;
-    [SerializeField]
-    Sprite itemLightning;
+    [SerializeField] Sprite itemBig;
+    [SerializeField] Sprite itemSlow;
+    [SerializeField] Sprite itemCoin;
+    [SerializeField] Sprite itemLightning;
+    [SerializeField] Sprite itemHeart;
+    [SerializeField] Sprite itemSmall;
+    [SerializeField] SpriteRenderer item;
 
     [Header("음악")]
     [SerializeField]
@@ -80,6 +77,18 @@ public class UIManager : MonoBehaviour
             heart1.SetActive(false);
     }
 
+    public void ActiveHeart()
+    {
+        if (gameManager.Life == 3)
+            heart3.SetActive(true);
+
+        else if (gameManager.Life == 2)
+            heart2.SetActive(true);
+
+        else if (gameManager.Life == 1)
+            heart1.SetActive(true);
+    }
+
     public void UpdateUI()
     {
         textScore.text = string.Format("SCORE {0}", score);
@@ -107,6 +116,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickStop()
     {
+        ButtonSound();
         gameManager.StopGame();
         stopPopUp.SetActive(true);
         textDelayTimeObj.SetActive(false);
@@ -115,11 +125,13 @@ public class UIManager : MonoBehaviour
 
     public void OnClickMenu()
     {
+        ButtonSound();
         SceneManager.LoadScene("Lobby");
     }
 
     public void OnClickNewGame()
     {
+        ButtonSound();
         stopPopUp.SetActive(false);
         SceneManager.LoadScene("Main");
 
@@ -127,9 +139,15 @@ public class UIManager : MonoBehaviour
 
     public void OnClickContinue()
     {
+        ButtonSound();
         countTime = 3;
         stopPopUp.SetActive(false);
         StartCoroutine(ContinueDelay());
+    }
+
+    private void ButtonSound()
+    {
+        gameManager.soundManager.ButtonAudio();
     }
 
     private IEnumerator ContinueDelay()
@@ -165,7 +183,6 @@ public class UIManager : MonoBehaviour
     {
         switch (randomNum)
         {
-            
             case 1:
                 item.sprite = itemBig;
                 break;
@@ -180,6 +197,14 @@ public class UIManager : MonoBehaviour
 
             case 4:
                 item.sprite = itemLightning;
+                break;
+
+            case 5:
+                item.sprite = itemSmall;
+                break;
+
+            case 6:
+                item.sprite = itemHeart;
                 break;
         }
     }
