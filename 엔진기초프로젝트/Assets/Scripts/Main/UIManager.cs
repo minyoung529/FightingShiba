@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Sprite itemSlow;
     [SerializeField]
+    Sprite itemCoin;
+    [SerializeField]
     SpriteRenderer item;
     [SerializeField]
     Sprite itemLightning;
@@ -61,15 +63,20 @@ public class UIManager : MonoBehaviour
         UpdateUI();
     }
 
+    public int ReturnScore()
+    {
+        int score_ = score;
+        return score_;
+    }
     public void DestroyHeart()
     {
-        if (gameManager.life == 2)
+        if (gameManager.Life == 2)
             heart3.SetActive(false);
 
-        else if (gameManager.life == 1)
+        else if (gameManager.Life == 1)
             heart2.SetActive(false);
 
-        else if (gameManager.life == 0)
+        else if (gameManager.Life == 0)
             heart1.SetActive(false);
     }
 
@@ -168,6 +175,10 @@ public class UIManager : MonoBehaviour
                 break;
 
             case 3:
+                item.sprite = itemCoin;
+                break;
+
+            case 4:
                 item.sprite = itemLightning;
                 break;
         }

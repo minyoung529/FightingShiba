@@ -52,7 +52,6 @@ public class EnemyBulletMove : MonoBehaviour
     private void Despawn()
     {
         transform.SetParent(gameManager.enemyPoolManager.transform, false);
-        Debug.Log("¾Æ");
         gameObject.SetActive(false);
     }
 }

@@ -27,7 +27,6 @@ public class PlayerMove : MonoBehaviour
 
     private bool isDamaged = false;
     public bool IsBig { get; private set; } = false;
-    public bool isItem = false;
 
     private float countTime;
     private float bigCooltime = 3f;
@@ -42,15 +41,16 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetMouseButton(0))
+        {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
+            targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
+            targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
 
-        transform.localPosition =
+            transform.localPosition =
             Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
+        }
     }
 
     private IEnumerator Fire()
@@ -91,6 +91,16 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Item"))
+        {
+            Destroy(collision.gameObject);
+        }
+
+        else if (collision.CompareTag("Coin"))
+        {
+            gameManager.uiManager.AddCoin(1);
+        }
+
         if (isDamaged) return;
 
         if (collision.CompareTag("EnemyBullet"))
@@ -100,15 +110,9 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(Damage());
         }
 
-        else if (collision.CompareTag("Item"))
+        if (collision.CompareTag("Lightning"))
         {
-            if (isItem) return;
-            Destroy(collision.gameObject);
-        }
-
-        else if (collision.CompareTag("Coin"))
-        {
-            gameManager.uiManager.AddCoin(1);
+            StartCoroutine(Damage());
         }
     }
 
@@ -130,13 +134,14 @@ public class PlayerMove : MonoBehaviour
 
     public void Item(string item)
     {
-        if (isItem) return;
-
         if (item == "BigItem")
-            StartCoroutine("ItemBig");
+            StartCoroutine(ItemBig());
 
         else if (item == "SlowItem")
-            StartCoroutine("ItemSlow");
+            StartCoroutine(ItemSlow());
+
+        else if (item == "LightningItem")
+            gameManager.StartCoroutine("SpawnLightning");
 
         countTime = 0f;
     }
@@ -144,7 +149,6 @@ public class PlayerMove : MonoBehaviour
     public IEnumerator ItemBig()
     {
         IsBig = true;
-        isItem = true;
 
         gameObject.transform.localScale = new Vector2(1.5f, 1.5f);
         yield return new WaitForSeconds(bigCooltime);
@@ -160,14 +164,11 @@ public class PlayerMove : MonoBehaviour
         gameObject.transform.localScale = new Vector2(0.9f, 0.9f);
         countTime = 6f;
         IsBig = false;
-        isItem = false;
-        StopCoroutine("ItemBig");
-
+        yield break;
     }
 
     public IEnumerator ItemSlow()
     {
-        isItem = true;
         Time.timeScale = 0.5f;
         music.pitch = 0.7f;
         yield return new WaitForSecondsRealtime(5f);
@@ -183,7 +184,6 @@ public class PlayerMove : MonoBehaviour
         countTime = 6f;
         Time.timeScale = 1f;
         music.pitch = 1f;
-        isItem = false;
-        StopCoroutine("ItemSlow");
+        yield break;
     }
 }

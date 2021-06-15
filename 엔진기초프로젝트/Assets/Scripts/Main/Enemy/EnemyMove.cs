@@ -126,7 +126,7 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
-    private void Fire()
+    private GameObject Fire(GameObject bullet)
     {
         diff = player.transform.position - transform.position;
         diff.Normalize();
@@ -134,9 +134,11 @@ public class EnemyMove : MonoBehaviour
         rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
         timer = 0f;
-        bullet = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
+
         bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 180f);
         bullet.transform.SetParent(null);
+
+        return bullet;
     }
 
     private GameObject InstantiateOrPool()
@@ -149,13 +151,16 @@ public class EnemyMove : MonoBehaviour
             result.transform.position = enemyBulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
+            //풀링 ^^ 유동탄 그럼 어더ㅓㅎ게 ??
+
         }
 
         else
         {
-            Fire();
+            result = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
         }
 
+        result = Fire(result);
         return result;
     }
 
@@ -235,12 +240,23 @@ public class EnemyMove : MonoBehaviour
     {
 
         circleTimer += Time.deltaTime;
-
+        GameObject circleBullet = null;
         if (circleTimer >= 3f)
         {
             for (int i = -90; i < 90; i += 15)
             {
-                GameObject circleBullet = Instantiate(enemyBulletPrefab);
+                if (gameManager.enemyPoolManager.transform.childCount > 0)
+                {
+                    circleBullet = gameManager.enemyPoolManager.transform.GetChild(0).gameObject;
+                    circleBullet.transform.position = enemyBulletPosition.position;
+                    circleBullet.transform.SetParent(null);
+                    circleBullet.SetActive(true);
+                }
+
+                else
+                {
+                    circleBullet = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
+                }
 
                 circleBullet.transform.position = enemyBulletPosition.transform.position;
                 circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);

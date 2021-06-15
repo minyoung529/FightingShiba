@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7573354855677281409, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dad66d1ae40ca4b44b7a0f98bc1e1943, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 1.63, y: 1.58}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3969066562735957284
@@ -96,9 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327fc7909f45d1a47865420a2fe56154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemBig: {fileID: -7573354855677281409, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
+  itemBig: {fileID: 8033092973025764044, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
   itemSlow: {fileID: 4337684191699249041, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
-  itemLightning: {fileID: 21300000, guid: dad66d1ae40ca4b44b7a0f98bc1e1943, type: 3}
+  itemCoin: {fileID: -5971942374765049077, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
+  itemLightning: {fileID: 1801263428120863714, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
 --- !u!58 &-4004058347165956676
 CircleCollider2D:
   m_ObjectHideFlags: 0

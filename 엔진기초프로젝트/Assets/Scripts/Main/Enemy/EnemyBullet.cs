@@ -17,8 +17,15 @@ public class EnemyBullet : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime, Space.Self);
-
         CheckLimit();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            Despawn();
+        }
     }
 
     private void CheckLimit()
@@ -46,7 +53,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void Despawn()
     {
-        transform.SetParent(gameManager.poolManager.transform, false);
+        transform.SetParent(gameManager.enemyPoolManager.transform, false);
         gameObject.SetActive(false);
     }
 }

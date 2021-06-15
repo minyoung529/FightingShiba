@@ -7,14 +7,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("배경 오브젝트")]
-    [SerializeField]
-    private GameObject cloud1 = null;
-    [SerializeField]
-    private GameObject cloud2 = null;
-    [SerializeField]
-    private GameObject yellowButterfly = null;
-
     [Header("아이템")]
     [SerializeField]
     private GameObject itemPrefab = null;
@@ -33,11 +25,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Collider2D lightningcol;
 
+    [Header("배경")]
+    [SerializeField]
+    private GameObject cloud;
+    [SerializeField]
+    private GameObject cloud2;
+
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
-    public int life { get; private set; } = 100;
-    public int RandomNum { get; private set; }  = 0;
+    public int Life { get; private set; } = 3;
 
     public PoolManager poolManager { get; private set; }
     public EnemyPoolManager enemyPoolManager { get; private set; }
@@ -49,24 +46,24 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
+        enemyPoolManager = FindObjectOfType<EnemyPoolManager>();
         poolManager = FindObjectOfType<PoolManager>();
         uiManager = FindObjectOfType<UIManager>();
         playerMove = FindObjectOfType<PlayerMove>();
-        enemyPoolManager = FindObjectOfType<EnemyPoolManager>();
 
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
 
         StartCoroutine(SpawnItem());
         StartCoroutine(SpawnCoin());
-        StartCoroutine(SpawnLightning());
+        StartCoroutine(SpawnCloud());
     }
 
     public void Dead()
     {
-        life--;
+        Life--;
         uiManager.DestroyHeart();
-        if (life <= 0)
+        if (Life <= 0)
         {
             if (uiManager.EnemyHP() >= 100)
                 SceneManager.LoadScene("GameClear");
@@ -95,18 +92,18 @@ public class GameManager : MonoBehaviour
     {
         float randomY = 0f;
         float randomDelay = 0f;
+        int ramdomNum = 0;
 
         while (true)
         {
             randomY = Random.Range(-3.5f, 3.5f);
             randomDelay = Random.Range(10f, 15f);
-            RandomNum = Random.Range(0, 4);
+            ramdomNum = Random.Range(0, 5);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(randomDelay);
 
-            uiManager.RandomItem(RandomNum);
+            uiManager.RandomItem(ramdomNum);
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
-            yield return new WaitForSeconds(1f);
 
         }
     }
@@ -119,25 +116,34 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             randomY = Random.Range(-3.5f, 3.5f);
-            randomDelay = Random.Range(5f, 10f);
+            randomDelay = Random.Range(7f, 1f);
 
-            yield return new WaitForSeconds(1f);
-
-            for (int i = 0; i < 1; i++)
-            {
-                Instantiate(coinPrefab, new Vector2(12f, randomY), Quaternion.identity);
-                yield return new WaitForSeconds(1f);
-            }
+            Instantiate(coinPrefab, new Vector2(12f, randomY), Quaternion.identity);
+            yield return new WaitForSeconds(randomDelay);
         }
+    }
+
+    private IEnumerator SpawnCloud()
+    {
+        float randomY = 0f;
+        float randomDelay = 0f;
+
+        randomY = Random.Range(2f, 4f);
+        randomDelay = Random.Range(5f, 7f);
+
+        Instantiate(cloud, new Vector2(12f, randomY - 0.2f), Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        Instantiate(cloud2, new Vector2(12f, randomY), Quaternion.identity);
+        yield return new WaitForSeconds(randomDelay);
     }
 
     private IEnumerator SpawnLightning()
     {
         float randomX;
 
-        for(int i = 0; i<5;i++)
+        for (int i = 0; i < 5; i++)
         {
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(1f);
 
             randomX = Random.Range(-8f, -3f);
             lightningObj.transform.position = new Vector2(randomX, 0f);
@@ -154,5 +160,6 @@ public class GameManager : MonoBehaviour
             lightningObj.SetActive(false);
             lightningcol.enabled = false;
         }
+        yield break;
     }
 }
