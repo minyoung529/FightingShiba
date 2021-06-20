@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     [Header("게임 중지 팝업")]
     [SerializeField] private GameObject stopPopUp;
+    [SerializeField] private GameObject musicPopUp;
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField] private Text textDelayTime;
@@ -116,11 +117,19 @@ public class UIManager : MonoBehaviour
 
     public void OnClickStop()
     {
-        ButtonSound();
+        gameManager.soundManager.ButtonAudio();
         gameManager.StopGame();
         stopPopUp.SetActive(true);
         textDelayTimeObj.SetActive(false);
         music.Stop();
+    }
+
+    public void OnClickMusic()
+    {
+        gameManager.soundManager.ButtonAudio();
+        gameManager.StopGame();
+        musicPopUp.SetActive(true);
+        textDelayTimeObj.SetActive(false);
     }
 
     public void OnClickMenu()
@@ -142,6 +151,7 @@ public class UIManager : MonoBehaviour
         ButtonSound();
         countTime = 3;
         stopPopUp.SetActive(false);
+        musicPopUp.SetActive(false);
         StartCoroutine(ContinueDelay());
     }
 
@@ -178,6 +188,7 @@ public class UIManager : MonoBehaviour
     {
         return enemyHPBar.value;
     }
+
 
     public void RandomItem(int randomNum)
     {

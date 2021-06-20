@@ -18,7 +18,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip buttonSound;
 
-    AudioSource audioSource;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -55,5 +55,10 @@ public class SoundManager : MonoBehaviour
     public void Slow()
     {
         audioSource.pitch = 0.7f;
+    }
+
+    public void DefaultSpeed()
+    {
+        audioSource.pitch = 1f;
     }
 }

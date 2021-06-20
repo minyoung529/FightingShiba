@@ -85,11 +85,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void AddScore(int score)
-    {
-        uiManager.AddScore(score);
-    }
-
     private IEnumerator SpawnItem()
     {
         float randomY = 0f;

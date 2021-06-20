@@ -74,7 +74,7 @@ public class PlayerMove : MonoBehaviour
             result.transform.SetParent(null);
             result.SetActive(true);
 
-            gameManager.uiManager.AddScore(1);
+            gameManager.uiManager.AddScore(2);
         }
 
         else
@@ -84,7 +84,7 @@ public class PlayerMove : MonoBehaviour
             newBullet.transform.SetParent(null);
             result = newBullet;
 
-            gameManager.uiManager.AddScore(1);
+            gameManager.uiManager.AddScore(2);
         }
         return result;
     }
@@ -172,7 +172,7 @@ public class PlayerMove : MonoBehaviour
         IsBig = true;
 
         gameObject.transform.localScale = new Vector2(scale, scale);
-        yield return new WaitForSeconds(bigCooltime);
+        yield return new WaitForSeconds(3f);
 
         for (int i = 0; i < 5; i++)
         {
@@ -204,7 +204,7 @@ public class PlayerMove : MonoBehaviour
 
         countTime = 6f;
         Time.timeScale = 1f;
-        music.pitch = 1f;
+        gameManager.soundManager.DefaultSpeed();
         yield break;
     }
 }

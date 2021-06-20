@@ -14,7 +14,6 @@ public class LobbyManager : MonoBehaviour
     private Slider volumeController;
     [SerializeField]
     private AudioSource backgroundMusic;
-    
 
     private void Update()
     {
