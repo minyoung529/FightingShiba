@@ -94,10 +94,10 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             randomY = Random.Range(-3.5f, 3.5f);
-            randomDelay = Random.Range(10f, 15f);
+            randomDelay = Random.Range(5f, 7f);
             ramdomNum = Random.Range(0, 7);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(randomDelay);
 
             uiManager.RandomItem(ramdomNum);
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);

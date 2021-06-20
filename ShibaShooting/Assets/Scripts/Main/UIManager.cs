@@ -121,7 +121,6 @@ public class UIManager : MonoBehaviour
         gameManager.StopGame();
         stopPopUp.SetActive(true);
         textDelayTimeObj.SetActive(false);
-        music.Stop();
     }
 
     public void OnClickMusic()
@@ -175,7 +174,6 @@ public class UIManager : MonoBehaviour
         }
 
         gameManager.ContinueGame();
-        music.Play();
         yield return 0;
     }
 
