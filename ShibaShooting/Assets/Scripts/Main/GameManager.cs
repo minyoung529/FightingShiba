@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
-    public int Life { get; private set; } = 3;
+    public int Life { get; private set; } = 100;
 
     public PoolManager poolManager { get; private set; }
     public EnemyPoolManager enemyPoolManager { get; private set; }

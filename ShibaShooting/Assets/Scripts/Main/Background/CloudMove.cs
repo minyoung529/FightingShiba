@@ -29,7 +29,7 @@ public class CloudMove : MonoBehaviour
 
         if (!isEnd)
         {
-            if (gameManager.uiManager.ReturnScore() > 1000 && transform.position.x < RandomNumber())
+            if (gameManager.uiManager.ReturnScore() > 600 && transform.position.x < RandomNumber())
             {
                 Debug.Log(RandomNumber());
                 rigid.gravityScale = 1f;
