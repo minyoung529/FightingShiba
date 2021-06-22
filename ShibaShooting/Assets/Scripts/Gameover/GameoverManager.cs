@@ -15,7 +15,7 @@ public class GameoverManager : MonoBehaviour
     }
     public void OnClickStart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Main");
     }
 
     public void OnClickLobby()

@@ -102,6 +102,7 @@ MonoBehaviour:
   itemLightning: {fileID: 1801263428120863714, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
   itemHeart: {fileID: -488721925442295091, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
   itemSmall: {fileID: 4639506938558671751, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
+  itemTired: {fileID: 21300000, guid: 14a2ff24bd6ed0f4abd4e12758174b51, type: 3}
 --- !u!58 &-4004058347165956676
 CircleCollider2D:
   m_ObjectHideFlags: 0

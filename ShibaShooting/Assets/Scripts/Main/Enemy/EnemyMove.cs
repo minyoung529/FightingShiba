@@ -111,12 +111,6 @@ public class EnemyMove : MonoBehaviour
         isDamaged = false;
     }
 
-    private IEnumerator Dead()
-    {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
-    }
-
     private IEnumerator EnemyFire()
     {
         while (true)
@@ -151,9 +145,7 @@ public class EnemyMove : MonoBehaviour
             result.transform.position = enemyBulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
-            //풀링 ^^ 유동탄 그럼 어더ㅓㅎ게 ??
-
-        }
+        }   
 
         else
         {

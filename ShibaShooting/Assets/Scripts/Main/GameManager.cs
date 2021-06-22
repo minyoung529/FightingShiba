@@ -34,11 +34,10 @@ public class GameManager : MonoBehaviour
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
-    public int Life { get; private set; } = 100;
+    public int Life { get; private set; } = 3;
 
     public PoolManager poolManager { get; private set; }
     public EnemyPoolManager enemyPoolManager { get; private set; }
-
     public UIManager uiManager { get; private set; }
     public PlayerMove playerMove { get; private set; }
     public SoundManager soundManager { get; private set; }
@@ -67,7 +66,7 @@ public class GameManager : MonoBehaviour
         uiManager.DestroyHeart();
         if (Life <= 0)
         {
-            if (uiManager.EnemyHP() >= 100)
+            if (uiManager.EnemyHP() > 150)
                 SceneManager.LoadScene("GameClear");
 
             else
@@ -94,14 +93,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             randomY = Random.Range(-3.5f, 3.5f);
-            randomDelay = Random.Range(5f, 7f);
-            ramdomNum = Random.Range(0, 7);
+            randomDelay = Random.Range(6f, 7f);
+            ramdomNum = Random.Range(0, 8);
 
             yield return new WaitForSeconds(randomDelay);
 
             uiManager.RandomItem(ramdomNum);
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
-
         }
     }
 
@@ -136,27 +134,35 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnLightning()
     {
+        if (playerMove.GetIsItem()) yield break;
+        playerMove.DecoLightning(true);
+
         float randomX;
 
         for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSeconds(1f);
 
+            lightningcol.enabled = false;
             randomX = Random.Range(-8f, -3f);
             lightningObj.transform.position = new Vector2(randomX, 0f);
             lightningObj.SetActive(true);
 
             lightningRenderer.color = new Color(1f, 1f, 1f, 0.5f);
             lightningRenderer.sprite = defaultSprite;
+
             yield return new WaitForSeconds(0.6f);
 
             lightningcol.enabled = true;
             lightningRenderer.sprite = lightningSprite;
             lightningRenderer.color = new Color(1f, 1f, 1f, 1f);
+
             yield return new WaitForSeconds(1f);
+
             lightningObj.SetActive(false);
             lightningcol.enabled = false;
         }
+        playerMove.DecoLightning(false);
         yield break;
     }
 

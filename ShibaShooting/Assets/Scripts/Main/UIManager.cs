@@ -32,13 +32,14 @@ public class UIManager : MonoBehaviour
     private Text textCoin = null;
 
     [Header("아이템 스프라이트")]
-    [SerializeField] Sprite itemBig;
-    [SerializeField] Sprite itemSlow;
-    [SerializeField] Sprite itemCoin;
-    [SerializeField] Sprite itemLightning;
-    [SerializeField] Sprite itemHeart;
-    [SerializeField] Sprite itemSmall;
-    [SerializeField] SpriteRenderer item;
+    [SerializeField] private Sprite itemBig;
+    [SerializeField] private Sprite itemSlow;
+    [SerializeField] private Sprite itemCoin;
+    [SerializeField] private Sprite itemLightning;
+    [SerializeField] private Sprite itemHeart;
+    [SerializeField] private Sprite itemSmall;
+    [SerializeField] private Sprite itemTired;
+    [SerializeField] private SpriteRenderer item;
 
     [Header("음악")]
     [SerializeField]
@@ -51,7 +52,6 @@ public class UIManager : MonoBehaviour
 
     private GameManager gameManager = null;
 
-
     private void Start()
     {
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
@@ -63,9 +63,9 @@ public class UIManager : MonoBehaviour
 
     public int ReturnScore()
     {
-        int score_ = score;
-        return score_;
+        return score;
     }
+
     public void DestroyHeart()
     {
         if (gameManager.Life == 2)
@@ -142,7 +142,6 @@ public class UIManager : MonoBehaviour
         ButtonSound();
         stopPopUp.SetActive(false);
         SceneManager.LoadScene("Main");
-
     }
 
     public void OnClickContinue()
@@ -214,6 +213,10 @@ public class UIManager : MonoBehaviour
 
             case 6:
                 item.sprite = itemHeart;
+                break;
+
+            case 7:
+                item.sprite = itemTired;
                 break;
         }
     }

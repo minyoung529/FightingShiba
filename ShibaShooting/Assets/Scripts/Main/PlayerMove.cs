@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [Header("플레이어 스피드")]
-    [SerializeField]
-    private float speed = 5f;
+    private float speed = 30f;
+
     [Header("총알 포지션")]
     [SerializeField]
     private Transform bulletPosition = null;
@@ -19,21 +18,28 @@ public class PlayerMove : MonoBehaviour
     [Header("음악")]
     [SerializeField]
     private AudioSource music;
+    [Header("꾸미기")]
+    [SerializeField]
+    private SpriteRenderer deco;
+    [SerializeField]
+    private Sprite sleep;
+    [SerializeField]
+    private Sprite lightning;
 
     private Vector2 targetPosition = Vector2.zero;
     private GameManager gameManager = null;
+    private BackgroundMove backMove = null;
     private SpriteRenderer spriteRenderer = null;
     private Rigidbody2D rigid = null;
 
     private bool isDamaged = false;
-    public bool IsBig { get; private set; } = false;
-
-    private float countTime;
-    private float bigCooltime = 3f;
+    private bool isBig = false;
+    private bool isItem = false;
 
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        backMove = FindObjectOfType<BackgroundMove>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         StartCoroutine(Fire());
@@ -93,7 +99,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.CompareTag("Item"))
         {
+            if (isItem) return;
             Destroy(collision.gameObject);
+            isItem = true;
         }
 
         else if (collision.CompareTag("Coin"))
@@ -107,13 +115,14 @@ public class PlayerMove : MonoBehaviour
         if (collision.CompareTag("EnemyBullet"))
         {
             Destroy(collision.gameObject);
-            if (IsBig) return;
+            if (isBig) return;
             gameManager.soundManager.DamagedAudio();
             StartCoroutine(Damage());
         }
 
         if (collision.CompareTag("Lightning"))
         {
+            gameManager.soundManager.DamagedAudio();
             StartCoroutine(Damage());
         }
     }
@@ -136,40 +145,57 @@ public class PlayerMove : MonoBehaviour
 
     public void Item(string item)
     {
-        if (item == "BigItem")
+        switch (item)
         {
-            gameManager.soundManager.ItemAudio();
-            StartCoroutine(ItemBig(1.5f));
-        }
+            case "BigItem":
+                gameManager.soundManager.ItemAudio();
+                StartCoroutine(ItemBig(1.5f));
+                IsItem(false);
+                break;
 
-        else if (item == "SlowItem")
-        {
-            gameManager.soundManager.ItemAudio();
-            StartCoroutine(ItemSlow());
-        }
+            case "SlowItem":
+                gameManager.soundManager.ItemAudio();
+                StartCoroutine(ItemSlow());
+                IsItem(false);
+                break;
 
-        else if (item == "LightningItem")
-        {
-            gameManager.soundManager.LightningAudio();
-            gameManager.StartCoroutine("SpawnLightning");
-        }
+            case "LightningItem":
+                gameManager.soundManager.LightningAudio();
+                gameManager.StartCoroutine("SpawnLightning");
+                IsItem(false);
+                break;
 
-        else if (item == "HeartItem")
-        {
-            gameManager.soundManager.ItemAudio();
-            gameManager.ItemHeart();
+            case "HeartItem":
+                gameManager.soundManager.ItemAudio();
+                gameManager.ItemHeart();
+                IsItem(false);
+                break;
+
+            case "SmallItem":
+                gameManager.soundManager.ItemAudio();
+                StartCoroutine(ItemBig(0.7f));
+                IsItem(false);
+                break;
+
+            case "TiredItem":
+                backMove.StartCoroutine("ChangeBackground");
+                StartCoroutine(ItemTired());
+                IsItem(false);
+                break;
+
+            default:
+                Debug.Log("오류");
+                break;
+
         }
-        else if (item == "SmallItem")
-        {
-            gameManager.soundManager.ItemAudio();
-            StartCoroutine(ItemBig(0.7f));
-        }
-        countTime = 0f;
     }
 
     public IEnumerator ItemBig(float scale)
     {
-        IsBig = true;
+        if(scale == 1.5f)
+        {
+            isBig = true;
+        }
 
         gameObject.transform.localScale = new Vector2(scale, scale);
         yield return new WaitForSeconds(3f);
@@ -183,8 +209,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         gameObject.transform.localScale = new Vector2(0.9f, 0.9f);
-        countTime = 6f;
-        IsBig = false;
+        isBig = false;
+        IsItem(false);
         yield break;
     }
 
@@ -202,9 +228,56 @@ public class PlayerMove : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.2f);
         }
 
-        countTime = 6f;
         Time.timeScale = 1f;
         gameManager.soundManager.DefaultSpeed();
+        IsItem(false);
         yield break;
+    }
+
+    public IEnumerator ItemTired()
+    {
+        if (GetIsItem()) yield break;
+
+        deco.enabled = true;
+        deco.sprite = sleep;
+        speed = 7f;
+
+        yield return new WaitForSecondsRealtime(5f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            deco.enabled = false;
+            yield return new WaitForSecondsRealtime(0.2f);
+            deco.enabled = true;
+            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
+
+        speed = 30f;
+        deco.enabled = false;
+        IsItem(false);
+        yield break;
+    }
+
+    public bool GetIsBig()
+    {
+        return isBig;
+    }
+
+    public void DecoLightning(bool isTrue)
+    {
+        deco.enabled = isTrue;
+        deco.sprite = lightning;
+    }
+
+    public void IsItem(bool isTrue)
+    {
+        isItem = isTrue;
+    }
+
+    public bool GetIsItem()
+    {
+        return isItem;
     }
 }
