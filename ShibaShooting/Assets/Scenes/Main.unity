@@ -475,7 +475,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290.06995, y: -361.99997}
+  m_AnchoredPosition: {x: 290.0703, y: -362}
   m_SizeDelta: {x: 201.04004, y: 201.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &454601986
@@ -1146,7 +1146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -418, y: -172.26001}
+  m_AnchoredPosition: {x: -418, y: -172.26025}
   m_SizeDelta: {x: 178.82996, y: 166.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &716508312
@@ -2274,7 +2274,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 50
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2536,7 +2536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 421.06995, y: -361.99997}
+  m_AnchoredPosition: {x: 421.0703, y: -362}
   m_SizeDelta: {x: 201.04004, y: 201.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1423353816
@@ -3312,8 +3312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096117e1f97bb0344ac2df1b50a668aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightning: {fileID: -2983090718515566234, guid: b02d0fa2288270545ba6a8744054270e, type: 3}
-  defaultSprite: {fileID: -1461059339494140160, guid: b02d0fa2288270545ba6a8744054270e, type: 3}
 --- !u!60 &1793545193
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3519,7 +3517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27322227, y: 0.162}
   m_AnchorMax: {x: 0.72722226, y: 0.8863333}
-  m_AnchoredPosition: {x: -0.42016602, y: -1}
+  m_AnchoredPosition: {x: -0.41992188, y: -1}
   m_SizeDelta: {x: -3.130005, y: 1.0100021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1911309451
@@ -3691,6 +3689,7 @@ MonoBehaviour:
   lightningcol: {fileID: 1793545193}
   cloud: {fileID: 5881459917966850042, guid: 9e8b398799eb2f54e8e909a7334c7599, type: 3}
   cloud2: {fileID: 6873086254450879962, guid: dc6f3f4475d919342940f26e61bb917a, type: 3}
+  sun: {fileID: 9148498876592862189, guid: 28ffb3b9cec1eab46be459e9a4c5a5f4, type: 3}
 --- !u!4 &1935711153
 Transform:
   m_ObjectHideFlags: 0
@@ -3881,7 +3880,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

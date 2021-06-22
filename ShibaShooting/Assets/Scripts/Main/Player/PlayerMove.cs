@@ -35,6 +35,8 @@ public class PlayerMove : MonoBehaviour
     private bool isDamaged = false;
     private bool isBig = false;
     private bool isItem = false;
+    private bool isTired = false;
+
 
     void Start()
     {
@@ -68,7 +70,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    //instantiating or pooling player bullet
     private GameObject InstantiateOrPool()
     {
         GameObject result = null;
@@ -80,7 +81,7 @@ public class PlayerMove : MonoBehaviour
             result.transform.SetParent(null);
             result.SetActive(true);
 
-            gameManager.uiManager.AddScore(2);
+            gameManager.uiManager.AddScore(4);
         }
 
         else
@@ -90,7 +91,7 @@ public class PlayerMove : MonoBehaviour
             newBullet.transform.SetParent(null);
             result = newBullet;
 
-            gameManager.uiManager.AddScore(2);
+            gameManager.uiManager.AddScore(4);
         }
         return result;
     }
@@ -99,13 +100,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.CompareTag("Item"))
         {
-            if (isItem)
-            {
-                return;
-                Debug.Log("SDKFUHSDFHSD");
-            }
+            if (isItem) return;
             Destroy(collision.gameObject);
-            isItem = true;
         }
 
         else if (collision.CompareTag("Coin"))
@@ -131,7 +127,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // Damage effect
     private IEnumerator Damage()
     {
         isDamaged = true;
@@ -152,18 +147,21 @@ public class PlayerMove : MonoBehaviour
         switch (item)
         {
             case "BigItem":
+                IsItem(true);
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemBig(1.5f));
                 IsItem(false);
                 break;
 
             case "SlowItem":
+                IsItem(true);
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemSlow());
                 IsItem(false);
                 break;
 
             case "LightningItem":
+                IsItem(true);
                 gameManager.soundManager.LightningAudio();
                 gameManager.StartCoroutine("SpawnLightning");
                 IsItem(false);
@@ -176,21 +174,21 @@ public class PlayerMove : MonoBehaviour
                 break;
 
             case "SmallItem":
+                IsItem(true);
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemBig(0.7f));
                 IsItem(false);
                 break;
 
             case "TiredItem":
+                IsItem(true);
                 backMove.StartCoroutine("ChangeBackground");
                 StartCoroutine(ItemTired());
                 IsItem(false);
                 break;
 
             default:
-                Debug.Log("¿À·ù");
                 break;
-
         }
 
         IsItem(false);
@@ -242,8 +240,7 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator ItemTired()
     {
-        if (GetIsItem()) yield break;
-
+        isTired = true;
         deco.enabled = true;
         deco.sprite = sleep;
         speed = 7f;
@@ -263,12 +260,8 @@ public class PlayerMove : MonoBehaviour
         speed = 30f;
         deco.enabled = false;
         IsItem(false);
+        isTired = false;
         yield break;
-    }
-
-    public bool GetIsBig()
-    {
-        return isBig;
     }
 
     public void DecoLightning(bool isTrue)
@@ -282,8 +275,8 @@ public class PlayerMove : MonoBehaviour
         isItem = isTrue;
     }
 
-    public bool GetIsItem()
+    public bool GetIsTired()
     {
-        return isItem;
+        return isTired;
     }
 }

@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class CloudMove : MonoBehaviour
 {
-    GameManager gameManager = null;
+    protected GameManager gameManager = null;
 
     [SerializeField]
-    private float speed = 3f;
+    protected float speed = 3f;
 
     private Rigidbody2D rigid;
     private Collider2D col;
 
-    private bool isEnd = false;
+    protected bool isEnd = false;
 
-
-    private void Start()
+    protected virtual void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody2D>();
@@ -23,7 +22,7 @@ public class CloudMove : MonoBehaviour
 
         col.enabled = false;
     }
-    void Update()
+    protected virtual void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
 
@@ -31,7 +30,6 @@ public class CloudMove : MonoBehaviour
         {
             if (gameManager.uiManager.ReturnScore() > 600 && transform.position.x < RandomNumber())
             {
-                Debug.Log(RandomNumber());
                 rigid.gravityScale = 1f;
                 col.enabled = true;
                 isEnd = true;
@@ -48,7 +46,7 @@ public class CloudMove : MonoBehaviour
         }
     }
 
-    private float RandomNumber()
+    protected virtual float RandomNumber()
     {
         float random = 0;
         random = Random.Range(-9f, -3f);

@@ -30,11 +30,13 @@ public class GameManager : MonoBehaviour
     private GameObject cloud;
     [SerializeField]
     private GameObject cloud2;
+    [SerializeField]
+    private GameObject sun;
 
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
-    public int Life { get; private set; } = 3;
+    public int Life { get; private set; } = 100;
 
     public PoolManager poolManager { get; private set; }
     public EnemyPoolManager enemyPoolManager { get; private set; }
@@ -130,11 +132,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Instantiate(cloud2, new Vector2(12f, randomY), Quaternion.identity);
         yield return new WaitForSeconds(randomDelay);
+        Instantiate(sun, new Vector2(12f, randomY), Quaternion.identity);
+        yield return new WaitForSeconds(randomDelay);
     }
 
     private IEnumerator SpawnLightning()
     {
-        if (playerMove.GetIsItem()) yield break;
         playerMove.DecoLightning(true);
 
         float randomX;

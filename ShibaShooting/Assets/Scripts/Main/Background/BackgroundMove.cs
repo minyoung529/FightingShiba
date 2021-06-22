@@ -33,8 +33,6 @@ public class BackgroundMove : MonoBehaviour
 
     public IEnumerator ChangeBackground()
     {
-        if (gameManager.playerMove.GetIsItem()) yield break;
-
         meshRenderer.material = dark;
         yield return new WaitForSeconds(7f);
         meshRenderer.material = bright;

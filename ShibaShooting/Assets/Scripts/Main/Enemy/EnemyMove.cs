@@ -25,10 +25,6 @@ public class EnemyMove : MonoBehaviour
     private SpriteRenderer spriteRenderer = null;
     private SpeechBubble speechBubble = null;
 
-    // [Header("¸»Ç³¼±")]
-    //[SerializeField]
-    //private GameObject sb = null;
-
     [Header("ÃÑ¾Ë µô·¹ÀÌ")]
     [SerializeField]
     private float fireRate = 0.8f;
@@ -135,7 +131,7 @@ public class EnemyMove : MonoBehaviour
         return bullet;
     }
 
-    private GameObject InstantiateOrPool()
+    protected virtual GameObject InstantiateOrPool()
     {
         GameObject result = null;
 

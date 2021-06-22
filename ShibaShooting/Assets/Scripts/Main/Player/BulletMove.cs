@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class BulletMove : MonoBehaviour
 {
-    [Header("ÃÑ¾Ë ½ºÇÇµå")]
-    [SerializeField]
-    private float speed = 10f;
-    
-    private float damage = 1f;
+    protected float speed = 10f;
+    protected float damage = 1f;
 
-    private GameManager gameManager = null;
+    protected GameManager gameManager = null;
 
-    void Start()
+    protected virtual void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.SetParent(null);

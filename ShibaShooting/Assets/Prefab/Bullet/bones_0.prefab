@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 200364306983741967}
   - component: {fileID: 2260576007372238855}
   - component: {fileID: 5632161567377674078}
-  - component: {fileID: 6724405377520229993}
+  - component: {fileID: -4762927920182863577}
   m_Layer: 0
   m_Name: bones_0
   m_TagString: Untagged
@@ -139,7 +139,7 @@ PolygonCollider2D:
       - {x: -0.02, y: -0.435}
       - {x: 0.049999997, y: -0.24499999}
       - {x: 0.26, y: 0.024999999}
---- !u!114 &6724405377520229993
+--- !u!114 &-4762927920182863577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,8 +148,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7160283548220480614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2e607b671fa5c941b328f5a2bceebdb, type: 3}
+  m_Script: {fileID: 11500000, guid: dd24c8c0f6485084db79acee1788da48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 2

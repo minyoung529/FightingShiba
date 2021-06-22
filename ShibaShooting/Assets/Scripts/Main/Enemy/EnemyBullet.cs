@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class EnemyBullet : BulletMove
 {
-    [SerializeField]
-    private float speed = 10f;
-
-    private GameManager gameManager = null;
-
-    void Start()
+    protected override void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        base.Start();
     }
 
-    void Update()
+    protected override void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime, Space.Self);
         CheckLimit();
@@ -28,30 +23,12 @@ public class EnemyBullet : MonoBehaviour
         }
     }
 
-    private void CheckLimit()
+    protected override void CheckLimit()
     {
-        if (transform.position.y > gameManager.MaxPosition.y + 2f)
-        {
-            Despawn();
-        }
-
-        if (transform.position.y < gameManager.MinPosition.y - 2f)
-        {
-            Despawn();
-        }
-
-        if (transform.position.x > gameManager.MaxPosition.x + 2f)
-        {
-            Despawn();
-        }
-
-        if (transform.position.x < gameManager.MinPosition.x - 2f)
-        {
-            Despawn();
-        }
+        base.CheckLimit();
     }
 
-    private void Despawn()
+    protected override void Despawn()
     {
         transform.SetParent(gameManager.enemyPoolManager.transform, false);
         gameObject.SetActive(false);
