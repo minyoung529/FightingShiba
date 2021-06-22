@@ -2364,3 +2364,4 @@ Total: 2.141900 ms (FindLiveObjects: 0.209100 ms CreateObjectMapping: 0.093500 m
 
 AssetImportParameters requested are different than current active one (requested -> active):
   requireTextureImportCompression: false -> true
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
