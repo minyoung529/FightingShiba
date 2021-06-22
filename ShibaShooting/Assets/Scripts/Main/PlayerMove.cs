@@ -99,7 +99,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.CompareTag("Item"))
         {
-            if (isItem) return;
+            if (isItem)
+            {
+                return;
+                Debug.Log("SDKFUHSDFHSD");
+            }
             Destroy(collision.gameObject);
             isItem = true;
         }
@@ -188,6 +192,8 @@ public class PlayerMove : MonoBehaviour
                 break;
 
         }
+
+        IsItem(false);
     }
 
     public IEnumerator ItemBig(float scale)

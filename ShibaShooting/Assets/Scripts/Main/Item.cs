@@ -41,8 +41,6 @@ public class Item : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (gameManager.playerMove.GetIsItem()) return;
-
             if (spriteRenderer.sprite == itemBig)
             {
                 gameManager.playerMove.Item("BigItem");
