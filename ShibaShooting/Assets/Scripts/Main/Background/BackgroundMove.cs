@@ -36,5 +36,6 @@ public class BackgroundMove : MonoBehaviour
         meshRenderer.material = dark;
         yield return new WaitForSeconds(7f);
         meshRenderer.material = bright;
+        gameManager.playerMove.IsItem(false);
     }
 }

@@ -7,7 +7,7 @@ public class CloudMove : MonoBehaviour
     protected GameManager gameManager = null;
 
     [SerializeField]
-    protected float speed = 3f;
+    private float speed = 3f;
 
     private Rigidbody2D rigid;
     private Collider2D col;

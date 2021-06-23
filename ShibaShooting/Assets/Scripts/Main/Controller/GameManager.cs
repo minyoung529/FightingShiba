@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
-    public int Life { get; private set; } = 100;
+    public int Life { get; private set; } = 3;
 
     public PoolManager poolManager { get; private set; }
     public EnemyPoolManager enemyPoolManager { get; private set; }
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
             randomDelay = Random.Range(6f, 7f);
             ramdomNum = Random.Range(0, 8);
 
-            yield return new WaitForSeconds(randomDelay);
+            yield return new WaitForSeconds(2f);
 
             uiManager.RandomItem(ramdomNum);
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
@@ -165,7 +165,9 @@ public class GameManager : MonoBehaviour
             lightningObj.SetActive(false);
             lightningcol.enabled = false;
         }
+
         playerMove.DecoLightning(false);
+        playerMove.IsItem(false);
         yield break;
     }
 

@@ -41,43 +41,34 @@ public class Item : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (spriteRenderer.sprite == itemBig)
-            {
-                gameManager.playerMove.Item("BigItem");
-            }
-
-            else if (spriteRenderer.sprite == itemSlow)
-            {
-                gameManager.playerMove.Item("SlowItem");
-            }
-
-            else if (spriteRenderer.sprite == itemCoin)
+            if (spriteRenderer.sprite == itemCoin)
             {
                 gameManager.soundManager.ItemAudio();
                 gameManager.uiManager.AddCoin(5);
-                gameManager.playerMove.IsItem(false);
-            }
-
-            else if (spriteRenderer.sprite == itemLightning)
-            {
-                gameManager.playerMove.Item("LightningItem");
             }
 
             else if (spriteRenderer.sprite == itemHeart)
-            {
                 gameManager.playerMove.Item("HeartItem");
-                gameManager.playerMove.IsItem(false);
-            }
+
+            if (gameManager.playerMove.ReturnIsItem()) return;
+
+            if (spriteRenderer.sprite == itemBig)
+                gameManager.playerMove.Item("BigItem");
+
+            else if (spriteRenderer.sprite == itemSlow)
+                gameManager.playerMove.Item("SlowItem");
+
+            else if (spriteRenderer.sprite == itemLightning)
+                gameManager.playerMove.Item("LightningItem");
 
             else if (spriteRenderer.sprite == itemSmall)
-            {
                 gameManager.playerMove.Item("SmallItem");
-            }
 
             else if (spriteRenderer.sprite == itemTired)
-            {
                 gameManager.playerMove.Item("TiredItem");
-            }
+
+            Destroy(gameObject);
         }
+
     }
 }

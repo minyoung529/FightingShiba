@@ -30,7 +30,6 @@ public class PlayerMove : MonoBehaviour
     private GameManager gameManager = null;
     private BackgroundMove backMove = null;
     private SpriteRenderer spriteRenderer = null;
-    private Rigidbody2D rigid = null;
 
     private bool isDamaged = false;
     private bool isBig = false;
@@ -43,7 +42,6 @@ public class PlayerMove : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         backMove = FindObjectOfType<BackgroundMove>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rigid = GetComponent<Rigidbody2D>();
         StartCoroutine(Fire());
     }
 
@@ -59,6 +57,8 @@ public class PlayerMove : MonoBehaviour
             transform.localPosition =
             Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
         }
+
+        Debug.Log(isItem);
     }
 
     private IEnumerator Fire()
@@ -98,13 +98,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Item"))
-        {
-            if (isItem) return;
-            Destroy(collision.gameObject);
-        }
-
-        else if (collision.CompareTag("Coin"))
+        if (collision.CompareTag("Coin"))
         {
             gameManager.uiManager.AddCoin(1);
             gameManager.soundManager.CoinAudio();
@@ -146,52 +140,45 @@ public class PlayerMove : MonoBehaviour
     {
         switch (item)
         {
+
             case "BigItem":
-                IsItem(true);
+                isItem = true;
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemBig(1.5f));
-                IsItem(false);
                 break;
 
             case "SlowItem":
-                IsItem(true);
+                isItem = true;
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemSlow());
-                IsItem(false);
                 break;
 
             case "LightningItem":
-                IsItem(true);
+                isItem = true;
                 gameManager.soundManager.LightningAudio();
                 gameManager.StartCoroutine("SpawnLightning");
-                IsItem(false);
                 break;
 
             case "HeartItem":
                 gameManager.soundManager.ItemAudio();
                 gameManager.ItemHeart();
-                IsItem(false);
                 break;
 
             case "SmallItem":
-                IsItem(true);
+                isItem = true;
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemBig(0.7f));
-                IsItem(false);
                 break;
 
             case "TiredItem":
-                IsItem(true);
+                isItem = true;
                 backMove.StartCoroutine("ChangeBackground");
                 StartCoroutine(ItemTired());
-                IsItem(false);
                 break;
 
             default:
                 break;
         }
-
-        IsItem(false);
     }
 
     public IEnumerator ItemBig(float scale)
@@ -214,7 +201,7 @@ public class PlayerMove : MonoBehaviour
 
         gameObject.transform.localScale = new Vector2(0.9f, 0.9f);
         isBig = false;
-        IsItem(false);
+        isItem = false;
         yield break;
     }
 
@@ -234,7 +221,7 @@ public class PlayerMove : MonoBehaviour
 
         Time.timeScale = 1f;
         gameManager.soundManager.DefaultSpeed();
-        IsItem(false);
+        isItem = false;
         yield break;
     }
 
@@ -259,7 +246,7 @@ public class PlayerMove : MonoBehaviour
 
         speed = 30f;
         deco.enabled = false;
-        IsItem(false);
+        isItem = false;
         isTired = false;
         yield break;
     }
@@ -275,8 +262,8 @@ public class PlayerMove : MonoBehaviour
         isItem = isTrue;
     }
 
-    public bool GetIsTired()
+    public bool ReturnIsItem()
     {
-        return isTired;
+        return isItem;
     }
 }

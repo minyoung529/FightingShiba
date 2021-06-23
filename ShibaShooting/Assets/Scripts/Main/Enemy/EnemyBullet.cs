@@ -13,14 +13,7 @@ public class EnemyBullet : BulletMove
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime, Space.Self);
         CheckLimit();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Player"))
-        {
-            Despawn();
-        }
+        //
     }
 
     protected override void CheckLimit()

@@ -5,10 +5,6 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     #region 변수목록
-    [Header("처치시 주는 점수")]
-    [SerializeField]
-    private int score = 100;
-
     [Header("Enemy 체력")]
     [SerializeField]
     private float hp = 100f;
@@ -21,7 +17,6 @@ public class EnemyMove : MonoBehaviour
     protected bool isDead = false;
 
     protected GameManager gameManager = null;
-    private Animator animator = null;
     private SpriteRenderer spriteRenderer = null;
     private SpeechBubble speechBubble = null;
 
@@ -56,10 +51,9 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        gameManager = FindObjectOfType<GameManager>();
         player = FindObjectOfType<PlayerMove>();
         speechBubble = FindObjectOfType<SpeechBubble>();
 
@@ -73,11 +67,6 @@ public class EnemyMove : MonoBehaviour
         if (transform.position.x >= 6.5f)
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
-        }
-
-        if (transform.position.x < 7f)
-        {
-            //sb.SetActive(true);
         }
 
         EnemyAttack();
@@ -141,7 +130,7 @@ public class EnemyMove : MonoBehaviour
             result.transform.position = enemyBulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
-        }   
+        }
 
         else
         {
@@ -161,15 +150,11 @@ public class EnemyMove : MonoBehaviour
         }
 
         if (hp < 80)
-        {
             speechBubble.ChangeSprites(2);
-        }
 
         if (hp < 70)
-        {
             speechBubble.ChangeSprites(3);
             fireRate = 0.5f;
-        }
 
         if (hp < 60)
         {
@@ -196,39 +181,35 @@ public class EnemyMove : MonoBehaviour
 
         if (hp < 20)
         {
-            circleMaxTime = 1.5f;
+            circleMaxTime = 1.2f;
             speechBubble.ChangeSprites(8);
         }
+
+        else if (hp < 0)
+            circleMaxTime = 1.0f;
     }
 
     private void ChangeSprite()
     {
         if (hp < 80)
-        {
             spriteRenderer.sprite = firstMinyoung;
-        }
 
         if (hp < 60)
-        {
             spriteRenderer.sprite = secondMinyoung;
-        }
 
         if (hp < 40)
-        {
             spriteRenderer.sprite = thirdMinyoung;
-        }
 
         if (hp < 20)
-        {
             spriteRenderer.sprite = fourthMinyoung;
-        }
     }
 
     private void Circle()
     {
-
         circleTimer += Time.deltaTime;
+
         GameObject circleBullet = null;
+
         if (circleTimer >= 3f)
         {
             for (int i = -90; i < 90; i += 15)
@@ -242,9 +223,7 @@ public class EnemyMove : MonoBehaviour
                 }
 
                 else
-                {
                     circleBullet = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
-                }
 
                 circleBullet.transform.position = enemyBulletPosition.transform.position;
                 circleBullet.transform.rotation = Quaternion.Euler(0, 0, i);
