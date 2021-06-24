@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SunMove : CloudMove
 {
-    private Collider2D sunCol = null;
     private float sunSpeed = 2.1f;
 
     [SerializeField]
@@ -14,10 +13,6 @@ public class SunMove : CloudMove
     {
         base.Start();
         StartCoroutine(Sunshine());
-
-        sunCol = GetComponent<Collider2D>();
-
-        sunCol.enabled = false;
     }
 
     protected override void Update()
@@ -32,7 +27,7 @@ public class SunMove : CloudMove
 
     private IEnumerator Sunshine()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(100);
 
         while (true)
         {

@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector2 targetPosition = Vector2.zero;
     private GameManager gameManager = null;
-    private BackgroundMove backMove = null;
+    public BackgroundMove backMove { get; private set; }
     private SpriteRenderer spriteRenderer = null;
 
     private bool isDamaged = false;
@@ -57,8 +57,6 @@ public class PlayerMove : MonoBehaviour
             transform.localPosition =
             Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
         }
-
-        Debug.Log(isItem);
     }
 
     private IEnumerator Fire()
@@ -98,12 +96,6 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Coin"))
-        {
-            gameManager.uiManager.AddCoin(1);
-            gameManager.soundManager.CoinAudio();
-        }
-
         if (isDamaged) return;
 
         if (collision.CompareTag("EnemyBullet"))
@@ -142,38 +134,14 @@ public class PlayerMove : MonoBehaviour
         {
 
             case "BigItem":
-                isItem = true;
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemBig(1.5f));
-                break;
-
-            case "SlowItem":
-                isItem = true;
-                gameManager.soundManager.ItemAudio();
-                StartCoroutine(ItemSlow());
-                break;
-
-            case "LightningItem":
-                isItem = true;
-                gameManager.soundManager.LightningAudio();
-                gameManager.StartCoroutine("SpawnLightning");
-                break;
-
-            case "HeartItem":
-                gameManager.soundManager.ItemAudio();
-                gameManager.ItemHeart();
                 break;
 
             case "SmallItem":
                 isItem = true;
                 gameManager.soundManager.ItemAudio();
                 StartCoroutine(ItemBig(0.7f));
-                break;
-
-            case "TiredItem":
-                isItem = true;
-                backMove.StartCoroutine("ChangeBackground");
-                StartCoroutine(ItemTired());
                 break;
 
             default:
@@ -184,9 +152,9 @@ public class PlayerMove : MonoBehaviour
     public IEnumerator ItemBig(float scale)
     {
         if(scale == 1.5f)
-        {
             isBig = true;
-        }
+
+        isItem = true;
 
         gameObject.transform.localScale = new Vector2(scale, scale);
         yield return new WaitForSeconds(3f);
@@ -207,9 +175,11 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator ItemSlow()
     {
+        isItem = true;
+
         gameManager.soundManager.Slow();
         Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(4f);
 
         for (int i = 0; i < 5; i++)
         {
@@ -265,5 +235,10 @@ public class PlayerMove : MonoBehaviour
     public bool ReturnIsItem()
     {
         return isItem;
+    }
+
+    public bool ReturnIsTired()
+    {
+        return isTired;
     }
 }

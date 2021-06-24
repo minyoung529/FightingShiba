@@ -45,27 +45,40 @@ public class Item : MonoBehaviour
             {
                 gameManager.soundManager.ItemAudio();
                 gameManager.uiManager.AddCoin(5);
+                Destroy(gameObject);
             }
 
             else if (spriteRenderer.sprite == itemHeart)
-                gameManager.playerMove.Item("HeartItem");
+            {
+                gameManager.soundManager.ItemAudio();
+                gameManager.ItemHeart();
+                Destroy(gameObject);
+            }
+
+            else if (spriteRenderer.sprite == itemTired)
+            {
+                if (gameManager.playerMove.ReturnIsTired()) return;
+                gameManager.playerMove.StartCoroutine("ItemTired");
+                gameManager.playerMove.backMove.StartCoroutine("ChangeBackground");
+            }
 
             if (gameManager.playerMove.ReturnIsItem()) return;
+
 
             if (spriteRenderer.sprite == itemBig)
                 gameManager.playerMove.Item("BigItem");
 
-            else if (spriteRenderer.sprite == itemSlow)
-                gameManager.playerMove.Item("SlowItem");
-
-            else if (spriteRenderer.sprite == itemLightning)
-                gameManager.playerMove.Item("LightningItem");
-
             else if (spriteRenderer.sprite == itemSmall)
                 gameManager.playerMove.Item("SmallItem");
 
-            else if (spriteRenderer.sprite == itemTired)
-                gameManager.playerMove.Item("TiredItem");
+            else if (spriteRenderer.sprite == itemSlow)
+                gameManager.playerMove.StartCoroutine("ItemSlow");
+            
+            else if (spriteRenderer.sprite == itemLightning)
+            {
+                gameManager.soundManager.LightningAudio();
+                gameManager.StartCoroutine("SpawnLightning");
+            }
 
             Destroy(gameObject);
         }

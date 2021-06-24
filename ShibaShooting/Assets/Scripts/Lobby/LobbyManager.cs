@@ -15,14 +15,6 @@ public class LobbyManager : MonoBehaviour
     [SerializeField]
     private AudioSource backgroundMusic;
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            QuitPopUp.SetActive(true);
-        }
-    }
-
     public void OnClickStart()
     {
         SceneManager.LoadScene("Main");
@@ -43,9 +35,9 @@ public class LobbyManager : MonoBehaviour
         QuitPopUp.SetActive(false);
     }
 
-    public void OnClickStore()
+    public void OnClickItem()
     {
-        SceneManager.LoadScene("Store");
+        SceneManager.LoadScene("Item");
     }
 
     public void SetMusicVolume(float volume)

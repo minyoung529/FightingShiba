@@ -13,7 +13,6 @@ public class EnemyBullet : BulletMove
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime, Space.Self);
         CheckLimit();
-        //
     }
 
     protected override void CheckLimit()

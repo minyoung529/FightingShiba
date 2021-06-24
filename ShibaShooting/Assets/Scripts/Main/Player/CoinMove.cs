@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinMove : MonoBehaviour
+public class CoinMove : BulletMove
 {
     [SerializeField]
-    private float speed = 4f;
-    private GameManager gameManager = null;
-    void Start()
+    private float coinSpeed = 4f;
+
+    protected override void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        base.Start();
     }
 
-    void Update()
+    protected override void Update()
     {
-        transform.Translate(Vector2.left * Time.deltaTime * speed);
+        transform.Translate(Vector2.left * Time.deltaTime * coinSpeed);
         if (transform.position.x < gameManager.MinPosition.x - 2f)
             Destroy(gameObject);
     }
@@ -23,6 +23,8 @@ public class CoinMove : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
+            gameManager.soundManager.CoinAudio();
+            gameManager.uiManager.AddCoin(1);
             Destroy(gameObject);
         }
     }

@@ -22,7 +22,6 @@ public class BackgroundMove : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material = bright;
     }
 
     private void Update()
