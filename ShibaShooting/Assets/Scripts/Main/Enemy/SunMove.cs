@@ -27,7 +27,7 @@ public class SunMove : CloudMove
 
     private IEnumerator Sunshine()
     {
-        yield return new WaitForSeconds(100);
+        yield return new WaitForSeconds(60);
 
         while (true)
         {

@@ -186,7 +186,7 @@ public class EnemyMove : MonoBehaviour
         }
 
         else if (hp < 0)
-            circleMaxTime = 1.0f;
+            circleMaxTime = 0.9f;
     }
 
     private void ChangeSprite()

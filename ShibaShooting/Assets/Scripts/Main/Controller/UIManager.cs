@@ -50,6 +50,8 @@ public class UIManager : MonoBehaviour
     private int coin = 0;
     private int countTime = 3;
 
+    private bool isStop = false;
+
     private GameManager gameManager = null;
 
     private void Start()
@@ -117,6 +119,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickStop()
     {
+        if (isStop) return;
+        isStop = true;
         gameManager.soundManager.ButtonAudio();
         gameManager.StopGame();
         stopPopUp.SetActive(true);
@@ -139,6 +143,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickNewGame()
     {
+        isStop = false;
         ButtonSound();
         stopPopUp.SetActive(false);
         SceneManager.LoadScene("Main");
@@ -173,6 +178,7 @@ public class UIManager : MonoBehaviour
         }
 
         gameManager.ContinueGame();
+        isStop = false;
         yield return 0;
     }
 
@@ -185,7 +191,6 @@ public class UIManager : MonoBehaviour
     {
         return enemyHPBar.value;
     }
-
 
     public void RandomItem(int randomNum)
     {

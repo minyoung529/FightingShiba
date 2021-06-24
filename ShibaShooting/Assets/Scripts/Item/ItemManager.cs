@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
@@ -114,5 +115,10 @@ public class ItemManager : MonoBehaviour
                 itemInfo.text = string.Format("학생들이 모두 졸고 있습니다. 당신도 7초 동안 눈이 감겨 이동 속도가 둔해집니다.");
                 break;
         }
+    }
+
+    public void OnClickLobby()
+    {
+        SceneManager.LoadScene("Lobby");
     }
 }
