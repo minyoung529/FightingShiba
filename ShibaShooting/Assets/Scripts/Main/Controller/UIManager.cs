@@ -129,6 +129,8 @@ public class UIManager : MonoBehaviour
 
     public void OnClickMusic()
     {
+        if (isStop) return;
+        isStop = true;
         gameManager.soundManager.ButtonAudio();
         gameManager.StopGame();
         musicPopUp.SetActive(true);

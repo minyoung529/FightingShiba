@@ -1428,3 +1428,134 @@ Received Import Request.
 Start importing Assets/Scripts/Main/Controller/UIManager.cs using Guid(413d5ff5a8330df41ad691da10f5f629) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0de269ec078fc5f039b173321600555f') in 0.007154 seconds
   Import took 0.010121 seconds .
 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.72 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 9 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 53.4 MB.
+System memory in use after: 53.4 MB.
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 2429.
+Total: 2.915300 ms (FindLiveObjects: 0.309700 ms CreateObjectMapping: 0.053000 ms MarkObjects: 2.451300 ms  DeleteObjects: 0.085800 ms)
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 2.37 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 9 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 53.4 MB.
+System memory in use after: 53.5 MB.
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 2429.
+Total: 3.387800 ms (FindLiveObjects: 0.230500 ms CreateObjectMapping: 0.062600 ms MarkObjects: 2.939900 ms  DeleteObjects: 0.153400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+========================================================================
+Received Import Request.
+  Time since last request: 544.936103 seconds.
+  path: Assets/Scripts/Main/Controller/GameManager.cs
+  artifactKey: Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Main/Controller/GameManager.cs using Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5b1c51da61513f86a110b0a712712eb') in 0.009771 seconds
+  Import took 0.014922 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.008116 seconds.
+  path: Assets/Scripts/Main/Controller/GameManager.cs
+  artifactKey: Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Main/Controller/GameManager.cs using Guid(36f4960dac16bfd49ba2f32dfb90d248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5b1c51da61513f86a110b0a712712eb') in 0.003873 seconds
+  Import took 0.008461 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001304 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.41 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.546 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.45 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1826 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 89.3 MB.
+System memory in use after: 89.3 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2433.
+Total: 2.440700 ms (FindLiveObjects: 0.202300 ms CreateObjectMapping: 0.068000 ms MarkObjects: 2.021000 ms  DeleteObjects: 0.147900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 31.275771 seconds.
+  path: Assets/Scripts/Main/Controller/UIManager.cs
+  artifactKey: Guid(413d5ff5a8330df41ad691da10f5f629) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Main/Controller/UIManager.cs using Guid(413d5ff5a8330df41ad691da10f5f629) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aafccc5292bdf1432bd96502fa5b9386') in 0.018930 seconds
+  Import took 0.022996 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001232 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.42 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.361 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.49 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1826 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 89.3 MB.
+System memory in use after: 89.3 MB.
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2437.
+Total: 2.173600 ms (FindLiveObjects: 0.207700 ms CreateObjectMapping: 0.072500 ms MarkObjects: 1.802800 ms  DeleteObjects: 0.089700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 83.664580 seconds.
+  path: Assets/Scenes/Main.unity
+  artifactKey: Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Main.unity using Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db458509f858303c8091d2ed2ab81441') in 0.028702 seconds
+  Import took 0.032486 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.780771 seconds.
+  path: Assets/Scenes/Item.unity
+  artifactKey: Guid(3d7065ab5fb58c44691c377da4869728) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Item.unity using Guid(3d7065ab5fb58c44691c377da4869728) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a952c8525e651e497af8376791c639e') in 0.004023 seconds
+  Import took 0.008567 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 246.734524 seconds.
+  path: Assets/Scenes/Item.unity
+  artifactKey: Guid(3d7065ab5fb58c44691c377da4869728) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Item.unity using Guid(3d7065ab5fb58c44691c377da4869728) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cae3b36213fa42c1f177c180a65648bb') in 0.004552 seconds
+  Import took 0.008803 seconds .
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.85 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 9 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 53.5 MB.
+System memory in use after: 53.5 MB.
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 2437.
+Total: 2.877100 ms (FindLiveObjects: 0.205000 ms CreateObjectMapping: 0.067600 ms MarkObjects: 2.515700 ms  DeleteObjects: 0.087500 ms)
+
