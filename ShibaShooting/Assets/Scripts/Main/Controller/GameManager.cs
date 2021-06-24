@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
             randomDelay = Random.Range(6f, 7f);
             ramdomNum = Random.Range(0, 8);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(randomDelay);
 
             uiManager.RandomItem(ramdomNum);
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
