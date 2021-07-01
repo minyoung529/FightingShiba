@@ -36,6 +36,11 @@ public class PlayerMove : MonoBehaviour
     private bool isItem = false;
     private bool isTired = false;
 
+    private float bigTime;
+    private float smallTime;
+    private float slowTime;
+    private float tiredTime;
+
 
     void Start()
     {
@@ -43,6 +48,7 @@ public class PlayerMove : MonoBehaviour
         backMove = FindObjectOfType<BackgroundMove>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(Fire());
+        SetCoolTime();
     }
 
     void Update()
@@ -135,13 +141,13 @@ public class PlayerMove : MonoBehaviour
 
             case "BigItem":
                 gameManager.soundManager.ItemAudio();
-                StartCoroutine(ItemBig(1.5f));
+                StartCoroutine(ItemBig());
                 break;
 
             case "SmallItem":
                 isItem = true;
                 gameManager.soundManager.ItemAudio();
-                StartCoroutine(ItemBig(0.7f));
+                StartCoroutine(ItemSmall());
                 break;
 
             default:
@@ -149,15 +155,36 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public IEnumerator ItemBig(float scale)
+    public IEnumerator ItemBig()
     {
-        if(scale == 1.5f)
-            isBig = true;
+        Debug.Log(bigTime);
+        isItem = true;
+        isBig = true;
 
+        gameObject.transform.localScale = new Vector2(1.5f, 1.5f);
+        yield return new WaitForSeconds(bigTime - 2f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            yield return new WaitForSeconds(0.2f);
+            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        gameObject.transform.localScale = new Vector2(0.9f, 0.9f);
+        isBig = false;
+        isItem = false;
+        yield break;
+    }
+
+    public IEnumerator ItemSmall()
+    {
+        Debug.Log(smallTime);
         isItem = true;
 
-        gameObject.transform.localScale = new Vector2(scale, scale);
-        yield return new WaitForSeconds(3f);
+        gameObject.transform.localScale = new Vector2(0.7f, 0.7f);
+        yield return new WaitForSeconds(smallTime - 2f);
 
         for (int i = 0; i < 5; i++)
         {
@@ -179,7 +206,7 @@ public class PlayerMove : MonoBehaviour
 
         gameManager.soundManager.Slow();
         Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(4f);
+        yield return new WaitForSecondsRealtime(slowTime - 2f);
 
         for (int i = 0; i < 5; i++)
         {
@@ -202,7 +229,7 @@ public class PlayerMove : MonoBehaviour
         deco.sprite = sleep;
         speed = 7f;
 
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(tiredTime - 2f);
 
         for (int i = 0; i < 5; i++)
         {
@@ -240,5 +267,13 @@ public class PlayerMove : MonoBehaviour
     public bool ReturnIsTired()
     {
         return isTired;
+    }
+
+    private void SetCoolTime()
+    {
+        bigTime = PlayerPrefs.GetFloat("bigTime", 5);
+        smallTime = PlayerPrefs.GetFloat("smallTime", 5);
+        slowTime = PlayerPrefs.GetFloat("slowTime", 5);
+        tiredTime = PlayerPrefs.GetFloat("tiredTime", 7);
     }
 }
