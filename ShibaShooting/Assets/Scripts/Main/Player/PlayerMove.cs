@@ -85,6 +85,10 @@ public class PlayerMove : MonoBehaviour
             case "isStrawberry":
                 animator.Play("Strawberry_Shiba");
                 break;
+
+            case "isMint":
+                animator.Play("Mint_Shiba");
+                break;
         }
     }
     private IEnumerator Fire()
