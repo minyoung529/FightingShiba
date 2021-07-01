@@ -30,6 +30,8 @@ public class PlayerMove : MonoBehaviour
     private GameManager gameManager = null;
     public BackgroundMove backMove { get; private set; }
     private SpriteRenderer spriteRenderer = null;
+    private Animator animator = null;
+
 
     private bool isDamaged = false;
     private bool isBig = false;
@@ -41,14 +43,18 @@ public class PlayerMove : MonoBehaviour
     private float slowTime;
     private float tiredTime;
 
+    private string crtShiba;
 
     void Start()
     {
+        crtShiba = PlayerPrefs.GetString("Shiba", "isIdle");
         gameManager = FindObjectOfType<GameManager>();
         backMove = FindObjectOfType<BackgroundMove>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         StartCoroutine(Fire());
         SetCoolTime();
+        ChangeSkin();
     }
 
     void Update()
@@ -65,6 +71,22 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void ChangeSkin()
+    {
+        Debug.Log(crtShiba);
+
+        switch(crtShiba)
+        {
+            case "isIdle":
+                animator.Play("Idle_Shiba");
+                Debug.Log("Sdf");
+                break;
+
+            case "isStrawberry":
+                animator.Play("Strawberry_Shiba");
+                break;
+        }
+    }
     private IEnumerator Fire()
     {
         while (true)
@@ -114,6 +136,8 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.CompareTag("Lightning"))
         {
+            if (isBig) return;
+
             gameManager.soundManager.DamagedAudio();
             StartCoroutine(Damage());
         }

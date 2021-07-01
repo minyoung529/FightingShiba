@@ -16,6 +16,8 @@ public class ItemManager : MonoBehaviour
     Text itemInfo, coinText, productCoinText;
     [SerializeField]
     Image itemImage;
+    [SerializeField]
+    GameObject itemField, skinField;
 
     [SerializeField]
     Sprite big, small, slow, coin, life, lightning, tired;
@@ -352,5 +354,17 @@ public class ItemManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         levelError.SetActive(false);
         yield break;
+    }
+
+    public void OnClickItem()
+    {
+        itemField.SetActive(true);
+        skinField.SetActive(false);
+    }
+
+    public void OnClickSkin()
+    {
+        itemField.SetActive(false);
+        skinField.SetActive(true);
     }
 }
