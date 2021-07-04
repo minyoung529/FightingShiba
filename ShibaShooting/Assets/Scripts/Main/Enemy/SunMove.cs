@@ -19,7 +19,7 @@ public class SunMove : CloudMove
     {
         transform.Translate(Vector2.left * sunSpeed * Time.deltaTime);
 
-        if (transform.position.x < gameManager.MinPosition.x - 4f || transform.position.y < gameManager.MinPosition.y - 3f)
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 4f || transform.position.y < GameManager.Instance.MinPosition.y - 3f)
         {
             transform.position = new Vector2(12f, 2.8f);
         }

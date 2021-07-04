@@ -8,21 +8,18 @@ public class Item : MonoBehaviour
     Sprite itemBig, itemSlow, itemCoin, itemLightning, itemHeart, itemSmall, itemTired;
     SpriteRenderer spriteRenderer = null;
 
-    private GameManager gameManager = null;
-
     private float speed = 8f;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
 
-        if (transform.position.x < gameManager.MinPosition.x - 2f)
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 2f)
             Destroy(gameObject);
         if (spriteRenderer.sprite == itemLightning || spriteRenderer.sprite == itemTired)
         {
@@ -43,41 +40,41 @@ public class Item : MonoBehaviour
         {
             if (spriteRenderer.sprite == itemCoin)
             {
-                gameManager.soundManager.ItemAudio();
-                gameManager.uiManager.AddCoin(5);
+                GameManager.Instance.soundManager.ItemAudio();
+                GameManager.Instance.uiManager.AddCoin(5);
                 Destroy(gameObject);
             }
 
             else if (spriteRenderer.sprite == itemHeart)
             {
-                gameManager.soundManager.ItemAudio();
-                gameManager.ItemHeart();
+                GameManager.Instance.soundManager.ItemAudio();
+                GameManager.Instance.ItemHeart();
                 Destroy(gameObject);
             }
 
             else if (spriteRenderer.sprite == itemTired)
             {
-                if (gameManager.playerMove.ReturnIsTired()) return;
-                gameManager.playerMove.StartCoroutine("ItemTired");
-                gameManager.playerMove.backMove.StartCoroutine("ChangeBackground");
+                if (GameManager.Instance.playerMove.ReturnIsTired()) return;
+                GameManager.Instance.playerMove.StartCoroutine("ItemTired");
+                GameManager.Instance.playerMove.backMove.StartCoroutine("ChangeBackground");
             }
 
-            if (gameManager.playerMove.ReturnIsItem()) return;
+            if (GameManager.Instance.playerMove.ReturnIsItem()) return;
 
 
             if (spriteRenderer.sprite == itemBig)
-                gameManager.playerMove.Item("BigItem");
+                GameManager.Instance.playerMove.Item("BigItem");
 
             else if (spriteRenderer.sprite == itemSmall)
-                gameManager.playerMove.Item("SmallItem");
+                GameManager.Instance.playerMove.Item("SmallItem");
 
             else if (spriteRenderer.sprite == itemSlow)
-                gameManager.playerMove.StartCoroutine("ItemSlow");
+                GameManager.Instance.playerMove.StartCoroutine("ItemSlow");
             
             else if (spriteRenderer.sprite == itemLightning)
             {
-                gameManager.soundManager.LightningAudio();
-                gameManager.StartCoroutine("SpawnLightning");
+                GameManager.Instance.soundManager.LightningAudio();
+                GameManager.Instance.StartCoroutine("SpawnLightning");
             }
 
             Destroy(gameObject);

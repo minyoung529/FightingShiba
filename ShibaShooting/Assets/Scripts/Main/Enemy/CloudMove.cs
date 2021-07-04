@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class CloudMove : MonoBehaviour
 {
-    protected GameManager gameManager = null;
-
     [SerializeField]
     private float speed = 3f;
 
     private Rigidbody2D rigid;
     private Collider2D col;
+    private SpriteRenderer spriteRenderer;
 
     protected bool isEnd = false;
 
     protected virtual void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         col.enabled = false;
     }
@@ -28,7 +27,7 @@ public class CloudMove : MonoBehaviour
 
         if (!isEnd)
         {
-            if (gameManager.uiManager.ReturnScore() > 1000 && transform.position.x < RandomNumber())
+            if (GameManager.Instance.uiManager.ReturnScore() > 2700 && transform.position.x < RandomNumber())
             {
                 rigid.gravityScale = 1f;
                 col.enabled = true;
@@ -36,13 +35,18 @@ public class CloudMove : MonoBehaviour
             }
         }
 
-        if (transform.position.x < gameManager.MinPosition.x - 4f || transform.position.y < gameManager.MinPosition.y - 3f)
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 4f || transform.position.y < GameManager.Instance.MinPosition.y - 3f)
         {
             transform.position = new Vector2(12f, 2.7f);
             rigid.gravityScale = 0f;
             col.enabled = false;
             isEnd = false;
             rigid.velocity = Vector2.zero;
+        }
+
+        if(GameManager.Instance.uiManager.EnemyHP()==180)
+        {
+            spriteRenderer.color = new Color(0, 0, 0, 1);
         }
     }
 

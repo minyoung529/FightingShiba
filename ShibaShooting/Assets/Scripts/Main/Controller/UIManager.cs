@@ -7,9 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [Header("생명")]
-    [SerializeField] private GameObject heart1;
-    [SerializeField] private GameObject heart2;
-    [SerializeField] private GameObject heart3;
+    [SerializeField] private GameObject hearts;
 
     [Header("게임 중지 팝업")]
     [SerializeField] private GameObject stopPopUp;
@@ -52,13 +50,10 @@ public class UIManager : MonoBehaviour
 
     private bool isStop = false;
 
-    private GameManager gameManager = null;
-
     private void Start()
     {
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
         coin = PlayerPrefs.GetInt("COIN", 0);
-        gameManager = FindObjectOfType<GameManager>();
 
         UpdateUI();
     }
@@ -68,28 +63,61 @@ public class UIManager : MonoBehaviour
         return score;
     }
 
-    public void DestroyHeart()
-    {
-        if (gameManager.Life == 2)
-            heart3.SetActive(false);
-
-        else if (gameManager.Life == 1)
-            heart2.SetActive(false);
-
-        else if (gameManager.Life == 0)
-            heart1.SetActive(false);
-    }
-
     public void ActiveHeart()
     {
-        if (gameManager.Life == 3)
-            heart3.SetActive(true);
+        if (GameManager.Instance.Life == 5)
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                hearts.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
 
-        else if (gameManager.Life == 2)
-            heart2.SetActive(true);
+        else if (GameManager.Instance.Life == 4)
+        {
+            for (int i = 1; i <= 4; i++)
+            {
+                hearts.transform.GetChild(i).gameObject.SetActive(true);
+            }
 
-        else if (gameManager.Life == 1)
-            heart1.SetActive(true);
+            hearts.transform.GetChild(5).gameObject.SetActive(false);
+        }
+
+        else if (GameManager.Instance.Life == 3)
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                hearts.transform.GetChild(i).gameObject.SetActive(true);
+            }
+
+            for (int i = 5; i >= 4; i--)
+            {
+                hearts.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        else if (GameManager.Instance.Life == 2)
+        {
+            for (int i = 1; i <= 2; i++)
+            {
+                hearts.transform.GetChild(i).gameObject.SetActive(true);
+            }
+
+            for (int i = 5; i >= 3; i--)
+            {
+                hearts.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        else if (GameManager.Instance.Life == 1)
+        {
+            hearts.transform.GetChild(1).gameObject.SetActive(true);
+
+            for (int i = 5; i >= 2; i--)
+            {
+                hearts.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
     }
 
     public void UpdateUI()
@@ -121,18 +149,23 @@ public class UIManager : MonoBehaviour
     {
         if (isStop) return;
         isStop = true;
-        gameManager.soundManager.ButtonAudio();
-        gameManager.StopGame();
+        GameManager.Instance.soundManager.ButtonAudio();
+        GameManager.Instance.StopGame();
         stopPopUp.SetActive(true);
         textDelayTimeObj.SetActive(false);
+    }
+
+    public bool GetIsStop()
+    {
+        return isStop;
     }
 
     public void OnClickMusic()
     {
         if (isStop) return;
         isStop = true;
-        gameManager.soundManager.ButtonAudio();
-        gameManager.StopGame();
+        GameManager.Instance.soundManager.ButtonAudio();
+        GameManager.Instance.StopGame();
         musicPopUp.SetActive(true);
         textDelayTimeObj.SetActive(false);
     }
@@ -149,6 +182,7 @@ public class UIManager : MonoBehaviour
         ButtonSound();
         stopPopUp.SetActive(false);
         SceneManager.LoadScene("Main");
+        GameManager.Instance.ContinueGame();
     }
 
     public void OnClickContinue()
@@ -162,7 +196,7 @@ public class UIManager : MonoBehaviour
 
     private void ButtonSound()
     {
-        gameManager.soundManager.ButtonAudio();
+        GameManager.Instance.soundManager.ButtonAudio();
     }
 
     private IEnumerator ContinueDelay()
@@ -179,7 +213,7 @@ public class UIManager : MonoBehaviour
                 textDelayTime.text = string.Format("");
         }
 
-        gameManager.ContinueGame();
+        GameManager.Instance.ContinueGame();
         isStop = false;
         yield return 0;
     }

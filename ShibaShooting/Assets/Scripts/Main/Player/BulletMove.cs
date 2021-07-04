@@ -7,13 +7,6 @@ public class BulletMove : MonoBehaviour
     protected float speed = 10f;
     protected float damage = 1f;
 
-    protected GameManager gameManager = null;
-
-    protected virtual void Start()
-    {
-        gameManager = FindObjectOfType<GameManager>();
-    }
-
     protected virtual void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
@@ -23,22 +16,22 @@ public class BulletMove : MonoBehaviour
 
     protected virtual void CheckLimit()
     {
-        if (transform.position.y > gameManager.MaxPosition.y + 2f)
+        if (transform.position.y > GameManager.Instance.MaxPosition.y + 2f)
         {
             Despawn();
         }
 
-        if (transform.position.y < gameManager.MinPosition.y - 2f)
+        if (transform.position.y < GameManager.Instance.MinPosition.y - 2f)
         {
             Despawn();
         }
 
-        if (transform.position.x > gameManager.MaxPosition.x + 2f)
+        if (transform.position.x > GameManager.Instance.MaxPosition.x + 2f)
         {
             Despawn();
         }
 
-        if (transform.position.x < gameManager.MinPosition.x - 2f)
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 2f)
         {
             Despawn();
         }
@@ -46,7 +39,7 @@ public class BulletMove : MonoBehaviour
 
     protected virtual void Despawn()
     {
-        transform.SetParent(gameManager.poolManager.transform, false);
+        transform.SetParent(GameManager.Instance.poolManager.transform, false);
         gameObject.SetActive(false);
     }
 
@@ -54,8 +47,7 @@ public class BulletMove : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            gameManager.uiManager.EnemyHPBar(damage);
-            gameManager.uiManager.AddScore(5);
+            GameManager.Instance.uiManager.AddScore(5);
         }
     }
 }

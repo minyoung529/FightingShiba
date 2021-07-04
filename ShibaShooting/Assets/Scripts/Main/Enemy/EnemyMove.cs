@@ -1,13 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EnemyMove : MonoBehaviour
 {
     #region 변수목록
-    [Header("Enemy 체력")]
-    [SerializeField]
-    private float hp = 100f;
+    private float hp = 180;
 
     [Header("Enemy 빠르기")]
     [SerializeField]
@@ -16,17 +16,16 @@ public class EnemyMove : MonoBehaviour
     private bool isDamaged = false;
     protected bool isDead = false;
 
-    protected GameManager gameManager = null;
     private SpriteRenderer spriteRenderer = null;
     private SpeechBubble speechBubble = null;
 
     [Header("총알 딜레이")]
     [SerializeField]
-    private float fireRate = 0.8f;
-    private GameObject bullet = null;
+    private float fireRate = 1f;
 
     private float timer = 0f;
     private float circleTimer = 0f;
+    private float randomTimer = 0f;
     private float circleMaxTime = 3f;
     private Vector3 diff = Vector3.zero;
     private PlayerMove player = null;
@@ -47,14 +46,20 @@ public class EnemyMove : MonoBehaviour
     private Sprite thirdMinyoung;
     [SerializeField]
     private Sprite fourthMinyoung;
+    [SerializeField]
+    private Sprite evolutionMinyoung;
+
+    BackgroundMove back;
+
+    [SerializeField]
+    private GameObject warning;
     #endregion
 
     protected virtual void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        back = FindObjectOfType<BackgroundMove>();
 
-        gameManager = FindObjectOfType<GameManager>();
-        player = FindObjectOfType<PlayerMove>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         speechBubble = FindObjectOfType<SpeechBubble>();
 
         StartCoroutine(EnemyFire());
@@ -69,7 +74,11 @@ public class EnemyMove : MonoBehaviour
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        EnemyAttack();
+        if (!GameManager.Instance.GetIsTutorial())
+        {
+            EnemyAttack();
+        }
+
         ChangeSprite();
     }
 
@@ -82,9 +91,23 @@ public class EnemyMove : MonoBehaviour
         {
             if (isDamaged) return;
             isDamaged = true;
+            GameManager.Instance.uiManager.EnemyHPBar(1);
             collision.gameObject.SetActive(false);
-            collision.transform.SetParent(gameManager.poolManager.transform, false);
+            collision.transform.SetParent(GameManager.Instance.poolManager.transform, false);
             StartCoroutine(Damaged());
+
+            if(hp == 0)
+            {
+                back.ChangeToRed();
+                StartCoroutine(Warning());
+                GameManager.Instance.SetThreeHeart();
+                GameManager.Instance.StartCoroutine("RealBossTime");
+            }
+
+            if (hp == 170 || hp == 130 || hp == 90 || hp == 60 || hp == 30 || hp == -1)
+            {
+                GameManager.Instance.StartCoroutine("SpawnSmallEnemy");
+            }
         }
     }
     private IEnumerator Damaged()
@@ -107,7 +130,7 @@ public class EnemyMove : MonoBehaviour
 
     private GameObject Fire(GameObject bullet)
     {
-        diff = player.transform.position - transform.position;
+        diff = GameManager.Instance.playerMove.transform.position - transform.position;
         diff.Normalize();
 
         rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
@@ -124,9 +147,9 @@ public class EnemyMove : MonoBehaviour
     {
         GameObject result = null;
 
-        if (gameManager.enemyPoolManager.transform.childCount > 0)
+        if (GameManager.Instance.enemyPoolManager.transform.childCount > 0)
         {
-            result = gameManager.enemyPoolManager.transform.GetChild(0).gameObject;
+            result = GameManager.Instance.enemyPoolManager.transform.GetChild(0).gameObject;
             result.transform.position = enemyBulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
@@ -143,65 +166,94 @@ public class EnemyMove : MonoBehaviour
 
     private void EnemyAttack()
     {
-        if (hp < 90)
+        if (hp < 190 && hp > 150)
         {
-            fireRate = 0.65f;
+            fireRate = 0.8f;
             speechBubble.ChangeSprites(1);
+            return;
         }
 
-        if (hp < 80)
+        if (hp < 150 && hp > 120)
+        {
+            circleMaxTime = 10f;
+            Circle();
+            fireRate = 0.6f;
             speechBubble.ChangeSprites(2);
+            return;
+        }
 
-        if (hp < 70)
+        if (hp < 120 && hp > 100)
+        {
+            Random();
             speechBubble.ChangeSprites(3);
             fireRate = 0.5f;
+            return;
+        }
 
-        if (hp < 60)
+        if (hp < 100 && hp > 80)
         {
             speechBubble.ChangeSprites(4);
+            return;
         }
 
-        if (hp < 50)
+        if (hp < 80 && hp > 50)
+        {
+            fireRate = 1.4f;
+            Random();
+            speechBubble.ChangeSprites(5);
+            return;
+        }
+
+        if (hp < 50 && hp > 20)
         {
             Circle();
-            speechBubble.ChangeSprites(5);
-        }
-
-        if (hp < 40)
-        {
-            circleMaxTime = 2f;
+            circleMaxTime = 6;
             speechBubble.ChangeSprites(6);
+            return;
         }
 
-        if (hp < 30)
+        if (hp < 20 && hp > 10)
         {
-            circleMaxTime = 1.5f;
+            Random();
+
+            circleMaxTime = 3f;
             speechBubble.ChangeSprites(7);
+            return;
         }
 
-        if (hp < 20)
+        if (hp < 10 && hp > 0)
         {
-            circleMaxTime = 1.2f;
+            Circle();
+            circleMaxTime = 2f;
             speechBubble.ChangeSprites(8);
+            return;
         }
 
-        else if (hp < 0)
-            circleMaxTime = 0.9f;
+        if (hp < 0)
+        {
+            Circle();
+            Random();
+            fireRate = 1f;
+            circleMaxTime = 3f;
+        }
     }
 
     private void ChangeSprite()
     {
-        if (hp < 80)
+        if (hp < 170)
             spriteRenderer.sprite = firstMinyoung;
 
-        if (hp < 60)
+        if (hp < 120)
             spriteRenderer.sprite = secondMinyoung;
 
-        if (hp < 40)
+        if (hp < 70)
             spriteRenderer.sprite = thirdMinyoung;
 
-        if (hp < 20)
+        if (hp < 40)
             spriteRenderer.sprite = fourthMinyoung;
+
+        if (hp <= 0)
+            spriteRenderer.sprite = evolutionMinyoung;
     }
 
     private void Circle()
@@ -210,13 +262,13 @@ public class EnemyMove : MonoBehaviour
 
         GameObject circleBullet = null;
 
-        if (circleTimer >= 3f)
+        if (circleTimer >= circleMaxTime)
         {
             for (int i = -90; i < 90; i += 15)
             {
-                if (gameManager.enemyPoolManager.transform.childCount > 0)
+                if (GameManager.Instance.enemyPoolManager.transform.childCount > 0)
                 {
-                    circleBullet = gameManager.enemyPoolManager.transform.GetChild(0).gameObject;
+                    circleBullet = GameManager.Instance.enemyPoolManager.transform.GetChild(0).gameObject;
                     circleBullet.transform.position = enemyBulletPosition.position;
                     circleBullet.transform.SetParent(null);
                     circleBullet.SetActive(true);
@@ -230,5 +282,57 @@ public class EnemyMove : MonoBehaviour
                 circleTimer = 0f;
             }
         }
+    }
+
+    private void Random()
+    {
+        randomTimer += Time.deltaTime;
+
+        GameObject randomBullet = null;
+
+        if (randomTimer >= 0.3)
+        {
+            int randomRot = UnityEngine.Random.Range(-90, 90);
+
+            if (GameManager.Instance.enemyPoolManager.transform.childCount > 0)
+            {
+                randomBullet = GameManager.Instance.enemyPoolManager.transform.GetChild(0).gameObject;
+                randomBullet.transform.position = enemyBulletPosition.position;
+                randomBullet.transform.SetParent(null);
+                randomBullet.SetActive(true);
+            }
+
+            else
+                randomBullet = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
+
+            randomBullet.transform.position = enemyBulletPosition.transform.position;
+            randomBullet.transform.rotation = Quaternion.Euler(0, 0, randomRot);
+            randomTimer = 0f;
+        }
+    }
+
+    public bool HpZero()
+    {
+        if (hp <= 0 && hp >= -1) return true;
+        else if (hp <= -30 && hp > -31) return true;
+        else if (hp <= -90 && hp > -91) return true;
+        else if (hp <= -120 && hp > -121) return true;
+        else return false;
+    }
+
+    IEnumerator Warning()
+    {
+        warning.SetActive(true);
+        Text warn = warning.GetComponent<Text>();
+
+        for (int i = 0; i<5;i++)
+        {
+            warn.color = new Color(1, 0, 0, 1);
+            yield return new WaitForSeconds(0.1f);
+            warn.color = new Color(1, 1, 1, 1);
+            yield return new WaitForSeconds(0.1f);
+        }
+        warning.SetActive(false);
+        yield break;
     }
 }

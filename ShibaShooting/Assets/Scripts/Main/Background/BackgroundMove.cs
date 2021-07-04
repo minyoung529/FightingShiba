@@ -13,17 +13,17 @@ public class BackgroundMove : MonoBehaviour
     private Material dark;
     [SerializeField]
     private Material bright;
+    [SerializeField]
+    private Material red;
 
     private float tiredTime;
 
     private Vector2 offset = Vector2.zero;
     private MeshRenderer meshRenderer;
-    private GameManager gameManager;
 
     private void Start()
     {
         tiredTime = PlayerPrefs.GetFloat("tiredTime", 7);
-        gameManager = FindObjectOfType<GameManager>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
@@ -38,6 +38,17 @@ public class BackgroundMove : MonoBehaviour
         meshRenderer.material = dark;
         yield return new WaitForSeconds(tiredTime);
         meshRenderer.material = bright;
-        gameManager.playerMove.IsItem(false);
+
+        if(GameManager.Instance.uiManager.EnemyHP() == 180)
+        {
+            meshRenderer.material = red;
+        }
+
+        GameManager.Instance.playerMove.IsItem(false);
+    }
+
+    public void ChangeToRed()
+    {
+        meshRenderer.material = red;
     }
 }

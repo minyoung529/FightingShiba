@@ -9,6 +9,8 @@ public class SkinManager : MonoBehaviour
     private string soldShiba;
 
     [SerializeField]
+    private GameObject moneyError;
+    [SerializeField]
     private GameObject buyPopup, contents;
     [SerializeField]
     private Text coinText, playerCoin;
@@ -42,7 +44,7 @@ public class SkinManager : MonoBehaviour
 
         if (playerMoney - productCoin <= 0)
         {
-            Debug.Log("돈업써");
+            StartCoroutine(Error_Money());
             return;
         }
 
@@ -57,10 +59,25 @@ public class SkinManager : MonoBehaviour
                 PlayerPrefs.SetString("isMint", "true");
                 playerMoney -= productCoin;
                 break;
+
+            case "Devil":
+                PlayerPrefs.SetString("isDevil", "true");
+                playerMoney -= productCoin;
+                break;
+
+            case "Angel":
+                PlayerPrefs.SetString("isAngel", "true");
+                playerMoney -= productCoin;
+                break;
+
+            case "Melona":
+                PlayerPrefs.SetString("isMelona", "true");
+                playerMoney -= productCoin;
+                break;
         }
 
         PlayerPrefs.SetInt("COIN", playerMoney);
-        Debug.Log(playerMoney);
+        ShopSoundManager.Instance.PaySound();
         UpdateUI();
         ChangeSprite();
         buyPopup.SetActive(false);
@@ -75,7 +92,10 @@ public class SkinManager : MonoBehaviour
             coinText.text = string.Format("{0}원", productCoin);
             soldShiba = "Strawberry";
         }
+    }
 
+    public void OnClickMint()
+    {
         if (PlayerPrefs.GetString("isMint") != "true")
         {
             productCoin = 150;
@@ -83,6 +103,47 @@ public class SkinManager : MonoBehaviour
             coinText.text = string.Format("{0}원", productCoin);
             soldShiba = "Mint";
         }
+    }
+
+    public void OnClickDevil()
+    {
+        if (PlayerPrefs.GetString("isDevil") != "true")
+        {
+            productCoin = 170;
+            buyPopup.SetActive(true);
+            coinText.text = string.Format("{0}원", productCoin);
+            soldShiba = "Devil";
+        }
+    }
+
+    public void OnClickAngel()
+    {
+        if (PlayerPrefs.GetString("isAngel") != "true")
+        {
+            productCoin = 100;
+            buyPopup.SetActive(true);
+            coinText.text = string.Format("{0}원", productCoin);
+            soldShiba = "Angel";
+        }
+    }
+
+    public void OnClickMelona()
+    {
+        if (PlayerPrefs.GetString("isMelona") != "true")
+        {
+            productCoin = 180;
+            buyPopup.SetActive(true);
+            coinText.text = string.Format("{0}원", productCoin);
+            soldShiba = "Melona";
+        }
+    }
+    IEnumerator Error_Money()
+    {
+        ShopSoundManager.Instance.ErrorSound();
+        moneyError.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        moneyError.SetActive(false);
+        yield break;
     }
 
     private void ChangeSprite()

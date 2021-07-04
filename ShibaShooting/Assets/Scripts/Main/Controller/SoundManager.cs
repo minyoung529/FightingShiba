@@ -17,14 +17,25 @@ public class SoundManager : MonoBehaviour
     private AudioClip damagedSound;
     [SerializeField]
     private AudioClip buttonSound;
+    [SerializeField]
+    private AudioClip tutorialBGM;
 
     private AudioSource audioSource;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = Mainbgm;
-        audioSource.Play();
+
+        if(PlayerPrefs.GetString("First") != "true")
+        {
+            audioSource.clip = Mainbgm;
+            audioSource.Play();
+        }
+
+        if (PlayerPrefs.GetString("First", "true") == "true")
+        {
+            Tutorial();
+        }
     }
 
     public void CoinAudio()
@@ -60,5 +71,17 @@ public class SoundManager : MonoBehaviour
     public void DefaultSpeed()
     {
         audioSource.pitch = 1f;
+    }
+
+    public void Tutorial()
+    {
+        audioSource.clip = tutorialBGM;
+        audioSource.Play();
+    }
+
+    public void EndTutorial()
+    {
+        audioSource.clip = Mainbgm;
+        audioSource.Play();
     }
 }

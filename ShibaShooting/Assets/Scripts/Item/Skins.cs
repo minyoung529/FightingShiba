@@ -40,10 +40,30 @@ public class Skins : MonoBehaviour
             image.color = new Color(1f, 1f, 1f, 1f);
             crtShiba = "isMint";
         }
+
+        if (gameObject.transform == contents.transform.GetChild(3) && PlayerPrefs.GetString("isDevil") == "true")
+        {
+            image.color = new Color(1f, 1f, 1f, 1f);
+            crtShiba = "isDevil";
+        }
+
+        if (gameObject.transform == contents.transform.GetChild(4) && PlayerPrefs.GetString("isAngel") == "true")
+        {
+            image.color = new Color(1f, 1f, 1f, 1f);
+            crtShiba = "isAngel";
+        }
+
+        if (gameObject.transform == contents.transform.GetChild(5) && PlayerPrefs.GetString("isMelona") == "true")
+        {
+            image.color = new Color(1f, 1f, 1f, 1f);
+            crtShiba = "isMelona";
+        }
     }
 
     public void OnClickChoose()
     {
+        ShopSoundManager.Instance.ButtonSound();
+
         if(image.color == new Color(1f, 1f, 1f, 1f))
         {
             check.SetActive(true);

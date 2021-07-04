@@ -12,9 +12,7 @@ public class PlayerMove : MonoBehaviour
     [Header("ÃÑ¾Ë ÇÁ¸®ÆÕ")]
     [SerializeField]
     private GameObject bulletPrefab = null;
-    [Header("ÃÑ¾Ë µô·¹ÀÌ ½Ã°£")]
-    [SerializeField]
-    private float fireRate = 0.5f;
+    private float fireRate = 0.45f;
     [Header("À½¾Ç")]
     [SerializeField]
     private AudioSource music;
@@ -27,11 +25,9 @@ public class PlayerMove : MonoBehaviour
     private Sprite lightning;
 
     private Vector2 targetPosition = Vector2.zero;
-    private GameManager gameManager = null;
     public BackgroundMove backMove { get; private set; }
     private SpriteRenderer spriteRenderer = null;
     private Animator animator = null;
-
 
     private bool isDamaged = false;
     private bool isBig = false;
@@ -48,7 +44,6 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         crtShiba = PlayerPrefs.GetString("Shiba", "isIdle");
-        gameManager = FindObjectOfType<GameManager>();
         backMove = FindObjectOfType<BackgroundMove>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -61,13 +56,18 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            if (GameManager.Instance.uiManager.GetIsStop()) return;
+            if (PlayerPrefs.GetString("First", "true") == "true" && !GameManager.Instance.GetIsTutorial())
+                return;
+
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            targetPosition.x = Mathf.Clamp(targetPosition.x, gameManager.MinPosition.x, gameManager.MaxPosition.x);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, gameManager.MinPosition.y, gameManager.MaxPosition.y);
+            targetPosition.x = Mathf.Clamp(targetPosition.x, GameManager.Instance.MinPosition.x, GameManager.Instance.MaxPosition.x);
+            targetPosition.y = Mathf.Clamp(targetPosition.y, GameManager.Instance.MinPosition.y, GameManager.Instance.MaxPosition.y);
 
             transform.localPosition =
             Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
+
         }
     }
 
@@ -75,11 +75,10 @@ public class PlayerMove : MonoBehaviour
     {
         Debug.Log(crtShiba);
 
-        switch(crtShiba)
+        switch (crtShiba)
         {
             case "isIdle":
                 animator.Play("Idle_Shiba");
-                Debug.Log("Sdf");
                 break;
 
             case "isStrawberry":
@@ -88,6 +87,18 @@ public class PlayerMove : MonoBehaviour
 
             case "isMint":
                 animator.Play("Mint_Shiba");
+                break;
+
+            case "isDevil":
+                animator.Play("Devil_Shiba");
+                break;
+
+            case "isAngel":
+                animator.Play("Angel_Shiba");
+                break;
+
+            case "isMelona":
+                animator.Play("Melona_Shiba");
                 break;
         }
     }
@@ -104,14 +115,14 @@ public class PlayerMove : MonoBehaviour
     {
         GameObject result = null;
 
-        if (gameManager.poolManager.transform.childCount > 0)
+        if (GameManager.Instance.poolManager.transform.childCount > 0)
         {
-            result = gameManager.poolManager.transform.GetChild(0).gameObject;
+            result = GameManager.Instance.poolManager.transform.GetChild(0).gameObject;
             result.transform.position = bulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
 
-            gameManager.uiManager.AddScore(4);
+            GameManager.Instance.uiManager.AddScore(4);
         }
 
         else
@@ -121,7 +132,7 @@ public class PlayerMove : MonoBehaviour
             newBullet.transform.SetParent(null);
             result = newBullet;
 
-            gameManager.uiManager.AddScore(4);
+            GameManager.Instance.uiManager.AddScore(4);
         }
         return result;
     }
@@ -134,7 +145,7 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(collision.gameObject);
             if (isBig) return;
-            gameManager.soundManager.DamagedAudio();
+            GameManager.Instance.soundManager.DamagedAudio();
             StartCoroutine(Damage());
         }
 
@@ -142,15 +153,15 @@ public class PlayerMove : MonoBehaviour
         {
             if (isBig) return;
 
-            gameManager.soundManager.DamagedAudio();
+            GameManager.Instance.soundManager.DamagedAudio();
             StartCoroutine(Damage());
         }
     }
 
-    private IEnumerator Damage()
+    public IEnumerator Damage()
     {
         isDamaged = true;
-        gameManager.Dead();
+        GameManager.Instance.Dead();
         for (int i = 0; i < 5; i++)
         {
             spriteRenderer.enabled = false;
@@ -160,6 +171,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         isDamaged = false;
+        yield break;
     }
 
     public void Item(string item)
@@ -168,13 +180,13 @@ public class PlayerMove : MonoBehaviour
         {
 
             case "BigItem":
-                gameManager.soundManager.ItemAudio();
+                GameManager.Instance.soundManager.ItemAudio();
                 StartCoroutine(ItemBig());
                 break;
 
             case "SmallItem":
                 isItem = true;
-                gameManager.soundManager.ItemAudio();
+                GameManager.Instance.soundManager.ItemAudio();
                 StartCoroutine(ItemSmall());
                 break;
 
@@ -232,7 +244,7 @@ public class PlayerMove : MonoBehaviour
     {
         isItem = true;
 
-        gameManager.soundManager.Slow();
+        GameManager.Instance.soundManager.Slow();
         Time.timeScale = 0.5f;
         yield return new WaitForSecondsRealtime(slowTime - 2f);
 
@@ -244,8 +256,9 @@ public class PlayerMove : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.2f);
         }
 
+        //¼öÁ¤ÇÒ°ÅÀÖ¤µ¹Ù´Ï´Ù
         Time.timeScale = 1f;
-        gameManager.soundManager.DefaultSpeed();
+        GameManager.Instance.soundManager.DefaultSpeed();
         isItem = false;
         yield break;
     }
@@ -295,6 +308,11 @@ public class PlayerMove : MonoBehaviour
     public bool ReturnIsTired()
     {
         return isTired;
+    }
+
+    public bool ReturnIsBig()
+    {
+        return isBig;
     }
 
     private void SetCoolTime()
