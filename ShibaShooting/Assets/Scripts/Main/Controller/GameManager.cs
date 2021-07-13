@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
 
     [Header("æ∆¿Ã≈€")]
@@ -57,24 +57,6 @@ public class GameManager : MonoBehaviour
     private int cnt = 0;
     private bool isTutorial;
     private int lifeCount = 3;
-
-    private static GameManager instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if(instance == null)
-            {
-                instance = FindObjectOfType<GameManager>();
-
-                if(instance == null)
-                {
-                    instance = new GameObject("GameManager").AddComponent<GameManager>();
-                }
-            }
-            return instance;
-        }
-    }
 
     void Start()
     {
