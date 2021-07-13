@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     [Header("게임 중지 팝업")]
     [SerializeField] private GameObject stopPopUp;
     [SerializeField] private GameObject musicPopUp;
+    [SerializeField] private GameObject tutorialPopup;
+
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField] private Text textDelayTime;
@@ -54,6 +56,7 @@ public class UIManager : MonoBehaviour
     {
         highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
         coin = PlayerPrefs.GetInt("COIN", 0);
+        PlayerPrefs.SetInt("Score", 0);
 
         UpdateUI();
     }
@@ -136,6 +139,16 @@ public class UIManager : MonoBehaviour
             PlayerPrefs.SetInt("HIGHSCORE", highScore);
         }
         UpdateUI();
+    }
+
+    public void TutorialStop()
+    {
+        tutorialPopup.SetActive(true);
+    }
+
+    public void TutorialNonstop()
+    {
+        tutorialPopup.SetActive(false);
     }
 
     public void AddCoin(int addCoin)
@@ -260,5 +273,10 @@ public class UIManager : MonoBehaviour
                 item.sprite = itemTired;
                 break;
         }
+    }
+
+    public void SetScore()
+    {
+        PlayerPrefs.SetInt("Score", score);
     }
 }

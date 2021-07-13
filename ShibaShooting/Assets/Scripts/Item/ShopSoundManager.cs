@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopSoundManager : MonoBehaviour
 {
-    public static ShopSoundManager Instance;
-
     AudioSource audioSource;
     [SerializeField]
     AudioClip buttonSound;
@@ -13,12 +9,8 @@ public class ShopSoundManager : MonoBehaviour
     AudioClip paySound;
     [SerializeField]
     AudioClip errorSound;
-
-
-    private void Awake()
-    {
-        Instance = this;
-    }
+    [SerializeField]
+    AudioClip fieldSound;
 
     void Start()
     {
@@ -33,6 +25,11 @@ public class ShopSoundManager : MonoBehaviour
     public void PaySound()
     {
         audioSource.PlayOneShot(paySound);
+    }
+
+    public void FieldSound()
+    {
+        audioSource.PlayOneShot(fieldSound);
     }
 
     public void ErrorSound()

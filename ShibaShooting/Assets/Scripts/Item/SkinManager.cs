@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SkinManager : MonoBehaviour
 {
@@ -16,8 +16,11 @@ public class SkinManager : MonoBehaviour
     private Text coinText, playerCoin;
     private int productCoin, playerMoney;
 
+    ShopSoundManager shopSoundManager;
+
     void Start()
     {
+        shopSoundManager = FindObjectOfType<ShopSoundManager>();
         crtShiba = PlayerPrefs.GetString("Shiba", "isIdle");
         playerMoney = PlayerPrefs.GetInt("COIN", 0);
     }
@@ -30,7 +33,7 @@ public class SkinManager : MonoBehaviour
 
     public void OnClickNo()
     {
-        buyPopup.SetActive(false);
+        buyPopup.transform.DOScale(Vector2.zero, 0.2f).SetEase(Ease.InOutQuad);
     }
 
     private void UpdateUI()
@@ -77,10 +80,10 @@ public class SkinManager : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("COIN", playerMoney);
-        ShopSoundManager.Instance.PaySound();
+        shopSoundManager.PaySound();
         UpdateUI();
         ChangeSprite();
-        buyPopup.SetActive(false);
+        buyPopup.transform.DOScale(Vector2.zero, 0.2f).SetEase(Ease.InOutQuad);
     }
 
     public void OnClickStrawberry()
@@ -88,7 +91,7 @@ public class SkinManager : MonoBehaviour
         if(PlayerPrefs.GetString("isBuyStrawberry") != "true")
         {
             productCoin = 100;
-            buyPopup.SetActive(true);
+            buyPopup.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.InOutQuad);
             coinText.text = string.Format("{0}원", productCoin);
             soldShiba = "Strawberry";
         }
@@ -99,7 +102,7 @@ public class SkinManager : MonoBehaviour
         if (PlayerPrefs.GetString("isMint") != "true")
         {
             productCoin = 150;
-            buyPopup.SetActive(true);
+            buyPopup.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.InOutQuad);
             coinText.text = string.Format("{0}원", productCoin);
             soldShiba = "Mint";
         }
@@ -110,7 +113,7 @@ public class SkinManager : MonoBehaviour
         if (PlayerPrefs.GetString("isDevil") != "true")
         {
             productCoin = 170;
-            buyPopup.SetActive(true);
+            buyPopup.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.InOutQuad);
             coinText.text = string.Format("{0}원", productCoin);
             soldShiba = "Devil";
         }
@@ -121,7 +124,7 @@ public class SkinManager : MonoBehaviour
         if (PlayerPrefs.GetString("isAngel") != "true")
         {
             productCoin = 100;
-            buyPopup.SetActive(true);
+            buyPopup.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.InOutQuad);
             coinText.text = string.Format("{0}원", productCoin);
             soldShiba = "Angel";
         }
@@ -132,14 +135,15 @@ public class SkinManager : MonoBehaviour
         if (PlayerPrefs.GetString("isMelona") != "true")
         {
             productCoin = 180;
-            buyPopup.SetActive(true);
+            buyPopup.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.InOutQuad);
             coinText.text = string.Format("{0}원", productCoin);
             soldShiba = "Melona";
         }
     }
+
     IEnumerator Error_Money()
     {
-        ShopSoundManager.Instance.ErrorSound();
+        shopSoundManager.ErrorSound();
         moneyError.SetActive(true);
         yield return new WaitForSeconds(1f);
         moneyError.SetActive(false);

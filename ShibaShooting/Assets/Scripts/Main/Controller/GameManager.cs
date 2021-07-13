@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,7 +6,6 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
 
     [Header("아이템")]
     [SerializeField]
@@ -36,6 +34,8 @@ public class GameManager : MonoBehaviour
     private GameObject cloud2;
     [SerializeField]
     private GameObject sun;
+    [SerializeField]
+    private GameObject dark;
 
     [SerializeField]
     private Text characterName, characterSpeech;
@@ -58,9 +58,22 @@ public class GameManager : MonoBehaviour
     private bool isTutorial;
     private int lifeCount = 3;
 
-    private void Awake()
+    private static GameManager instance;
+    public static GameManager Instance
     {
-        Instance = this;
+        get
+        {
+            if(instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+
+                if(instance == null)
+                {
+                    instance = new GameObject("GameManager").AddComponent<GameManager>();
+                }
+            }
+            return instance;
+        }
     }
 
     void Start()
@@ -92,7 +105,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && isFirst == "true")
+        {
+            uiManager.TutorialStop();
+            return;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Escape) && PlayerPrefs.GetString("First") != "true")
         {
             uiManager.OnClickStop();
         }
@@ -109,14 +128,21 @@ public class GameManager : MonoBehaviour
     {
         Life--;
         uiManager.ActiveHeart();
+        uiManager.SetScore();
 
         if (Life <= 0)
         {
-            if (uiManager.EnemyHP() == 180)
-                SceneManager.LoadScene("GameClear");
+            if (uiManager.EnemyHP() == 160)
+            {
+                PlayerPrefs.SetString("GameOver", "false");
+            }
 
             else
-                SceneManager.LoadScene("GameOver");
+            {
+                PlayerPrefs.SetString("GameOver", "true");
+            }
+
+            SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -177,9 +203,9 @@ public class GameManager : MonoBehaviour
 
         Instantiate(smallEnemy, new Vector2(7f, randomY), Quaternion.identity);
 
-        if(uiManager.EnemyHP() == 180)
+        if (uiManager.EnemyHP() == 160)
         {
-            while(true)
+            while (true)
             {
                 Instantiate(smallEnemy, new Vector2(7f, randomY), Quaternion.identity);
                 Instantiate(smallEnemy, new Vector2(7f, randomY), Quaternion.identity);
@@ -255,8 +281,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Tutorial()
     {
-        yield return new WaitForSeconds(2.3f);
+        yield return new WaitForSeconds(2.0f);
         Time.timeScale = 0;
+        isTutorial = false;
         textBox.SetActive(true);
         shiba.SetActive(false);
         stranger.SetActive(true);
@@ -265,7 +292,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Tutorial_Move()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4f);
         Time.timeScale = 0;
         textBox.SetActive(true);
         shiba.SetActive(false);
@@ -276,7 +303,8 @@ public class GameManager : MonoBehaviour
     private void CharacterText(string charName, string charText)
     {
         characterName.text = string.Format(charName);
-        characterSpeech.text = string.Format(charText);
+        characterSpeech.text = string.Format(" ");
+        characterSpeech.DOText(charText, 1f, true).SetUpdate(true);
     }
 
     private void TutorialText()
@@ -284,6 +312,7 @@ public class GameManager : MonoBehaviour
         switch (cnt)
         {
             case 1:
+
                 CharacterText("시바선생님", "총알...? 근데 누구세요...?");
                 shiba.SetActive(true);
                 stranger.SetActive(false);
@@ -324,13 +353,13 @@ public class GameManager : MonoBehaviour
                 break;
 
             case 9:
-                CharacterText("???", "먼저! 화면을 클릭해서 요리조리 움직여봐!");
+                CharacterText("???", "먼저! 화면을 드래그해서 요리조리 움직여봐!");
                 break;
 
             case 10:
+                Time.timeScale = 1f;
                 textBox.SetActive(false);
                 isTutorial = true;
-                Time.timeScale = 0.8f;
                 StartCoroutine(Tutorial_Move());
                 break;
 
@@ -380,27 +409,42 @@ public class GameManager : MonoBehaviour
                 break;
 
             case 21:
+                sliderCheck.SetActive(true);
+                CharacterText("???", "특히 저 게이지가 다 차면 악마가 되니까 조심해!");
+                break;
+
+            case 22:
+                sliderCheck.SetActive(true);
+                CharacterText("???", "학생이 악마가 되면 총알의 움직임이 불규칙적이기도 하고");
+                break;
+
+            case 23:
+                CharacterText("???", "갑자기 안개가 끼는 등 어려움이 많단 말이야.");
+                break;
+
+            case 24:
                 sliderCheck.SetActive(false);
                 heartCheck.SetActive(true);
                 CharacterText("???", "학생의 총알을 맞으면 저 위에 생명 하나가 줄어드는데...");
                 break;
 
-            case 22:
+            case 25:
                 CharacterText("???", "하트가 모두 없어지지 않도록 조심하는 게 좋을거야.");
                 break;
 
-            case 23:
+            case 26:
                 heartCheck.SetActive(false);
                 CharacterText("???", "그리고 나중에는 학생이 구름을 떨어뜨릴 수도 있으니까 그것도 조심해야해!");
                 break;
 
-            case 24:
+            case 27:
                 CharacterText("???", "그럼, 행운을 빌어 시바 선생!");
                 break;
 
-            case 25:
+            case 28:
                 textBox.SetActive(false);
                 PlayerPrefs.SetString("First", "false");
+                isFirst = PlayerPrefs.GetString("First");
                 isTutorial = false;
                 Time.timeScale = 1;
                 soundManager.EndTutorial();
@@ -419,8 +463,28 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator RealBossTime()
     {
-        Time.timeScale = 0.5f;
-        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0.4f;
+        yield return new WaitForSeconds(1.3f);
         Time.timeScale = 1f;
+    }
+
+    public bool ReturnIsTutorial()
+    {
+        return isTutorial;
+    }
+
+    public IEnumerator DarkActive()
+    {
+        SpriteRenderer darkRenderer;
+        darkRenderer = dark.GetComponent<SpriteRenderer>();
+        yield return new WaitForSeconds(10f);
+
+        while (true)
+        {
+            darkRenderer.DOFade(1f, 0.5f);
+            yield return new WaitForSeconds(2f);
+            darkRenderer.DOFade(0f, 0.5f);
+            yield return new WaitForSeconds(10f);
+        }
     }
 }

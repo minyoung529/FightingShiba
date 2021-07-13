@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SunMove : CloudMove
@@ -15,7 +14,7 @@ public class SunMove : CloudMove
         StartCoroutine(Sunshine());
     }
 
-    protected override void Update()
+    private void Update()
     {
         transform.Translate(Vector2.left * sunSpeed * Time.deltaTime);
 
@@ -27,15 +26,14 @@ public class SunMove : CloudMove
 
     private IEnumerator Sunshine()
     {
-        yield return new WaitForSeconds(60);
+        yield return new WaitForSeconds(60f);
 
         while (true)
         {
             sunshine.enabled = true;
             yield return new WaitForSeconds(2f);
             sunshine.enabled = false;
-            yield return new WaitForSeconds(6f);
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(18f);
         }
     }
 }

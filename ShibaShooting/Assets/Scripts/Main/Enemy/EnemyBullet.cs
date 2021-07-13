@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBullet : BulletMove
@@ -57,15 +56,20 @@ public class EnemyBullet : BulletMove
 
     IEnumerator Bounce()
     {
-        rigid.AddForce(Vector2.left * 4.3f);
-        isBounce = true;
-        col.isTrigger = false;
-        col.sharedMaterial = bounce;
+        for (int i = 0; i < 200; i++)
+        {
+            rigid.AddForce(Vector2.left * 4.3f);
+            isBounce = true;
+            col.isTrigger = false;
+            col.sharedMaterial = bounce;
 
-        yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
 
-        col.sharedMaterial = null;
-        col.isTrigger = true;
-        isBounce = false;
+            col.sharedMaterial = null;
+            col.isTrigger = true;
+            isBounce = false;
+
+            yield return new WaitForSeconds(14f);
+        }
     }
 }

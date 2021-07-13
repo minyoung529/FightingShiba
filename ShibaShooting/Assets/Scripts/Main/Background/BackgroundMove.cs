@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BackgroundMove : MonoBehaviour
@@ -39,7 +38,7 @@ public class BackgroundMove : MonoBehaviour
         yield return new WaitForSeconds(tiredTime);
         meshRenderer.material = bright;
 
-        if(GameManager.Instance.uiManager.EnemyHP() == 180)
+        if(GameManager.Instance.uiManager.EnemyHP() == 160)
         {
             meshRenderer.material = red;
         }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -145,22 +144,30 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(collision.gameObject);
             if (isBig) return;
-            GameManager.Instance.soundManager.DamagedAudio();
+            Vibrate();
             StartCoroutine(Damage());
         }
 
         if (collision.CompareTag("Lightning"))
         {
             if (isBig) return;
-
-            GameManager.Instance.soundManager.DamagedAudio();
+            Vibrate();
             StartCoroutine(Damage());
+        }
+    }
+
+    private void Vibrate()
+    {
+        if (PlayerPrefs.GetString("V", "true") == "true")
+        {
+            Handheld.Vibrate();
         }
     }
 
     public IEnumerator Damage()
     {
         isDamaged = true;
+        GameManager.Instance.soundManager.DamagedAudio();
         GameManager.Instance.Dead();
         for (int i = 0; i < 5; i++)
         {
@@ -246,17 +253,16 @@ public class PlayerMove : MonoBehaviour
 
         GameManager.Instance.soundManager.Slow();
         Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(slowTime - 2f);
+        yield return new WaitForSeconds((slowTime - 2f)/2);
 
         for (int i = 0; i < 5; i++)
         {
             spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
-            yield return new WaitForSecondsRealtime(0.2f);
+            yield return new WaitForSeconds(0.1f);
             spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
-            yield return new WaitForSecondsRealtime(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
 
-        //수정할거있ㅅ바니다
         Time.timeScale = 1f;
         GameManager.Instance.soundManager.DefaultSpeed();
         isItem = false;
@@ -270,16 +276,16 @@ public class PlayerMove : MonoBehaviour
         deco.sprite = sleep;
         speed = 7f;
 
-        yield return new WaitForSecondsRealtime(tiredTime - 2f);
+        yield return new WaitForSeconds(tiredTime - 2f);
 
         for (int i = 0; i < 5; i++)
         {
             spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
             deco.enabled = false;
-            yield return new WaitForSecondsRealtime(0.2f);
+            yield return new WaitForSeconds(0.2f);
             deco.enabled = true;
             spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
-            yield return new WaitForSecondsRealtime(0.2f);
+            yield return new WaitForSeconds(0.2f);
         }
 
         speed = 30f;

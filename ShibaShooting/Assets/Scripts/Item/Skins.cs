@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Skins : MonoBehaviour
 {
@@ -13,8 +12,11 @@ public class Skins : MonoBehaviour
 
     Image image;
 
+    ShopSoundManager shopSoundManager;
+
     void Start()
     {
+        shopSoundManager = FindObjectOfType<ShopSoundManager>();
         crtShiba = PlayerPrefs.GetString("Shiba", "isIdle");
         image = GetComponent<Image>();
         image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -62,11 +64,12 @@ public class Skins : MonoBehaviour
 
     public void OnClickChoose()
     {
-        ShopSoundManager.Instance.ButtonSound();
+        shopSoundManager.ButtonSound();
 
         if(image.color == new Color(1f, 1f, 1f, 1f))
         {
-            check.SetActive(true);
+            check.transform.localScale = Vector2.zero;
+            check.transform.DOScale(Vector2.one, 0.2f);
             check.transform.position = new Vector2(transform.position.x, transform.position.y);
             PlayerPrefs.SetString("Shiba", crtShiba);
         }

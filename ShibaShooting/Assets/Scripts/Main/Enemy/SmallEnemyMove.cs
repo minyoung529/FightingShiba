@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SmallEnemyMove : MonoBehaviour
@@ -24,9 +23,9 @@ public class SmallEnemyMove : MonoBehaviour
         randomX = Random.Range(-1.0f, -0.4f);
         randomY = Random.Range(-1.0f, 1f);
 
-        Vector2 vector2 = new Vector2(1, -1);
+        Vector2 vector2 = new Vector2(randomX, randomY);
         vector2 = vector2.normalized;
-        rigid.AddForce(vector2 * 500);
+        rigid.AddForce(vector2 * 550);
         randomRot = Random.Range(-35, 35);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, randomRot));
     }

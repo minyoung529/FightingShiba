@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameOverShiba : MonoBehaviour
@@ -18,27 +16,27 @@ public class GameOverShiba : MonoBehaviour
         switch (crtShiba)
         {
             case "isIdle":
-                animator.Play("Idle_Shiba");
+                animator.Play("Shop_Idle");
                 break;
 
             case "isStrawberry":
-                animator.Play("Strawberry_Shiba");
+                animator.Play("Shop_Strawberry_Shiba");
                 break;
 
             case "isMint":
-                animator.Play("Mint_Shiba");
+                animator.Play("Shop_Mint_Shiba");
                 break;
 
             case "isDevil":
-                animator.Play("Devil_Shiba");
+                animator.Play("Shop_Devil");
                 break;
 
             case "isAngel":
-                animator.Play("Angel_Shiba");
+                animator.Play("Shop_Angel");
                 break;
 
             case "isMelona":
-                animator.Play("Melona_Shiba");
+                animator.Play("Shop_Melona");
                 break;
         }
     }

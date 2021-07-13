@@ -1,13 +1,11 @@
 using System.Collections;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class EnemyMove : MonoBehaviour
 {
     #region 변수목록
-    private float hp = 180;
+    private float hp = 160;
 
     [Header("Enemy 빠르기")]
     [SerializeField]
@@ -91,6 +89,7 @@ public class EnemyMove : MonoBehaviour
         {
             if (isDamaged) return;
             isDamaged = true;
+            GameManager.Instance.soundManager.Bullet();
             GameManager.Instance.uiManager.EnemyHPBar(1);
             collision.gameObject.SetActive(false);
             collision.transform.SetParent(GameManager.Instance.poolManager.transform, false);
@@ -102,9 +101,11 @@ public class EnemyMove : MonoBehaviour
                 StartCoroutine(Warning());
                 GameManager.Instance.SetThreeHeart();
                 GameManager.Instance.StartCoroutine("RealBossTime");
+                GameManager.Instance.StartCoroutine("DarkActive");
+                GameManager.Instance.soundManager.BossBGM();
             }
 
-            if (hp == 170 || hp == 130 || hp == 90 || hp == 60 || hp == 30 || hp == -1)
+            if (hp == 150 || hp == 120 || hp == 90 || hp == 60 || hp == 30 || hp == -1)
             {
                 GameManager.Instance.StartCoroutine("SpawnSmallEnemy");
             }
@@ -145,6 +146,7 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual GameObject InstantiateOrPool()
     {
+
         GameObject result = null;
 
         if (GameManager.Instance.enemyPoolManager.transform.childCount > 0)
@@ -233,8 +235,8 @@ public class EnemyMove : MonoBehaviour
         {
             Circle();
             Random();
-            fireRate = 1f;
-            circleMaxTime = 3f;
+            fireRate = 1.2f;
+            circleMaxTime = 3.2f;
         }
     }
 
@@ -328,11 +330,13 @@ public class EnemyMove : MonoBehaviour
         for (int i = 0; i<5;i++)
         {
             warn.color = new Color(1, 0, 0, 1);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
             warn.color = new Color(1, 1, 1, 1);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
         }
         warning.SetActive(false);
+
         yield break;
+
     }
 }

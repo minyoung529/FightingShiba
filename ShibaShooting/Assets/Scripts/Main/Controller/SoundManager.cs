@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
@@ -19,6 +16,10 @@ public class SoundManager : MonoBehaviour
     private AudioClip buttonSound;
     [SerializeField]
     private AudioClip tutorialBGM;
+    [SerializeField]
+    private AudioClip bossBGM;
+    [SerializeField]
+    private AudioClip bulletSound;
 
     private AudioSource audioSource;
 
@@ -46,6 +47,11 @@ public class SoundManager : MonoBehaviour
     public void ItemAudio()
     {
         audioSource.PlayOneShot(itemSound);
+    }
+
+    public void Bullet()
+    {
+        audioSource.PlayOneShot(bulletSound);
     }
 
     public void LightningAudio()
@@ -82,6 +88,12 @@ public class SoundManager : MonoBehaviour
     public void EndTutorial()
     {
         audioSource.clip = Mainbgm;
+        audioSource.Play();
+    }
+
+    public void BossBGM()
+    {
+        audioSource.clip = bossBGM;
         audioSource.Play();
     }
 }

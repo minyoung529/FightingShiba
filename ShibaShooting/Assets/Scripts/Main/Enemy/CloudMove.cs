@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CloudMove : MonoBehaviour
@@ -21,7 +19,7 @@ public class CloudMove : MonoBehaviour
 
         col.enabled = false;
     }
-    protected virtual void Update()
+    private void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
 
@@ -44,7 +42,7 @@ public class CloudMove : MonoBehaviour
             rigid.velocity = Vector2.zero;
         }
 
-        if(GameManager.Instance.uiManager.EnemyHP()==180)
+        if(GameManager.Instance.uiManager.EnemyHP()==160)
         {
             spriteRenderer.color = new Color(0, 0, 0, 1);
         }

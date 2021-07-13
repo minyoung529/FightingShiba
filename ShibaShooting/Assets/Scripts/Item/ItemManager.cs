@@ -1,15 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ItemManager : MonoBehaviour
 {
     [SerializeField]
     GameObject parent;
     [SerializeField]
-    GameObject ItemPopup, buyButton, coinImage, moneyError, levelError;
+    GameObject ItemPopup, buyButton, coinImage;
+    [SerializeField]
+    GameObject moneyError, levelError;
     [SerializeField]
     Text itemName, itemLevel;
     [SerializeField]
@@ -40,11 +42,14 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private GameObject textBox, shiba, storeOwner;
 
+    private ShopSoundManager shopSoundManager;
+
     private void Start()
     {
+        shopSoundManager = FindObjectOfType<ShopSoundManager>();
         itemBtn.image.color = new Color32(255, 229, 95, 255);
 
-        playerCoin = PlayerPrefs.GetInt("COIN");
+        playerCoin = PlayerPrefs.GetInt("COIN", 0);
         coinText.text = string.Format("{0}", playerCoin);
         SetPlayerPrefs();
 
@@ -65,13 +70,6 @@ public class ItemManager : MonoBehaviour
             SceneManager.LoadScene("Lobby");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            playerCoin += 40;
-            PlayerPrefs.SetInt("COIN", playerCoin);
-            coinText.text = string.Format("{0}", playerCoin);
-        }
-
         if (Input.GetMouseButtonDown(0) && textBox.activeSelf)
         {
             cnt++;
@@ -79,75 +77,75 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    private void OnClickItemButton(bool isSell)
+    {
+        shopSoundManager.ButtonSound();
+        ItemPopup.SetActive(true);
+        buyButton.SetActive(isSell);
+        coinImage.SetActive(isSell);
+
+    }
+
     #region 버튼 함수들
     public void OnClickBigItem()
     {
         if (isFirst == "true") return;
-        ItemPopup.SetActive(true);
         Information("BigItem");
         crtitemName = "BigItem";
-        buyButton.SetActive(true);
-        coinImage.SetActive(true);
+        OnClickItemButton(true);
     }
 
     public void OnClickSmallItem()
     {
         if (isFirst == "true") return;
-        ItemPopup.SetActive(true);
         Information("SmallItem");
         crtitemName = "SmallItem";
-        buyButton.SetActive(true);
-        coinImage.SetActive(true);
+        OnClickItemButton(true);
+
     }
 
     public void OnClickSlowItem()
     {
         if (isFirst == "true") return;
-        ItemPopup.SetActive(true);
         Information("SlowItem");
         crtitemName = "SlowItem";
-        buyButton.SetActive(true);
-        coinImage.SetActive(true);
+        OnClickItemButton(true);
+
     }
 
     public void OnClickCoinItem()
     {
         if (isFirst == "true") return;
-        ItemPopup.SetActive(true);
         Information("CoinItem");
         crtitemName = "CoinItem";
-        buyButton.SetActive(true);
-        coinImage.SetActive(true);
+        OnClickItemButton(true);
+
     }
 
     public void OnClickLifeItem()
     {
         if (isFirst == "true") return;
-        ItemPopup.SetActive(true);
         Information("LifeItem");
         crtitemName = "LifeItem";
-        buyButton.SetActive(false);
-        coinImage.SetActive(false);
+        OnClickItemButton(false);
+
     }
 
     public void OnClickLightningItem()
     {
         if (isFirst == "true") return;
-        ItemPopup.SetActive(true);
         Information("LightningItem");
         crtitemName = "LightningItem";
-        buyButton.SetActive(false);
-        coinImage.SetActive(false);
+        OnClickItemButton(false);
+
     }
 
     public void OnClickTiredItem()
     {
         if (isFirst == "true") return;
-        ItemPopup.SetActive(true);
         Information("TiredItem");
         crtitemName = "TiredItem";
-        buyButton.SetActive(true);
-        coinImage.SetActive(true);
+        OnClickItemButton(true);
     }
 
     public void InfoActiveFalse()
@@ -222,7 +220,7 @@ public class ItemManager : MonoBehaviour
 
     public void OnClickLobby()
     {
-        ShopSoundManager.Instance.ButtonSound();
+        shopSoundManager.ButtonSound();
         SceneManager.LoadScene("Lobby");
     }
 
@@ -249,13 +247,17 @@ public class ItemManager : MonoBehaviour
 
     public void OnClickBuy()
     {
+        playerCoin = PlayerPrefs.GetInt("COIN", 0);
         if (isFirst == "true") return;
 
-        Debug.Log(crtitemName);
+        Debug.Log(playerCoin);
+        Debug.Log(PlayerPrefs.GetInt("COIN"));
 
         switch (crtitemName)
         {
             case "BigItem":
+                Debug.Log(bigCoin);
+
                 if (MaxLevel(bigLevel))
                 {
                     StartCoroutine(Error_Level());
@@ -374,9 +376,16 @@ public class ItemManager : MonoBehaviour
                 break;
         }
 
-        ShopSoundManager.Instance.PaySound();
+        Debug.Log(playerCoin);
+        Debug.Log(PlayerPrefs.GetInt("COIN", 0));
+
+        shopSoundManager.PaySound();
         PlayerPrefs.SetInt("COIN", playerCoin);
         coinText.text = string.Format("{0}", playerCoin);
+
+        Debug.Log(playerCoin);
+        Debug.Log(PlayerPrefs.GetInt("COIN", 0));
+
     }
 
     private bool MaxLevel(int level)
@@ -387,26 +396,26 @@ public class ItemManager : MonoBehaviour
 
     IEnumerator Error_Money()
     {
-        ShopSoundManager.Instance.ErrorSound();
-        moneyError.SetActive(true);
+        shopSoundManager.ErrorSound();
+        moneyError.transform.DOScale(Vector2.one, 0.1f).SetEase(Ease.InOutQuad);
         yield return new WaitForSeconds(1f);
-        moneyError.SetActive(false);
+        moneyError.transform.DOScale(Vector2.zero, 0.1f);
         yield break;
     }
 
     IEnumerator Error_Level()
     {
-        ShopSoundManager.Instance.ErrorSound();
-        levelError.SetActive(true);
+        shopSoundManager.ErrorSound();
+        levelError.transform.DOScale(Vector2.one, 0.2f);
         yield return new WaitForSeconds(1f);
-        levelError.SetActive(false);
+        levelError.transform.DOScale(Vector2.zero, 0.2f);
         yield break;
     }
 
     public void OnClickItem()
     {
         if (isFirst == "true") return;
-        ShopSoundManager.Instance.ButtonSound();
+        shopSoundManager.FieldSound();
         itemField.SetActive(true);
         skinField.SetActive(false);
 
@@ -418,7 +427,7 @@ public class ItemManager : MonoBehaviour
     public void OnClickSkin()
     {
         if (isFirst == "true") return;
-        ShopSoundManager.Instance.ButtonSound();
+        shopSoundManager.FieldSound();
 
         itemField.SetActive(false);
         skinField.SetActive(true);
@@ -430,7 +439,8 @@ public class ItemManager : MonoBehaviour
     private void CharacterText(string charName, string charText)
     {
         characterName.text = string.Format(charName);
-        characterSpeech.text = string.Format(charText);
+        characterSpeech.text = string.Format(" ");
+        characterSpeech.DOText(charText, 1f);
     }
 
     private void StoreTutorial()
@@ -467,33 +477,39 @@ public class ItemManager : MonoBehaviour
                 CharacterText("꿀곰(상점주인)", "아이템은 최대 11레벨까지 강화가 가능하고,");
                 break;
             case 8:
-                CharacterText("꿀곰(상점주인)", "옷은 옷별로 디자인과 가격이 달라서 고르는 재미가 있으실 거예요.");
+                CharacterText("꿀곰(상점주인)", "아이템 강화를 하려면 아이템을 클릭하고");
                 break;
             case 9:
-                CharacterText("꿀곰(상점주인)", "또, 옷을 입으시려면 구매하시고 옷을 한번 더 클릭해주시면 입어진답니다!");
+                CharacterText("꿀곰(상점주인)", "레벨 버튼을 눌러주시면 돼요");
                 break;
             case 10:
+                CharacterText("꿀곰(상점주인)", "옷은 옷별로 디자인과 가격이 달라서 고르는 재미가 있으실 거예요.");
+                break;
+            case 11:
+                CharacterText("꿀곰(상점주인)", "또, 옷을 입으시려면 구매하시고 옷을 한번 더 클릭해주시면 입어진답니다!");
+                break;
+            case 12:
                 CharacterText("시바선생님", "네, 알겠습니다.");
                 shiba.SetActive(true);
                 storeOwner.SetActive(false);
                 break;
-            case 11:
+            case 13:
                 CharacterText("꿀곰(상점주인)", "오랜만에 오는 손님이시니, 저희 가게 150원 상품권을 드리겠습니다!");
                 shiba.SetActive(false);
                 storeOwner.SetActive(true);
 
                 playerCoin += 150;
                 coinText.text = string.Format("{0}", playerCoin);
-                ShopSoundManager.Instance.PaySound();
+                shopSoundManager.PaySound();
 
                 break;
-            case 12:
+            case 14:
                 CharacterText("꿀곰(상점주인)", "이걸로 아이템을 강화하거나 예쁜 옷을 사보세요!");
                 break;
-            case 13:
+            case 15:
                 CharacterText("꿀곰(상점주인)", "앞으로 많은 이용 부탁드립니다!");
                 break;
-            case 14:
+            case 16:
                 textBox.SetActive(false);
                 PlayerPrefs.SetString("StoreFirst", "false");
                 isFirst = PlayerPrefs.GetString("StoreFirst");
