@@ -404,3 +404,36 @@ Received Import Request.
 Start importing Assets/Scripts/MonoSingleton.cs using Guid(3408178c6cc388040a83539940a8822c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af573ef18d2b29077d907a0ffc6ff335') in 0.009061 seconds
   Import took 0.012459 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002748 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.141 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.66 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1844 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 86.2 MB.
+System memory in use after: 86.2 MB.
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 2341.
+Total: 2.436000 ms (FindLiveObjects: 0.309800 ms CreateObjectMapping: 0.119700 ms MarkObjects: 1.894700 ms  DeleteObjects: 0.111000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  requireTextureImportCompression: false -> true
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 2026.079158 seconds.
+  path: Assets/Scripts/MonoSingleton.cs
+  artifactKey: Guid(3408178c6cc388040a83539940a8822c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/MonoSingleton.cs using Guid(3408178c6cc388040a83539940a8822c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4aea1519f73369632db97278a9e0031b') in 0.014571 seconds
+  Import took 0.018638 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
