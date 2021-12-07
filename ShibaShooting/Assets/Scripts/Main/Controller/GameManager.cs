@@ -67,7 +67,6 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager = FindObjectOfType<UIManager>();
         playerMove = FindObjectOfType<PlayerMove>();
         tutorialManager = GetComponent<TutorialManager>();
-
     }
 
     #region User_Data_Save
@@ -111,14 +110,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
+        SceneManager.LoadScene(ConstantManager.UI_SCENE, LoadSceneMode.Additive);
         Time.timeScale = 1;
 
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
-
-        StartCoroutine(SpawnItem());
-        StartCoroutine(SpawnCoin());
-        StartCoroutine(SpawnCloud());
     }
 
     private void Update()
@@ -134,6 +130,13 @@ public class GameManager : MonoSingleton<GameManager>
             UIManager.OnClickStop();
         }
 
+    }
+
+    public void GameStart()
+    {
+        StartCoroutine(SpawnItem());
+        StartCoroutine(SpawnCoin());
+        StartCoroutine(SpawnCloud());
     }
 
     public void Dead()
@@ -157,7 +160,6 @@ public class GameManager : MonoSingleton<GameManager>
             SceneManager.LoadScene("GameOver");
         }
     }
-
 
     public void StopGame()
     {

@@ -303,73 +303,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &693014923
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 693014924}
-  - component: {fileID: 693014925}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &693014924
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693014923}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1935711153}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &693014925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693014923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413d5ff5a8330df41ad691da10f5f629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hearts: {fileID: 0}
-  stopPopUp: {fileID: 0}
-  musicPopUp: {fileID: 0}
-  tutorialPopup: {fileID: 0}
-  textDelayTime: {fileID: 0}
-  textDelayTimeObj: {fileID: 0}
-  enemyHPBar: {fileID: 0}
-  textScore: {fileID: 0}
-  textHighScore: {fileID: 0}
-  textCoin: {fileID: 0}
-  itemBig: {fileID: 8033092973025764044, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
-  itemSlow: {fileID: 4337684191699249041, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
-  itemCoin: {fileID: -5971942374765049077, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
-  itemLightning: {fileID: 1801263428120863714, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
-  itemHeart: {fileID: -488721925442295091, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
-  itemSmall: {fileID: 4639506938558671751, guid: 8bdd992fa77caa648bb935f2b5449e18, type: 3}
-  itemTired: {fileID: 21300000, guid: 14a2ff24bd6ed0f4abd4e12758174b51, type: 3}
-  item: {fileID: 1567209772799939204, guid: e0a84083140fe344ca61e973973e1b49, type: 3}
-  characterName: {fileID: 0}
-  characterSpeech: {fileID: 0}
-  textBox: {fileID: 0}
-  characters:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &892076170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,7 +1441,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1069198860}
-  - {fileID: 693014924}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

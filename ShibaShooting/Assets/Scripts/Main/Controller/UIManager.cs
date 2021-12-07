@@ -304,4 +304,23 @@ public class UIManager : MonoBehaviour
     {
         return characterName.text;
     }
+
+    #region
+    public void OnClickStart()
+    {
+        SoundManager.Instance.ButtonAudio();
+
+        if (GameManager.Instance.CurrentUser.GetIsCompleteTutorial())
+        {
+            SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
+        }
+
+        else
+        {
+            SceneManager.LoadScene(ConstantManager.STORY_SCENE);
+        }
+
+        SceneManager.LoadScene(ConstantManager.UI_SCENE, LoadSceneMode.Additive);
+    }
+    #endregion
 }
