@@ -104,7 +104,7 @@ public class EnemyMove : MonoBehaviour
                 SoundManager.Instance.BossBGM();
             }
 
-            if (hp % 30 == 0 || hp < 0)
+            if (hp % 30 == 0 || hp > 29)
             {
                 GameManager.Instance.StartCoroutine("SpawnSmallEnemy");
             }

@@ -16,10 +16,6 @@ public class LobbyManager : MonoBehaviour
     [SerializeField]
     private GameObject resetPopup, resetOKPopup;
     [SerializeField]
-    private Slider volumeController;
-    [SerializeField]
-    private AudioSource audioSource;
-    [SerializeField]
     private AudioClip infoSound, buttonSound;
 
     private bool isInfo, isSetting, isCheckReset, isQuit;
@@ -44,7 +40,6 @@ public class LobbyManager : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Escape) && isSetting && !isCheckReset)
         {
-            QuitSetting();
             isCheckReset = false;
         }
 
@@ -61,130 +56,32 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void OnClickStart()
-    {
-        audioSource.PlayOneShot(buttonSound);
-
-        if(PlayerPrefs.GetString("First", "true") == "true")
-        {
-            SceneManager.LoadScene("Story");
-            return;
-        }
-
-        else
-        {
-            SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
-            SceneManager.LoadScene(ConstantManager.UI_SCENE, LoadSceneMode.Additive);
-        }
-    }
-
-    public void OnClickVibrate_On()
-    {
-        vibButton.color = Color.white;
-        vibrate.text = string.Format("진동 끄기");
-        PlayerPrefs.SetString("V", "true");
-    }
-
-    public void OnClickVibrate_Off()
-    {
-        vibButton.color = Color.black;
-        vibrate.text = string.Format("진동 켜기");
-        PlayerPrefs.SetString("V", "false");
-    }
-
     public void OnClickVibrate()
     {
-        if (PlayerPrefs.GetString("V", "true") == "true")
-        {
-            OnClickVibrate_Off();
-        }
-
-        else
-        {
-            OnClickVibrate_On();
-        }
+        GameManager.Instance.CurrentUser.isVibrate = !GameManager.Instance.CurrentUser.isVibrate;
+        SetVibrate();
     }
 
-    private void SetVib()
+    private void SetVibrate()
     {
-        if (PlayerPrefs.GetString("V", "true") == "true")
-        {
-            OnClickVibrate_On();
-        }
+        bool isVibrate = GameManager.Instance.CurrentUser.isVibrate;
 
+        if (isVibrate)
+        {
+            vibrate.text = string.Format("진동 끄기");
+            vibButton.color = Color.green;
+        }
         else
         {
-            OnClickVibrate_Off();
+            vibrate.text = string.Format("진동 켜기");
+            vibButton.color = Color.black;
         }
     }
 
     public void OnClickCheckQuit()
     {
-        audioSource.PlayOneShot(buttonSound);
         isQuit = true;
         QuitPopUp.SetActive(true);
-    }
-
-    public void Quit()
-    {
-        audioSource.PlayOneShot(buttonSound);
-        Application.Quit();
-        isQuit = false;
-    }
-
-    public void NotQuit()
-    {
-        isQuit = false;
-        QuitPopUp.SetActive(false);
-    }
-
-    public void OnClickItem()
-    {
-        audioSource.PlayOneShot(buttonSound);
-        SceneManager.LoadScene("Item");
-    }
-
-    public void SetMusicVolume(float volume)
-    {
-        audioSource.volume = volume;
-    }
-
-    public void OnClickSetting()
-    {
-        SetVib();
-        audioSource.PlayOneShot(infoSound);
-
-        if (isSetting)
-        {
-            QuitSetting();
-            isSetting = false;
-            return;
-        }
-
-        isSetting = true;
-        settingPopup.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.InOutQuad);
-    }
-
-    public void QuitSetting()
-    {
-        isSetting = false;
-        settingPopup.transform.DOScale(Vector2.zero, 0.2f).SetEase(Ease.InOutQuad);
-    }
-
-    public void OnClickInfo()
-    {
-        audioSource.PlayOneShot(infoSound);
-        if (!isInfo)
-        {
-            isInfo = true;
-            infoPopup.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.InOutQuad);
-        }
-
-        else
-        {
-            isInfo = false;
-            infoPopup.transform.DOScale(Vector2.zero, 0.2f).SetEase(Ease.InOutQuad);
-        }
     }
 
     public void ReTutorial()

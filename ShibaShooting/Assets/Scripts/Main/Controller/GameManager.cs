@@ -143,7 +143,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Life--;
         UIManager.ActiveHeart();
-        UIManager.SetScore();
 
         if (Life <= 0)
         {
@@ -181,11 +180,9 @@ public class GameManager : MonoSingleton<GameManager>
         {
             randomY = Random.Range(-3.5f, 3.5f);
             randomDelay = Random.Range(6f, 7f);
-            randomNum = Random.Range(0, 8);
-
             yield return new WaitForSeconds(randomDelay);
 
-            UIManager.RandomItem(randomNum);
+            UIManager.RandomItem(Random.Range(0, 7));
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
         }
     }

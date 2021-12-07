@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject stopPopUp;
     [SerializeField] private GameObject musicPopUp;
     [SerializeField] private GameObject tutorialPopup;
-
+    [SerializeField] private GameObject quitPopup;
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField] private Text textDelayTime;
@@ -32,13 +32,7 @@ public class UIManager : MonoBehaviour
     private Text textCoin = null;
 
     [Header("아이템 스프라이트")]
-    [SerializeField] private Sprite itemBig;
-    [SerializeField] private Sprite itemSlow;
-    [SerializeField] private Sprite itemCoin;
-    [SerializeField] private Sprite itemLightning;
-    [SerializeField] private Sprite itemHeart;
-    [SerializeField] private Sprite itemSmall;
-    [SerializeField] private Sprite itemTired;
+    [SerializeField] private Sprite[] itemSprites;
     [SerializeField] private SpriteRenderer item;
 
     [Header("튜토리얼")]
@@ -48,7 +42,6 @@ public class UIManager : MonoBehaviour
 
     private int score = 0;
     private int highScore = 0;
-    private int coin = 0;
     private int countTime = 3;
 
     private bool isStop = false;
@@ -56,9 +49,16 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         highScore = GameManager.Instance.CurrentUser.GetHighScore();
-        coin = GameManager.Instance.CurrentUser.GetCoin();
 
         UpdateUI();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            quitPopup.gameObject.SetActive(!quitPopup.activeSelf);
+        }
     }
 
     public int ReturnScore()
@@ -127,7 +127,7 @@ public class UIManager : MonoBehaviour
     {
         textScore.text = string.Format("SCORE {0}", score);
         textHighScore.text = string.Format("HIGHSCORE {0}", highScore);
-        textCoin.text = string.Format("{0}", coin);
+        textCoin.text = string.Format("{0}", GameManager.Instance.CurrentUser.GetCoin());
     }
 
     public void AddScore(int addScore)
@@ -146,15 +146,9 @@ public class UIManager : MonoBehaviour
         tutorialPopup.SetActive(true);
     }
 
-    public void TutorialNonstop()
-    {
-        tutorialPopup.SetActive(false);
-    }
-
     public void AddCoin(int addCoin)
     {
-        this.coin += addCoin;
-        PlayerPrefs.SetInt("COIN", coin);
+        GameManager.Instance.CurrentUser.AddCoin(addCoin);
         UpdateUI();
     }
 
@@ -186,7 +180,7 @@ public class UIManager : MonoBehaviour
     public void OnClickMenu()
     {
         ButtonSound();
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene(ConstantManager.LOBBY_SCENE);
     }
 
     public void OnClickNewGame()
@@ -194,7 +188,7 @@ public class UIManager : MonoBehaviour
         isStop = false;
         ButtonSound();
         stopPopUp.SetActive(false);
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
         GameManager.Instance.ContinueGame();
     }
 
@@ -243,43 +237,11 @@ public class UIManager : MonoBehaviour
 
     public void RandomItem(int randomNum)
     {
-        switch (randomNum)
-        {
-            case 1:
-                item.sprite = itemBig;
-                break;
-
-            case 2:
-                item.sprite = itemSlow;
-                break;
-
-            case 3:
-                item.sprite = itemCoin;
-                break;
-
-            case 4:
-                item.sprite = itemLightning;
-                break;
-
-            case 5:
-                item.sprite = itemSmall;
-                break;
-
-            case 6:
-                item.sprite = itemHeart;
-                break;
-
-            case 7:
-                item.sprite = itemTired;
-                break;
-        }
+        item.sprite = itemSprites[randomNum];
     }
 
-    public void SetScore()
-    {
-        PlayerPrefs.SetInt("Score", score);
-    }
 
+    #region Tutorial
     public void CharacterText(string charName, string charText)
     {
         characterName.text = string.Format(charName);
@@ -304,8 +266,9 @@ public class UIManager : MonoBehaviour
     {
         return characterName.text;
     }
+    #endregion
 
-    #region
+    #region Lobby
     public void OnClickStart()
     {
         SoundManager.Instance.ButtonAudio();
