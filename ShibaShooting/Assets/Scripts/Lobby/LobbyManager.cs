@@ -73,7 +73,8 @@ public class LobbyManager : MonoBehaviour
 
         else
         {
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
+            SceneManager.LoadScene(ConstantManager.UI_SCENE, LoadSceneMode.Additive);
         }
     }
 

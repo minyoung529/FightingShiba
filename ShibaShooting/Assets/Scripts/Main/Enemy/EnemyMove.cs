@@ -21,7 +21,6 @@ public class EnemyMove : MonoBehaviour
     [SerializeField]
     private float fireRate = 1f;
 
-    private float timer = 0f;
     private float circleTimer = 0f;
     private float randomTimer = 0f;
     private float circleMaxTime = 3f;
@@ -72,7 +71,7 @@ public class EnemyMove : MonoBehaviour
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        if (!GameManager.Instance.GetIsTutorial())
+        if (!GameManager.Instance.tutorialManager.GetIsTutorial())
         {
             EnemyAttack();
         }
@@ -85,27 +84,27 @@ public class EnemyMove : MonoBehaviour
         if (transform.position.x > 6.5f) return;
         if (isDead) return;
 
-        if (collision.CompareTag("Bullet"))
+        if (collision.CompareTag(ConstantManager.BULLET_TAG))
         {
             if (isDamaged) return;
             isDamaged = true;
-            GameManager.Instance.soundManager.Bullet();
-            GameManager.Instance.uiManager.EnemyHPBar(1);
+            SoundManager.Instance.Bullet();
+            GameManager.Instance.UIManager.EnemyHPBar(1);
             collision.gameObject.SetActive(false);
             collision.transform.SetParent(GameManager.Instance.poolManager.transform, false);
             StartCoroutine(Damaged());
 
-            if(hp == 0)
+            if (hp == 0)
             {
                 back.ChangeToRed();
                 StartCoroutine(Warning());
                 GameManager.Instance.SetThreeHeart();
                 GameManager.Instance.StartCoroutine("RealBossTime");
                 GameManager.Instance.StartCoroutine("DarkActive");
-                GameManager.Instance.soundManager.BossBGM();
+                SoundManager.Instance.BossBGM();
             }
 
-            if (hp == 150 || hp == 120 || hp == 90 || hp == 60 || hp == 30 || hp == -1)
+            if (hp % 30 == 0 || hp < 0)
             {
                 GameManager.Instance.StartCoroutine("SpawnSmallEnemy");
             }
@@ -136,8 +135,6 @@ public class EnemyMove : MonoBehaviour
 
         rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
-        timer = 0f;
-
         bullet.transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 180f);
         bullet.transform.SetParent(null);
 
@@ -149,9 +146,9 @@ public class EnemyMove : MonoBehaviour
 
         GameObject result = null;
 
-        if (GameManager.Instance.enemyPoolManager.transform.childCount > 0)
+        if (GameManager.Instance.poolManager.IsInPoolObject(enemyBulletPrefab.name))
         {
-            result = GameManager.Instance.enemyPoolManager.transform.GetChild(0).gameObject;
+            result = GameManager.Instance.poolManager.GetPoolObject(enemyBulletPrefab.name);
             result.transform.position = enemyBulletPosition.position;
             result.transform.SetParent(null);
             result.SetActive(true);
@@ -268,9 +265,9 @@ public class EnemyMove : MonoBehaviour
         {
             for (int i = -90; i < 90; i += 15)
             {
-                if (GameManager.Instance.enemyPoolManager.transform.childCount > 0)
+                if (GameManager.Instance.poolManager.IsInPoolObject(enemyBulletPrefab.name))
                 {
-                    circleBullet = GameManager.Instance.enemyPoolManager.transform.GetChild(0).gameObject;
+                    circleBullet = GameManager.Instance.poolManager.GetPoolObject(enemyBulletPrefab.name);
                     circleBullet.transform.position = enemyBulletPosition.position;
                     circleBullet.transform.SetParent(null);
                     circleBullet.SetActive(true);
@@ -296,9 +293,9 @@ public class EnemyMove : MonoBehaviour
         {
             int randomRot = UnityEngine.Random.Range(-90, 90);
 
-            if (GameManager.Instance.enemyPoolManager.transform.childCount > 0)
+            if (GameManager.Instance.poolManager.IsInPoolObject(enemyBulletPrefab.name))
             {
-                randomBullet = GameManager.Instance.enemyPoolManager.transform.GetChild(0).gameObject;
+                randomBullet = GameManager.Instance.poolManager.GetPoolObject(enemyBulletPrefab.name);
                 randomBullet.transform.position = enemyBulletPosition.position;
                 randomBullet.transform.SetParent(null);
                 randomBullet.SetActive(true);
@@ -327,7 +324,7 @@ public class EnemyMove : MonoBehaviour
         warning.SetActive(true);
         Text warn = warning.GetComponent<Text>();
 
-        for (int i = 0; i<5;i++)
+        for (int i = 0; i < 5; i++)
         {
             warn.color = new Color(1, 0, 0, 1);
             yield return new WaitForSeconds(0.15f);

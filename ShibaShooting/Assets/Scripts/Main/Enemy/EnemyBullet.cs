@@ -21,7 +21,7 @@ public class EnemyBullet : BulletMove
 
     protected override void Update()
     {
-        if (GameManager.Instance.GetIsTutorial())
+        if (GameManager.Instance.tutorialManager.GetIsTutorial())
         {
             Despawn();
         }
@@ -49,7 +49,7 @@ public class EnemyBullet : BulletMove
 
     protected override void Despawn()
     {
-        transform.SetParent(GameManager.Instance.enemyPoolManager.transform, false);
+        transform.SetParent(GameManager.Instance.poolManager.transform, false);
         gameObject.SetActive(false);
     }
 

@@ -34,18 +34,18 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag(ConstantManager.PLAYER_TAG))
         {
             if (spriteRenderer.sprite == itemCoin)
             {
-                GameManager.Instance.soundManager.ItemAudio();
-                GameManager.Instance.uiManager.AddCoin(5);
+                SoundManager.Instance.ItemAudio();
+                GameManager.Instance.UIManager.AddCoin(5);
                 Destroy(gameObject);
             }
 
             else if (spriteRenderer.sprite == itemHeart)
             {
-                GameManager.Instance.soundManager.ItemAudio();
+                SoundManager.Instance.ItemAudio();
                 GameManager.Instance.ItemHeart();
                 Destroy(gameObject);
             }
@@ -71,7 +71,7 @@ public class Item : MonoBehaviour
             
             else if (spriteRenderer.sprite == itemLightning)
             {
-                GameManager.Instance.soundManager.LightningAudio();
+                SoundManager.Instance.LightningAudio();
                 GameManager.Instance.StartCoroutine("SpawnLightning");
             }
 

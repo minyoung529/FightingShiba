@@ -38,7 +38,7 @@ public class BackgroundMove : MonoBehaviour
         yield return new WaitForSeconds(tiredTime);
         meshRenderer.material = bright;
 
-        if(GameManager.Instance.uiManager.EnemyHP() == 160)
+        if(GameManager.Instance.UIManager.EnemyHP() == 160)
         {
             meshRenderer.material = red;
         }

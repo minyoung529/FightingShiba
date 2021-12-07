@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : MonoSingleton<SoundManager>
 {
     [SerializeField]
     private AudioClip Mainbgm;
@@ -25,6 +25,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
+
         audioSource = GetComponent<AudioSource>();
 
         if(PlayerPrefs.GetString("First") != "true")

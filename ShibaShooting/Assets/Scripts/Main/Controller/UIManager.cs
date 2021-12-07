@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class UIManager : MonoBehaviour
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField] private Text textDelayTime;
-    [SerializeField] private GameObject textDelayTimeObj;
 
     [Header("딜레이 타임 텍스트")]
     [SerializeField]
@@ -41,9 +41,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite itemTired;
     [SerializeField] private SpriteRenderer item;
 
-    [Header("음악")]
-    [SerializeField]
-    private AudioSource music;
+    [Header("튜토리얼")]
+    public Text characterName, characterSpeech;
+    public GameObject textBox;
+    public GameObject[] characters = new GameObject[(int)CharacterType.Count];
 
     private int score = 0;
     private int highScore = 0;
@@ -54,9 +55,8 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        highScore = PlayerPrefs.GetInt("HIGHSCORE", 500);
-        coin = PlayerPrefs.GetInt("COIN", 0);
-        PlayerPrefs.SetInt("Score", 0);
+        highScore = GameManager.Instance.CurrentUser.GetHighScore();
+        coin = GameManager.Instance.CurrentUser.GetCoin();
 
         UpdateUI();
     }
@@ -132,16 +132,16 @@ public class UIManager : MonoBehaviour
 
     public void AddScore(int addScore)
     {
-        this.score += addScore;
+        score += addScore;
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetInt("HIGHSCORE", highScore);
+            GameManager.Instance.CurrentUser.SetHighScore(highScore);
         }
         UpdateUI();
     }
 
-    public void TutorialStop()
+    public void InactiveTutorial()
     {
         tutorialPopup.SetActive(true);
     }
@@ -162,10 +162,10 @@ public class UIManager : MonoBehaviour
     {
         if (isStop) return;
         isStop = true;
-        GameManager.Instance.soundManager.ButtonAudio();
+        SoundManager.Instance.ButtonAudio();
         GameManager.Instance.StopGame();
         stopPopUp.SetActive(true);
-        textDelayTimeObj.SetActive(false);
+        textDelayTime.gameObject.SetActive(false);
     }
 
     public bool GetIsStop()
@@ -177,10 +177,10 @@ public class UIManager : MonoBehaviour
     {
         if (isStop) return;
         isStop = true;
-        GameManager.Instance.soundManager.ButtonAudio();
+        SoundManager.Instance.ButtonAudio();
         GameManager.Instance.StopGame();
         musicPopUp.SetActive(true);
-        textDelayTimeObj.SetActive(false);
+        textDelayTime.gameObject.SetActive(false);
     }
 
     public void OnClickMenu()
@@ -209,12 +209,12 @@ public class UIManager : MonoBehaviour
 
     private void ButtonSound()
     {
-        GameManager.Instance.soundManager.ButtonAudio();
+        SoundManager.Instance.ButtonAudio();
     }
 
     private IEnumerator ContinueDelay()
     {
-        textDelayTimeObj.SetActive(true);
+        textDelayTime.gameObject.SetActive(true);
 
         while (countTime > 0)
         {
@@ -278,5 +278,30 @@ public class UIManager : MonoBehaviour
     public void SetScore()
     {
         PlayerPrefs.SetInt("Score", score);
+    }
+
+    public void CharacterText(string charName, string charText)
+    {
+        characterName.text = string.Format(charName);
+        characterSpeech.text = "";
+        characterSpeech.DOText(charText, 1f, true).SetUpdate(true);
+    }
+
+    public void ActiveCharacterInDialogue(int index)
+    {
+        for (int i = 0; i < characters.Length; i++)
+        {
+            characters[i].SetActive(i == index);
+        }
+    }
+
+    public void ActiveDialogueBox()
+    {
+        textBox.SetActive(!textBox.activeSelf);
+    }
+
+    public string GetPreviousCharacterName()
+    {
+        return characterName.text;
     }
 }

@@ -55,8 +55,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (GameManager.Instance.uiManager.GetIsStop()) return;
-            if (PlayerPrefs.GetString("First", "true") == "true" && !GameManager.Instance.GetIsTutorial())
+            if (GameManager.Instance.UIManager.GetIsStop()) return;
+            if (GameManager.Instance.CurrentUser.GetIsCompleteTutorial() && !GameManager.Instance.tutorialManager.GetIsTutorial())
                 return;
 
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -121,7 +121,7 @@ public class PlayerMove : MonoBehaviour
             result.transform.SetParent(null);
             result.SetActive(true);
 
-            GameManager.Instance.uiManager.AddScore(4);
+            GameManager.Instance.UIManager.AddScore(4);
         }
 
         else
@@ -131,7 +131,7 @@ public class PlayerMove : MonoBehaviour
             newBullet.transform.SetParent(null);
             result = newBullet;
 
-            GameManager.Instance.uiManager.AddScore(4);
+            GameManager.Instance.UIManager.AddScore(4);
         }
         return result;
     }
@@ -140,7 +140,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (isDamaged) return;
 
-        if (collision.CompareTag("EnemyBullet"))
+        if (collision.CompareTag(ConstantManager.ENEMY_BULLET_TAG))
         {
             Destroy(collision.gameObject);
             if (isBig) return;
@@ -148,7 +148,7 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(Damage());
         }
 
-        if (collision.CompareTag("Lightning"))
+        if (collision.CompareTag(ConstantManager.LIGHTNING_TAG))
         {
             if (isBig) return;
             Vibrate();
@@ -167,7 +167,7 @@ public class PlayerMove : MonoBehaviour
     public IEnumerator Damage()
     {
         isDamaged = true;
-        GameManager.Instance.soundManager.DamagedAudio();
+        SoundManager.Instance.DamagedAudio();
         GameManager.Instance.Dead();
         for (int i = 0; i < 5; i++)
         {
@@ -187,13 +187,13 @@ public class PlayerMove : MonoBehaviour
         {
 
             case "BigItem":
-                GameManager.Instance.soundManager.ItemAudio();
+                SoundManager.Instance.ItemAudio();
                 StartCoroutine(ItemBig());
                 break;
 
             case "SmallItem":
                 isItem = true;
-                GameManager.Instance.soundManager.ItemAudio();
+                SoundManager.Instance.ItemAudio();
                 StartCoroutine(ItemSmall());
                 break;
 
@@ -251,7 +251,7 @@ public class PlayerMove : MonoBehaviour
     {
         isItem = true;
 
-        GameManager.Instance.soundManager.Slow();
+        SoundManager.Instance.Slow();
         Time.timeScale = 0.5f;
         yield return new WaitForSeconds((slowTime - 2f)/2);
 
@@ -264,7 +264,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         Time.timeScale = 1f;
-        GameManager.Instance.soundManager.DefaultSpeed();
+        SoundManager.Instance.DefaultSpeed();
         isItem = false;
         yield break;
     }

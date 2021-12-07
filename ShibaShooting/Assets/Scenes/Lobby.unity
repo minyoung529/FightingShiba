@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 136887182}
   - component: {fileID: 136887181}
   m_Layer: 5
-  m_Name: OptionButton (1)
+  m_Name: InfoButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1637,7 +1637,7 @@ RectTransform:
   - {fileID: 1373730216}
   - {fileID: 136887180}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1794,7 +1794,7 @@ Transform:
   m_LocalScale: {x: 1.1819563, y: 1.1819563, z: 1.1401938}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -21.468}
 --- !u!114 &763938565
 MonoBehaviour:
@@ -2662,60 +2662,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178697026}
   m_CullTransparentMesh: 1
---- !u!1 &1184112581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1184112582}
-  - component: {fileID: 1184112583}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1184112582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184112581}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5304058, y: -0.013302356, z: -71.9739}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1184112583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184112581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b7410b921640554788ba1e423aa898f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuitPopUp: {fileID: 0}
-  settingPopup: {fileID: 0}
-  infoPopup: {fileID: 0}
-  resetPopup: {fileID: 0}
-  resetOKPopup: {fileID: 0}
-  volumeController: {fileID: 0}
-  audioSource: {fileID: 0}
-  infoSound: {fileID: 0}
-  buttonSound: {fileID: 0}
-  vibrate: {fileID: 0}
-  vibButton: {fileID: 0}
 --- !u!1 &1208149585
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,7 +2754,7 @@ GameObject:
   - component: {fileID: 1230079245}
   - component: {fileID: 1230079248}
   m_Layer: 0
-  m_Name: "\u3134"
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3250,7 +3196,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299607932
 GameObject:
@@ -4737,7 +4683,7 @@ RectTransform:
   - {fileID: 1267406626}
   - {fileID: 556369236}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

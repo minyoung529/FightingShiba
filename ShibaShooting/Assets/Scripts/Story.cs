@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class Story : MonoBehaviour
 {
-    [SerializeField] private Image s1, s2, s3, s4, s5, s6;
+     private Image s1, s2, s3, s4, s5, s6;
     private float delayTime = 3;
     private Image[] stories;
 
@@ -49,7 +49,7 @@ public class Story : MonoBehaviour
             yield return new WaitForSeconds(delayTime);
         }
 
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
     }
 
     private IEnumerator Vibrate()
@@ -62,6 +62,6 @@ public class Story : MonoBehaviour
     }
     public void OnClickSkip()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
     }
 }

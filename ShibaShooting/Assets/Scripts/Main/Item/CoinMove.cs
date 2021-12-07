@@ -8,17 +8,24 @@ public class CoinMove : BulletMove
     protected override void Update()
     {
         transform.Translate(Vector2.left * Time.deltaTime * coinSpeed);
-        if (transform.position.x < GameManager.Instance.MinPosition.x - 2f)
-            Destroy(gameObject);
+        PoolObject();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag(ConstantManager.PLAYER_TAG))
         {
-            GameManager.Instance.soundManager.CoinAudio();
-            GameManager.Instance.uiManager.AddCoin(1);
-            Destroy(gameObject);
+            SoundManager.Instance.CoinAudio();
+            GameManager.Instance.UIManager.AddCoin(1);
+            PoolObject();
+        }
+    }
+
+    private void PoolObject()
+    {
+        if (transform.position.x < GameManager.Instance.MinPosition.x - 2f)
+        {
+            transform.SetParent(GameManager.Instance.poolManager.transform);
         }
     }
 }

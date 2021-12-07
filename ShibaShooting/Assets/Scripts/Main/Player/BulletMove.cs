@@ -43,9 +43,9 @@ public class BulletMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag(ConstantManager.ENEMY_BULLET_TAG))
         {
-            GameManager.Instance.uiManager.AddScore(5);
+            GameManager.Instance.UIManager.AddScore(5);
         }
     }
 }

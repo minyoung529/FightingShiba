@@ -36,11 +36,11 @@ public class GameoverManager : MonoBehaviour
     }
     public void OnClickStart()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
     }
 
     public void OnClickLobby()
     {
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene(ConstantManager.LOBBY_SCENE);
     }
 }

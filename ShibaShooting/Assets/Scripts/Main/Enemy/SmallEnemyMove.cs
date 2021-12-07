@@ -32,7 +32,7 @@ public class SmallEnemyMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(ConstantManager.PLAYER_TAG))
         {
             if(GameManager.Instance.playerMove.ReturnIsBig())
             {
@@ -44,7 +44,7 @@ public class SmallEnemyMove : MonoBehaviour
             GameManager.Instance.playerMove.StartCoroutine("Damage");
         }
 
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag(ConstantManager.BULLET_TAG))
         {
             hp--;
             StartCoroutine(Damage());

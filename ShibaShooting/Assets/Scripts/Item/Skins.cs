@@ -25,7 +25,7 @@ public class Skins : MonoBehaviour
 
     public void ChangeSprite()
     {
-        if (gameObject.transform == contents.transform.GetChild(0))
+        if (transform == contents.transform.GetChild(0))
         {
             image.color = new Color(1f, 1f, 1f, 1f);
             crtShiba = "isIdle";

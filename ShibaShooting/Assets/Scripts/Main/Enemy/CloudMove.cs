@@ -25,7 +25,7 @@ public class CloudMove : MonoBehaviour
 
         if (!isEnd)
         {
-            if (GameManager.Instance.uiManager.ReturnScore() > 2700 && transform.position.x < RandomNumber())
+            if (GameManager.Instance.UIManager.ReturnScore() > 2700 && transform.position.x < RandomNumber())
             {
                 rigid.gravityScale = 1f;
                 col.enabled = true;
@@ -42,7 +42,7 @@ public class CloudMove : MonoBehaviour
             rigid.velocity = Vector2.zero;
         }
 
-        if(GameManager.Instance.uiManager.EnemyHP()==160)
+        if(GameManager.Instance.UIManager.EnemyHP()==160)
         {
             spriteRenderer.color = new Color(0, 0, 0, 1);
         }
