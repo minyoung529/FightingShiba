@@ -1,6 +1,6 @@
 ﻿{
-    "highScore": 0,
+    "highScore": 1643,
     "coin": 0,
-    "isCompleteTutorial": false,
+    "isCompleteTutorial": true,
     "isVibrate": false
 }

@@ -64,7 +64,10 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (isDead) return;
+        if (isDead)
+        {
+            return;
+        }
 
         if (transform.position.x >= 6.5f)
         {
@@ -103,7 +106,7 @@ public class EnemyMove : MonoBehaviour
                 SoundManager.Instance.BossBGM();
             }
 
-            if (hp % 30 == 0 || hp > 29)
+            if (hp % 30 == 0 && hp > 29)
             {
                 GameManager.Instance.StartCoroutine("SpawnSmallEnemy");
             }
@@ -151,7 +154,7 @@ public class EnemyMove : MonoBehaviour
     protected virtual GameObject InstantiateOrPool()
     {
         GameObject result = null;
-
+        Debug.Log("Fire");
         if (GameManager.Instance.poolManager.IsInPoolObject(enemyBulletPrefab.name))
         {
             result = GameManager.Instance.poolManager.GetPoolObject(enemyBulletPrefab.name);

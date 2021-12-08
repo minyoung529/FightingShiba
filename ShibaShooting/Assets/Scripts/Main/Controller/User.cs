@@ -5,6 +5,7 @@ public class User
     [SerializeField] private int highScore;
     [SerializeField] private int coin;
     [SerializeField] private bool isCompleteTutorial;
+
     public bool isVibrate;
 
     public void SetIsCompleteTutorial(bool isComplete)
@@ -20,6 +21,7 @@ public class User
     {
         return highScore;
     }
+
     public void SetHighScore(int highScore)
      => this.highScore = highScore;
 

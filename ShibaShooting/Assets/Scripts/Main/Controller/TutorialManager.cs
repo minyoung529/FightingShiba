@@ -97,14 +97,13 @@ public class TutorialManager : MonoBehaviour
     {
         GameManager.Instance.UIManager.ActiveDialogueBox();
 
-        GameManager.Instance.CurrentUser.SetIsCompleteTutorial(true);
-        SetIsTutorial(false);
-
         Time.timeScale = 1f;
         GameManager.Instance.SetLife(ConstantManager.PLAYER_FIRST_LIFE);
+        GameManager.Instance.CurrentUser.SetIsCompleteTutorial(true);
 
         SoundManager.Instance.EndTutorial();
 
+        isTutorial = false;
         enabled = false;
     }
 

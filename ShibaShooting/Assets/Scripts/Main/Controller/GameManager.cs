@@ -45,7 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int Life { get; private set; } = 3;
 
-    public PoolManager poolManager { get; private set; }
+    public PoolManager poolManager;
     public UIManager UIManager { get; private set; }
     public PlayerMove playerMove { get; private set; }
     public TutorialManager tutorialManager { get; private set; }
@@ -352,5 +352,15 @@ public class GameManager : MonoSingleton<GameManager>
     public void SetTutorialManager(TutorialManager tutorialManager)
     {
         this.tutorialManager = tutorialManager;
+    }
+
+    public void SetPoolManager(PoolManager poolManager)
+    {
+        this.poolManager = poolManager;
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveToJson();
     }
 }

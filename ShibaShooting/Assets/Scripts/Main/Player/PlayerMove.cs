@@ -60,18 +60,22 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             if (GameManager.Instance.UIManager.GetIsStop()) return;
-            if (GameManager.Instance.CurrentUser.GetIsCompleteTutorial() && !GameManager.Instance.tutorialManager.GetIsTutorial())
+            if (!GameManager.Instance.CurrentUser.GetIsCompleteTutorial() && GameManager.Instance.tutorialManager.GetIsTutorial())
                 return;
 
-            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            targetPosition.x = Mathf.Clamp(targetPosition.x, GameManager.Instance.MinPosition.x, GameManager.Instance.MaxPosition.x);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, GameManager.Instance.MinPosition.y, GameManager.Instance.MaxPosition.y);
-
-            transform.localPosition =
-            Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
-
+            Move();
         }
+    }
+
+    private void Move()
+    {
+        targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        targetPosition.x = Mathf.Clamp(targetPosition.x, GameManager.Instance.MinPosition.x, GameManager.Instance.MaxPosition.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, GameManager.Instance.MinPosition.y, GameManager.Instance.MaxPosition.y);
+
+        transform.localPosition =
+        Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
     }
 
     private void ChangeSkin()
@@ -118,25 +122,21 @@ public class PlayerMove : MonoBehaviour
     {
         GameObject result = null;
 
-        if (GameManager.Instance.poolManager.transform.childCount > 0)
+        if (GameManager.Instance.poolManager.IsInPoolObject(bulletPrefab.name))
         {
-            result = GameManager.Instance.poolManager.transform.GetChild(0).gameObject;
-            result.transform.position = bulletPosition.position;
-            result.transform.SetParent(null);
-            result.SetActive(true);
-
-            GameManager.Instance.UIManager.AddScore(4);
+            result = GameManager.Instance.poolManager.GetPoolObject(bulletPrefab.name);
         }
 
         else
         {
-            GameObject newBullet = Instantiate(bulletPrefab, bulletPosition);
-            newBullet.transform.position = bulletPosition.position;
-            newBullet.transform.SetParent(null);
-            result = newBullet;
-
-            GameManager.Instance.UIManager.AddScore(4);
+            result = Instantiate(bulletPrefab, bulletPosition);
         }
+
+        result.transform.position = bulletPosition.position;
+        result.transform.SetParent(null);
+        GameManager.Instance.UIManager.AddScore(4);
+        result.SetActive(true);
+
         return result;
     }
 
@@ -146,6 +146,7 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.CompareTag(ConstantManager.ENEMY_BULLET_TAG))
         {
+            Debug.Log(collision.gameObject.name);
             Destroy(collision.gameObject);
             if (isBig) return;
             Vibrate();

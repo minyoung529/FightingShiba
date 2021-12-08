@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
+    private void Awake()
+    {
+        GameManager.Instance.SetPoolManager(this);
+    }
     //원하는 타입을 풀링된 오브젝트에서 꺼내는 함수
     public T GetPoolObject<T>(string objName)
     {
@@ -23,9 +27,11 @@ public class PoolManager : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).name.Equals(objName))
+            GameObject obj = transform.GetChild(i).gameObject;
+
+            if (obj.name.Contains(objName))
             {
-                return transform.GetChild(i).gameObject;
+                return obj;
             }
         }
 
@@ -37,7 +43,9 @@ public class PoolManager : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).name.Equals(objName))
+            GameObject obj = transform.GetChild(i).gameObject;
+
+            if (obj.name.Contains(objName))
             {
                 return true;
             }
