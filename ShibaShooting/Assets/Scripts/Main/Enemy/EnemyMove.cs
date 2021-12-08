@@ -87,9 +87,8 @@ public class EnemyMove : MonoBehaviour
         if (collision.CompareTag(ConstantManager.BULLET_TAG))
         {
             if (isDamaged) return;
-            isDamaged = true;
-            SoundManager.Instance.Bullet();
-            GameManager.Instance.UIManager.EnemyHPBar(1);
+
+            OnDamaged();
             collision.gameObject.SetActive(false);
             collision.transform.SetParent(GameManager.Instance.poolManager.transform, false);
             StartCoroutine(Damaged());
@@ -115,8 +114,15 @@ public class EnemyMove : MonoBehaviour
         hp--;
         spriteRenderer.material.SetColor("_Color", new Color(0.5f, 0.5f, 0.5f, 0f));
         yield return new WaitForSeconds(0.1f);
-        spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+        spriteRenderer.material.SetColor("_Color", Color.clear);
         isDamaged = false;
+    }
+
+    private void OnDamaged()
+    {
+        isDamaged = true;
+        SoundManager.Instance.Bullet();
+        GameManager.Instance.UIManager.EnemyHPBar(1);
     }
 
     private IEnumerator EnemyFire()

@@ -67,58 +67,9 @@ public class UIManager : MonoBehaviour
 
     public void ActiveHeart()
     {
-        if (GameManager.Instance.Life == 5)
+        for (int i = 0; i < ConstantManager.PLAYER_FULL_LIFE; i++)
         {
-            for (int i = 1; i <= 5; i++)
-            {
-                hearts.transform.GetChild(i).gameObject.SetActive(true);
-            }
-        }
-
-        else if (GameManager.Instance.Life == 4)
-        {
-            for (int i = 1; i <= 4; i++)
-            {
-                hearts.transform.GetChild(i).gameObject.SetActive(true);
-            }
-
-            hearts.transform.GetChild(5).gameObject.SetActive(false);
-        }
-
-        else if (GameManager.Instance.Life == 3)
-        {
-            for (int i = 1; i <= 3; i++)
-            {
-                hearts.transform.GetChild(i).gameObject.SetActive(true);
-            }
-
-            for (int i = 5; i >= 4; i--)
-            {
-                hearts.transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
-
-        else if (GameManager.Instance.Life == 2)
-        {
-            for (int i = 1; i <= 2; i++)
-            {
-                hearts.transform.GetChild(i).gameObject.SetActive(true);
-            }
-
-            for (int i = 5; i >= 3; i--)
-            {
-                hearts.transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
-
-        else if (GameManager.Instance.Life == 1)
-        {
-            hearts.transform.GetChild(1).gameObject.SetActive(true);
-
-            for (int i = 5; i >= 2; i--)
-            {
-                hearts.transform.GetChild(i).gameObject.SetActive(false);
-            }
+            hearts.transform.GetChild(i).gameObject.SetActive(i < GameManager.Instance.Life);
         }
     }
 

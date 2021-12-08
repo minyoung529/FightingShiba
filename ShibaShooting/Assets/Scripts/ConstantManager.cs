@@ -13,4 +13,5 @@ public static class ConstantManager
     public const string UI_SCENE = "UI";
 
     public const int PLAYER_FIRST_LIFE = 3;
+    public const int PLAYER_FULL_LIFE = 5;
 }

@@ -12,15 +12,13 @@ public class TutorialManager : MonoBehaviour
     private int tutorialCount;
     private int moveIndex = 10;
 
-    public int testCnt = 0;
-
     CharacterType characterType;
 
     private void Awake()
     {
         GameManager.Instance.SetTutorialManager(this);
     }
-    
+
     private void Start()
     {
         if (GameManager.Instance.CurrentUser.GetIsCompleteTutorial())
@@ -38,10 +36,6 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.L))
-        {
-            testCnt++;
-        }
         if (Input.GetMouseButtonUp(0) && !isTutorial)
         {
             tutorialCount++;
@@ -66,11 +60,12 @@ public class TutorialManager : MonoBehaviour
         isTutorial = false;
         CharacterText();
         GameManager.Instance.UIManager.ActiveDialogueBox();
-
     }
 
     private IEnumerator Tutorial_Move()
     {
+        GameManager.Instance.UIManager.ActiveDialogueBox();
+
         isTutorial = true;
         Time.timeScale = 1;
 

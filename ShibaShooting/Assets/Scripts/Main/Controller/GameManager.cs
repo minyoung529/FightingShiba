@@ -77,11 +77,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.L))
-        {
-            Debug.Log(tutorialManager.testCnt);
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape) && user.GetIsCompleteTutorial())
         {
             UIManager.InactiveTutorial();
