@@ -130,6 +130,7 @@ public class EnemyMove : MonoBehaviour
 
     private GameObject Fire(GameObject bullet)
     {
+        Debug.Log("Fire");
         diff = GameManager.Instance.playerMove.transform.position - transform.position;
         diff.Normalize();
 
@@ -143,7 +144,6 @@ public class EnemyMove : MonoBehaviour
 
     protected virtual GameObject InstantiateOrPool()
     {
-
         GameObject result = null;
 
         if (GameManager.Instance.poolManager.IsInPoolObject(enemyBulletPrefab.name))

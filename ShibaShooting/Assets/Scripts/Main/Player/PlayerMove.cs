@@ -40,6 +40,10 @@ public class PlayerMove : MonoBehaviour
 
     private string crtShiba;
 
+    private void Awake()
+    {
+        GameManager.Instance.SetPlayerMove(this);
+    }
     void Start()
     {
         crtShiba = PlayerPrefs.GetString("Shiba", "isIdle");

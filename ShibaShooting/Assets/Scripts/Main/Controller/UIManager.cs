@@ -20,16 +20,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text textDelayTime;
 
     [Header("딜레이 타임 텍스트")]
-    [SerializeField]
-    private Slider enemyHPBar;
+    [SerializeField] private Slider enemyHPBar;
 
     [Header("점수")]
-    [SerializeField]
-    private Text textScore = null;
-    [SerializeField]
-    private Text textHighScore = null;
-    [SerializeField]
-    private Text textCoin = null;
+    [SerializeField] private Text textScore = null;
+    [SerializeField] private Text textHighScore = null;
+    [SerializeField] private Text textCoin = null;
 
     [Header("아이템 스프라이트")]
     [SerializeField] private Sprite[] itemSprites;
@@ -40,6 +36,9 @@ public class UIManager : MonoBehaviour
     public GameObject textBox;
     public GameObject[] characters = new GameObject[(int)CharacterType.Count];
 
+    [Header("캔버스")]
+    [SerializeField] private Canvas[] canvases;
+
     private int score = 0;
     private int highScore = 0;
     private int countTime = 3;
@@ -49,8 +48,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         highScore = GameManager.Instance.CurrentUser.GetHighScore();
-
         UpdateUI();
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -180,7 +179,7 @@ public class UIManager : MonoBehaviour
     public void OnClickMenu()
     {
         ButtonSound();
-        SceneManager.LoadScene(ConstantManager.LOBBY_SCENE);
+        GoToScene(SceneType.Lobby);
     }
 
     public void OnClickNewGame()
@@ -188,7 +187,7 @@ public class UIManager : MonoBehaviour
         isStop = false;
         ButtonSound();
         stopPopUp.SetActive(false);
-        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
+        GoToScene(SceneType.Main);
         GameManager.Instance.ContinueGame();
     }
 
@@ -275,15 +274,34 @@ public class UIManager : MonoBehaviour
 
         if (GameManager.Instance.CurrentUser.GetIsCompleteTutorial())
         {
-            SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
+            GoToScene(SceneType.Main);
         }
 
         else
         {
-            SceneManager.LoadScene(ConstantManager.STORY_SCENE);
+            GoToScene(SceneType.Story);
         }
-
-        SceneManager.LoadScene(ConstantManager.UI_SCENE, LoadSceneMode.Additive);
     }
     #endregion
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void GoToScene(SceneType sceneType)
+    {
+        SceneManager.LoadScene(sceneType.ToString());
+        GameManager.Instance.FindControllerObjects();
+
+        for (int i = 0; i < canvases.Length; i++)
+        {
+            canvases[i].gameObject.SetActive(i == (int)sceneType);
+        }
+    }
+
+    public void OnClickStorySkip()
+    {
+        GoToScene(SceneType.Main);
+    }
 }

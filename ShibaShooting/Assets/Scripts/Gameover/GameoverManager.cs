@@ -34,13 +34,4 @@ public class GameoverManager : MonoBehaviour
         highScoreText.text = string.Format("HIGHSCORE\n{0}", PlayerPrefs.GetInt("HIGHSCORE"));
         scoreText.text = string.Format("SCORE\n{0}", PlayerPrefs.GetInt("Score"));
     }
-    public void OnClickStart()
-    {
-        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
-    }
-
-    public void OnClickLobby()
-    {
-        SceneManager.LoadScene(ConstantManager.LOBBY_SCENE);
-    }
 }

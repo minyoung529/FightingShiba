@@ -1,5 +1,6 @@
 ﻿{
     "highScore": 0,
     "coin": 0,
-    "isCompleteTutorial": false
+    "isCompleteTutorial": false,
+    "isVibrate": false
 }

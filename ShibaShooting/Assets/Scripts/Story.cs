@@ -7,49 +7,31 @@ using DG.Tweening;
 
 public class Story : MonoBehaviour
 {
-     private Image s1, s2, s3, s4, s5, s6;
     private float delayTime = 3;
+    [SerializeField]
     private Image[] stories;
 
-    void Start()
+    private void OnEnable()
     {
         StartCoroutine(StoryTelling());
     }
 
-    private void SetupStories()
-    {
-        stories = new Image[6];
-        stories[0] = s1;
-        stories[1] = s2;
-        stories[2] = s3;
-        stories[3] = s4;
-        stories[4] = s5;
-        stories[5] = s6;
-    }
-
     private IEnumerator StoryTelling()
     {
-        SetupStories();
-
-        if(PlayerPrefs.GetString("V", "true") == "true")
+        if (GameManager.Instance.CurrentUser.isVibrate)
         {
             StartCoroutine(Vibrate());
         }
 
         yield return new WaitForSeconds(delayTime);
 
-        for (int i = 0; i<stories.Length; i++)
+        for (int i = 0; i < stories.Length; i++)
         {
-            if(i==stories.Length)
-            {
-                break;
-            }
-
             stories[i].DOFade(0, 0.25f);
             yield return new WaitForSeconds(delayTime);
         }
 
-        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
+        GameManager.Instance.UIManager.GoToScene(SceneType.Main);
     }
 
     private IEnumerator Vibrate()
@@ -62,6 +44,6 @@ public class Story : MonoBehaviour
     }
     public void OnClickSkip()
     {
-        SceneManager.LoadScene(ConstantManager.MAIN_SCENE);
+        GameManager.Instance.UIManager.GoToScene(SceneType.Main);
     }
 }

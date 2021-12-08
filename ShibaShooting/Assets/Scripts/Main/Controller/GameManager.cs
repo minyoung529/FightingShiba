@@ -1,7 +1,6 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
@@ -41,7 +40,6 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField]
     private GameObject dark;
 
-
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
@@ -55,18 +53,45 @@ public class GameManager : MonoSingleton<GameManager>
     private string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
 
-    private int cnt = 0;
     private int lifeCount = 3;
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
+
         CreateSaveFile();
         LoadFromJson();
+    }
 
-        poolManager = FindObjectOfType<PoolManager>();
-        UIManager = FindObjectOfType<UIManager>();
-        playerMove = FindObjectOfType<PlayerMove>();
-        tutorialManager = GetComponent<TutorialManager>();
+    void Start()
+    {
+        SceneManager.LoadScene(ConstantManager.UI_SCENE, LoadSceneMode.Additive);
+        FindControllerObjects();
+
+        Time.timeScale = 1;
+
+        MinPosition = new Vector2(-9f, -4f);
+        MaxPosition = new Vector2(9f, 4f);
+    }
+
+
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.L))
+        {
+            Debug.Log(tutorialManager.testCnt);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && user.GetIsCompleteTutorial())
+        {
+            UIManager.InactiveTutorial();
+            return;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Escape) && !user.GetIsCompleteTutorial())
+        {
+            UIManager.OnClickStop();
+        }
     }
 
     #region User_Data_Save
@@ -108,30 +133,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     #endregion
 
-    void Start()
+    public void FindControllerObjects()
     {
-        SceneManager.LoadScene(ConstantManager.UI_SCENE, LoadSceneMode.Additive);
-        Time.timeScale = 1;
-
-        MinPosition = new Vector2(-9f, -4f);
-        MaxPosition = new Vector2(9f, 4f);
+        poolManager ??= FindObjectOfType<PoolManager>();
+        UIManager ??= FindObjectOfType<UIManager>();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && user.GetIsCompleteTutorial())
-        {
-            UIManager.InactiveTutorial();
-            return;
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Escape) && !user.GetIsCompleteTutorial())
-        {
-            UIManager.OnClickStop();
-        }
-
-    }
-
     public void GameStart()
     {
         StartCoroutine(SpawnItem());
@@ -156,7 +162,7 @@ public class GameManager : MonoSingleton<GameManager>
                 PlayerPrefs.SetString("GameOver", "true");
             }
 
-            SceneManager.LoadScene("GameOver");
+            //SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -322,6 +328,7 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.ActiveHeart();
     }
 
+    // Set Character Type (Enum) from name (string)
     public void SetCharacterType(ref CharacterType characterType)
     {
         switch (UIManager.GetPreviousCharacterName())
@@ -338,5 +345,17 @@ public class GameManager : MonoSingleton<GameManager>
                 characterType = CharacterType.StoreHelper;
                 break;
         }
+    }
+
+    //HACK:
+    public void SetPlayerMove(PlayerMove playerMove)
+    {
+        this.playerMove = playerMove;
+    }
+
+    //HACK:
+    public void SetTutorialManager(TutorialManager tutorialManager)
+    {
+        this.tutorialManager = tutorialManager;
     }
 }
