@@ -16,10 +16,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject tutorialPopup;
     [SerializeField] private GameObject quitPopup;
 
+    [Header("Text")]
+    [SerializeField] private GameObject warning;
+
     [Header("딜레이 타임 텍스트")]
     [SerializeField] private Text textDelayTime;
 
-    [Header("딜레이 타임 텍스트")]
+    [Header("hp")]
     [SerializeField] private Slider enemyHPBar;
 
     [Header("점수")]
@@ -58,11 +61,6 @@ public class UIManager : MonoBehaviour
         {
             quitPopup.gameObject.SetActive(!quitPopup.activeSelf);
         }
-    }
-
-    public int ReturnScore()
-    {
-        return score;
     }
 
     public void ActiveHeart()
@@ -112,10 +110,6 @@ public class UIManager : MonoBehaviour
         textDelayTime.gameObject.SetActive(false);
     }
 
-    public bool GetIsStop()
-    {
-        return isStop;
-    }
 
     public void OnClickMusic()
     {
@@ -130,6 +124,8 @@ public class UIManager : MonoBehaviour
     public void OnClickMenu()
     {
         ButtonSound();
+        GameManager.Instance.isGameOver = true;
+        stopPopUp.SetActive(false);
         GoToScene(SceneType.Lobby);
     }
 
@@ -180,10 +176,6 @@ public class UIManager : MonoBehaviour
         enemyHPBar.value += damage;
     }
 
-    public float EnemyHP()
-    {
-        return enemyHPBar.value;
-    }
 
     public void RandomItem(int randomNum)
     {
@@ -226,6 +218,7 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.CurrentUser.GetIsCompleteTutorial())
         {
             GoToScene(SceneType.Main);
+            GameManager.Instance.GameStart();
         }
 
         else
@@ -243,16 +236,51 @@ public class UIManager : MonoBehaviour
     public void GoToScene(SceneType sceneType)
     {
         SceneManager.LoadScene(sceneType.ToString());
-        GameManager.Instance.FindControllerObjects();
 
         for (int i = 0; i < canvases.Length; i++)
         {
             canvases[i].gameObject.SetActive(i == (int)sceneType);
         }
+
+        GameManager.Instance.FindControllerObjects();
     }
 
     public void OnClickStorySkip()
     {
         GoToScene(SceneType.Main);
+    }
+
+    private IEnumerator Warning()
+    {
+        warning.SetActive(true);
+        Text warn = warning.GetComponent<Text>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            warn.color = new Color(1, 0, 0, 1);
+            yield return new WaitForSeconds(0.15f);
+            warn.color = new Color(1, 1, 1, 1);
+            yield return new WaitForSeconds(0.15f);
+        }
+        warning.SetActive(false);
+    }
+    public void StartWarning()
+    {
+        StartCoroutine(Warning());
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public float GetEnemyHP()
+    {
+        return enemyHPBar.value;
+    }
+
+    public bool GetIsStop()
+    {
+        return isStop;
     }
 }

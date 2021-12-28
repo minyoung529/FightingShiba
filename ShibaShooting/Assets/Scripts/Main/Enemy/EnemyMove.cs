@@ -47,9 +47,6 @@ public class EnemyMove : MonoBehaviour
     private Sprite evolutionMinyoung;
 
     BackgroundMove back;
-
-    [SerializeField]
-    private GameObject warning;
     #endregion
 
     protected virtual void Start()
@@ -99,8 +96,8 @@ public class EnemyMove : MonoBehaviour
             if (hp == 0)
             {
                 back.ChangeToRed();
-                StartCoroutine(Warning());
-                GameManager.Instance.SetThreeHeart();
+                GameManager.Instance.UIManager.StartWarning();
+                GameManager.Instance.SetLifeCount(5);
                 GameManager.Instance.StartCoroutine("RealBossTime");
                 GameManager.Instance.StartCoroutine("DarkActive");
                 SoundManager.Instance.BossBGM();
@@ -154,7 +151,6 @@ public class EnemyMove : MonoBehaviour
     protected virtual GameObject InstantiateOrPool()
     {
         GameObject result = null;
-        Debug.Log("Fire");
         if (GameManager.Instance.poolManager.IsInPoolObject(enemyBulletPrefab.name))
         {
             result = GameManager.Instance.poolManager.GetPoolObject(enemyBulletPrefab.name);
@@ -326,23 +322,5 @@ public class EnemyMove : MonoBehaviour
         else if (hp <= -90 && hp > -91) return true;
         else if (hp <= -120 && hp > -121) return true;
         else return false;
-    }
-
-    IEnumerator Warning()
-    {
-        warning.SetActive(true);
-        Text warn = warning.GetComponent<Text>();
-
-        for (int i = 0; i < 5; i++)
-        {
-            warn.color = new Color(1, 0, 0, 1);
-            yield return new WaitForSeconds(0.15f);
-            warn.color = new Color(1, 1, 1, 1);
-            yield return new WaitForSeconds(0.15f);
-        }
-        warning.SetActive(false);
-
-        yield break;
-
     }
 }

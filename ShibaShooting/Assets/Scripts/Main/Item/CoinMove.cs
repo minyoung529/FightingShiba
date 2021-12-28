@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class CoinMove : BulletMove
 {
-    [SerializeField]
-    private float coinSpeed = 4f;
+    [SerializeField] private float coinSpeed = 4f;
 
     protected override void Update()
     {
         transform.Translate(Vector2.left * Time.deltaTime * coinSpeed);
-        PoolObject();
+        SetPoolObject();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,15 +16,15 @@ public class CoinMove : BulletMove
         {
             SoundManager.Instance.CoinAudio();
             GameManager.Instance.UIManager.AddCoin(1);
-            PoolObject();
+            GameManager.Instance.poolManager.SetPoolObject(gameObject);
         }
     }
 
-    private void PoolObject()
+    private void SetPoolObject()
     {
         if (transform.position.x < GameManager.Instance.MinPosition.x - 2f)
         {
-            transform.SetParent(GameManager.Instance.poolManager.transform);
+            GameManager.Instance.poolManager.SetPoolObject(gameObject);
         }
     }
 }

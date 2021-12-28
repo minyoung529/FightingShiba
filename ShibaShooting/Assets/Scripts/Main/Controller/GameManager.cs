@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,50 +11,39 @@ public class GameManager : MonoSingleton<GameManager>
     private User user;
     public User CurrentUser { get { return user; } }
 
-    [Header("아이템")]
-    [SerializeField]
-    private GameObject itemPrefab = null;
-    [SerializeField]
-    private GameObject coinPrefab = null;
-    [SerializeField]
-    private GameObject smallEnemy;
+    [SerializeField] List<Skin> skins = new List<Skin>();
 
-    [Header("번개")]
-    [SerializeField]
-    private GameObject lightningObj;
-    [SerializeField]
-    private Sprite defaultSprite;
-    [SerializeField]
-    private Sprite lightningSprite;
-    [SerializeField]
-    private SpriteRenderer lightningRenderer;
-    [SerializeField]
-    private Collider2D lightningcol;
+    #region InGame
+    [Header("아이템")]
+    [SerializeField]  private GameObject itemPrefab = null;
+    [SerializeField]  private GameObject coinPrefab = null;
+    [SerializeField] private GameObject smallEnemy;
 
     [Header("배경")]
-    [SerializeField]
-    private GameObject cloud;
-    [SerializeField]
-    private GameObject cloud2;
-    [SerializeField]
-    private GameObject sun;
-    [SerializeField]
-    private GameObject dark;
+    [SerializeField] private GameObject[] clouds;
+    [SerializeField] private GameObject sun;
+    [SerializeField] private GameObject dark;
 
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
 
-    public int Life { get; private set; } = 3;
+    #endregion
 
+    #region Controller
     public PoolManager poolManager;
     public UIManager UIManager { get; private set; }
     public PlayerMove playerMove { get; private set; }
     public TutorialManager tutorialManager { get; private set; }
-
+    #endregion
+   
+    #region Data
     private string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
+    #endregion
 
     private int lifeCount = 3;
+    public int Life { get; private set; } = 3;
+    public bool isGameOver = false;
 
     private void Awake()
     {
@@ -135,6 +125,8 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void GameStart()
     {
+        FindControllerObjects();
+
         StartCoroutine(SpawnItem());
         StartCoroutine(SpawnCoin());
         StartCoroutine(SpawnCloud());
@@ -147,7 +139,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (Life <= 0)
         {
-            if (UIManager.EnemyHP() == 160)
+            if (UIManager.GetEnemyHP() == 160)
             {
                 PlayerPrefs.SetString("GameOver", "false");
             }
@@ -175,13 +167,13 @@ public class GameManager : MonoSingleton<GameManager>
     {
         float randomY = 0f;
         float randomDelay = 0f;
-        int randomNum = 0;
 
-        while (true)
+        while (!isGameOver)
         {
             randomY = Random.Range(-3.5f, 3.5f);
             randomDelay = Random.Range(6f, 7f);
             yield return new WaitForSeconds(randomDelay);
+            if (isGameOver) yield break;
 
             UIManager.RandomItem(Random.Range(0, 7));
             Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
@@ -193,13 +185,23 @@ public class GameManager : MonoSingleton<GameManager>
         float randomY = 0f;
         float randomDelay = 0f;
 
-        while (true)
+        while (!isGameOver)
         {
+            yield return new WaitForSeconds(randomDelay);
+
             randomY = Random.Range(-3.5f, 3.5f);
             randomDelay = Random.Range(7f, 1f);
-
-            Instantiate(coinPrefab, new Vector2(12f, randomY), Quaternion.identity);
-            yield return new WaitForSeconds(randomDelay);
+            if (isGameOver) yield break;
+            if (poolManager.IsInPoolObject("Coin"))
+            {
+                GameObject obj = poolManager.GetPoolObject("Coin");
+                obj.SetActive(true);
+                obj.transform.position = new Vector2(12f, randomY);
+            }
+            else
+            {
+                Instantiate(coinPrefab, new Vector2(12f, randomY), Quaternion.identity);
+            }
         }
     }
 
@@ -211,7 +213,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         Instantiate(smallEnemy, new Vector2(7f, randomY), Quaternion.identity);
 
-        if (UIManager.EnemyHP() == 160)
+        if (UIManager.GetEnemyHP() == 160)
         {
             while (true)
             {
@@ -233,53 +235,16 @@ public class GameManager : MonoSingleton<GameManager>
         randomY = Random.Range(2f, 4f);
         randomDelay = Random.Range(5f, 7f);
 
-        Instantiate(cloud, new Vector2(12f, randomY - 0.2f), Quaternion.identity);
+        Instantiate(clouds[0], new Vector2(12f, randomY - 0.2f), Quaternion.identity);
         yield return new WaitForSeconds(1f);
-        Instantiate(cloud2, new Vector2(12f, randomY), Quaternion.identity);
+        Instantiate(clouds[1], new Vector2(12f, randomY), Quaternion.identity);
         yield return new WaitForSeconds(randomDelay);
         Instantiate(sun, new Vector2(12f, randomY), Quaternion.identity);
         yield return new WaitForSeconds(randomDelay);
     }
 
-    private IEnumerator SpawnLightning()
-    {
-        playerMove.DecoLightning(true);
-
-        float randomX;
-
-        for (int i = 0; i < 5; i++)
-        {
-            yield return new WaitForSeconds(1f);
-
-            lightningcol.enabled = false;
-            randomX = Random.Range(-8f, -3f);
-            lightningObj.transform.position = new Vector2(randomX, 0f);
-            lightningObj.SetActive(true);
-
-            lightningRenderer.color = new Color(1f, 1f, 1f, 0.5f);
-            lightningRenderer.sprite = defaultSprite;
-
-            yield return new WaitForSeconds(0.6f);
-
-            lightningcol.enabled = true;
-            lightningRenderer.sprite = lightningSprite;
-            lightningRenderer.color = new Color(1f, 1f, 1f, 1f);
-
-            yield return new WaitForSeconds(1f);
-
-            lightningObj.SetActive(false);
-            lightningcol.enabled = false;
-        }
-
-        playerMove.DecoLightning(false);
-        playerMove.IsItem(false);
-        yield break;
-    }
-
     public void ItemHeart()
     {
-        if (Life == lifeCount) return;
-
         if (Life < lifeCount)
         {
             Life++;
@@ -288,10 +253,10 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
 
-    public void SetThreeHeart()
+    public void SetLifeCount(int life)
     {
-        lifeCount = 5;
-        Life = 5;
+        lifeCount = life;
+        Life = life;
         UIManager.ActiveHeart();
     }
 

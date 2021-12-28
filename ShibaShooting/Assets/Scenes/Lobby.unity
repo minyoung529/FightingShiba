@@ -157,18 +157,20 @@ MonoBehaviour:
     coin: 0
     isCompleteTutorial: 0
     isVibrate: 0
+  skins:
+  - name: 
+    sprite: {fileID: 0}
+    info: 
   itemPrefab: {fileID: 5781131234313542667, guid: e0a84083140fe344ca61e973973e1b49, type: 3}
   coinPrefab: {fileID: 8374166679680285943, guid: fe417ac59516b04408cb93a3b59695a5, type: 3}
   smallEnemy: {fileID: 4999240067380030835, guid: cf921906c45318e45bc9778705783bf2, type: 3}
-  lightningObj: {fileID: 0}
-  defaultSprite: {fileID: -1461059339494140160, guid: b02d0fa2288270545ba6a8744054270e, type: 3}
-  lightningSprite: {fileID: -2983090718515566234, guid: b02d0fa2288270545ba6a8744054270e, type: 3}
-  lightningRenderer: {fileID: 0}
-  lightningcol: {fileID: 0}
-  cloud: {fileID: 5881459917966850042, guid: 9e8b398799eb2f54e8e909a7334c7599, type: 3}
-  cloud2: {fileID: 6873086254450879962, guid: dc6f3f4475d919342940f26e61bb917a, type: 3}
+  clouds:
+  - {fileID: 5881459917966850042, guid: 9e8b398799eb2f54e8e909a7334c7599, type: 3}
+  - {fileID: 6873086254450879962, guid: dc6f3f4475d919342940f26e61bb917a, type: 3}
   sun: {fileID: 9148498876592862189, guid: 28ffb3b9cec1eab46be459e9a4c5a5f4, type: 3}
   dark: {fileID: 0}
+  poolManager: {fileID: 0}
+  isGameOver: 0
 --- !u!4 &190909963
 Transform:
   m_ObjectHideFlags: 0

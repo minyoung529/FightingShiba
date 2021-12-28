@@ -53,4 +53,10 @@ public class PoolManager : MonoBehaviour
 
         return false;
     }
+
+    public void SetPoolObject(GameObject obj)
+    {
+        obj.transform.SetParent(transform);
+        obj.SetActive(false);
+    }
 }
