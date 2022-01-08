@@ -42,6 +42,11 @@ public class UIManager : MonoBehaviour
     [Header("Äµ¹ö½º")]
     [SerializeField] private Canvas[] canvases;
 
+    [Header("StorePanel")]
+    [SerializeField] private PurchasePanel purchasePanel;
+    private List<PurchasePanel> purchasePanels = new List<PurchasePanel>();
+
+
     private int score = 0;
     private int highScore = 0;
     private int countTime = 3;
@@ -53,6 +58,7 @@ public class UIManager : MonoBehaviour
         highScore = GameManager.Instance.CurrentUser.GetHighScore();
         UpdateUI();
         DontDestroyOnLoad(this);
+        InstantiatePanel();
     }
 
     private void Update()
@@ -63,6 +69,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    #region
+    private void InstantiatePanel()
+    {
+        for (int i = 0; i < GameManager.Instance.GetPurchaseItems().Count; i++)
+        {
+            Instantiate(purchasePanel.gameObject, purchasePanel.transform.parent);
+            PurchasePanel panel = purchasePanel.GetComponent<PurchasePanel>();
+            purchasePanels.Add(panel);
+            panel.Init(GameManager.Instance.GetPurchaseItems()[i]);
+        }
+    }
+    #endregion
     public void ActiveHeart()
     {
         for (int i = 0; i < ConstantManager.PLAYER_FULL_LIFE; i++)

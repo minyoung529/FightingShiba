@@ -11,12 +11,13 @@ public class GameManager : MonoSingleton<GameManager>
     private User user;
     public User CurrentUser { get { return user; } }
 
-    [SerializeField] List<Skin> skins = new List<Skin>();
+    [SerializeField] private List<PurchaseItem> skins = new List<PurchaseItem>();
+    [SerializeField] private List<PurchaseItem> items = new List<PurchaseItem>();
 
     #region InGame
     [Header("아이템")]
-    [SerializeField]  private GameObject itemPrefab = null;
-    [SerializeField]  private GameObject coinPrefab = null;
+    [SerializeField] private GameObject itemPrefab = null;
+    [SerializeField] private GameObject coinPrefab = null;
     [SerializeField] private GameObject smallEnemy;
 
     [Header("배경")]
@@ -35,7 +36,7 @@ public class GameManager : MonoSingleton<GameManager>
     public PlayerMove playerMove { get; private set; }
     public TutorialManager tutorialManager { get; private set; }
     #endregion
-   
+
     #region Data
     private string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
@@ -44,6 +45,8 @@ public class GameManager : MonoSingleton<GameManager>
     private int lifeCount = 3;
     public int Life { get; private set; } = 3;
     public bool isGameOver = false;
+
+    public Camera mainCam;
 
     private void Awake()
     {
@@ -63,7 +66,6 @@ public class GameManager : MonoSingleton<GameManager>
         MinPosition = new Vector2(-9f, -4f);
         MaxPosition = new Vector2(9f, 4f);
     }
-
 
     private void Update()
     {
@@ -327,5 +329,10 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnApplicationQuit()
     {
         SaveToJson();
+    }
+
+    public List<PurchaseItem> GetPurchaseItems()
+    {
+        return items;
     }
 }

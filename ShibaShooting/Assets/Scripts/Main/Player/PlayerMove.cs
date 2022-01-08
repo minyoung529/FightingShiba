@@ -3,30 +3,15 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private float speed = 30f;
-
-    [Header("ÃÑ¾Ë Æ÷Áö¼Ç")]
-    [SerializeField]
-    private Transform bulletPosition = null;
-    [Header("ÃÑ¾Ë ÇÁ¸®ÆÕ")]
-    [SerializeField]
-    private GameObject bulletPrefab = null;
-    private float fireRate = 0.45f;
-    [Header("À½¾Ç")]
-    [SerializeField]
-    private AudioSource music;
+    CharacterBase player;
+    
     [Header("²Ù¹Ì±â")]
-    [SerializeField]
-    private SpriteRenderer deco;
-    [SerializeField]
-    private Sprite sleep;
-    [SerializeField]
-    private Sprite lightning;
+    [SerializeField] private SpriteRenderer deco;
+    [SerializeField] private Sprite sleep;
+    [SerializeField] private Sprite lightning;
 
     private Vector2 targetPosition = Vector2.zero;
     public BackgroundMove backMove { get; private set; }
-    private SpriteRenderer spriteRenderer = null;
-    private Animator animator = null;
 
     private bool isDamaged = false;
     private bool isBig = false;
@@ -46,36 +31,27 @@ public class PlayerMove : MonoBehaviour
     }
     void Start()
     {
+        player = GetComponent<CharacterBase>();
         crtShiba = PlayerPrefs.GetString("Shiba", "isIdle");
         backMove = FindObjectOfType<BackgroundMove>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        StartCoroutine(Fire());
         SetCoolTime();
         ChangeSkin();
+
+        InputEventManager.StartListening("MOVE", Move);
     }
 
-    void Update()
+    private void Move(EventParam eventParam)
     {
-        if (Input.GetMouseButton(0))
-        {
-            if (GameManager.Instance.UIManager.GetIsStop()) return;
-            if (!GameManager.Instance.CurrentUser.GetIsCompleteTutorial() && GameManager.Instance.tutorialManager.GetIsTutorial())
-                return;
+        if (GameManager.Instance.UIManager.GetIsStop()) return;
+        if (!GameManager.Instance.CurrentUser.GetIsCompleteTutorial() && GameManager.Instance.tutorialManager.GetIsTutorial()) return;
 
-            Move();
-        }
-    }
-
-    private void Move()
-    {
-        targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        targetPosition = eventParam.vectorParam;
 
         targetPosition.x = Mathf.Clamp(targetPosition.x, GameManager.Instance.MinPosition.x, GameManager.Instance.MaxPosition.x);
         targetPosition.y = Mathf.Clamp(targetPosition.y, GameManager.Instance.MinPosition.y, GameManager.Instance.MaxPosition.y);
 
         transform.localPosition =
-        Vector2.MoveTowards(transform.localPosition, targetPosition, speed * Time.deltaTime);
+        Vector2.MoveTowards(transform.localPosition, targetPosition, player.speed * Time.deltaTime);
     }
 
     private void ChangeSkin()
@@ -85,61 +61,31 @@ public class PlayerMove : MonoBehaviour
         switch (crtShiba)
         {
             case "isIdle":
-                animator.Play("Idle_Shiba");
+                player.animator.Play("Idle_Shiba");
                 break;
 
             case "isStrawberry":
-                animator.Play("Strawberry_Shiba");
+                player.animator.Play("Strawberry_Shiba");
                 break;
 
             case "isMint":
-                animator.Play("Mint_Shiba");
+                player.animator.Play("Mint_Shiba");
                 break;
 
             case "isDevil":
-                animator.Play("Devil_Shiba");
+                player.animator.Play("Devil_Shiba");
                 break;
 
             case "isAngel":
-                animator.Play("Angel_Shiba");
+                player.animator.Play("Angel_Shiba");
                 break;
 
             case "isMelona":
-                animator.Play("Melona_Shiba");
+                player.animator.Play("Melona_Shiba");
                 break;
         }
     }
-    private IEnumerator Fire()
-    {
-        while (true)
-        {
-            InstantiateOrPool();
-            yield return new WaitForSeconds(fireRate);
-        }
-    }
-
-    private GameObject InstantiateOrPool()
-    {
-        GameObject result = null;
-
-        if (GameManager.Instance.poolManager.IsInPoolObject(bulletPrefab.name))
-        {
-            result = GameManager.Instance.poolManager.GetPoolObject(bulletPrefab.name);
-        }
-
-        else
-        {
-            result = Instantiate(bulletPrefab, bulletPosition);
-        }
-
-        result.transform.position = bulletPosition.position;
-        result.transform.SetParent(null);
-        GameManager.Instance.UIManager.AddScore(4);
-        result.SetActive(true);
-
-        return result;
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDamaged) return;
@@ -176,9 +122,9 @@ public class PlayerMove : MonoBehaviour
         GameManager.Instance.Dead();
         for (int i = 0; i < 5; i++)
         {
-            spriteRenderer.enabled = false;
+            player.spriteRenderer.enabled = false;
             yield return new WaitForSeconds(0.2f);
-            spriteRenderer.enabled = true;
+            player.spriteRenderer.enabled = true;
             yield return new WaitForSeconds(0.2f);
         }
 
@@ -218,9 +164,9 @@ public class PlayerMove : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
             yield return new WaitForSeconds(0.2f);
-            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
             yield return new WaitForSeconds(0.2f);
         }
 
@@ -240,9 +186,9 @@ public class PlayerMove : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
             yield return new WaitForSeconds(0.2f);
-            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
             yield return new WaitForSeconds(0.2f);
         }
 
@@ -258,13 +204,13 @@ public class PlayerMove : MonoBehaviour
 
         SoundManager.Instance.Slow();
         Time.timeScale = 0.5f;
-        yield return new WaitForSeconds((slowTime - 2f)/2);
+        yield return new WaitForSeconds((slowTime - 2f) / 2);
 
         for (int i = 0; i < 5; i++)
         {
-            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
             yield return new WaitForSeconds(0.1f);
-            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -279,21 +225,21 @@ public class PlayerMove : MonoBehaviour
         isTired = true;
         deco.enabled = true;
         deco.sprite = sleep;
-        speed = 7f;
+        player.speed = 7f;
 
         yield return new WaitForSeconds(tiredTime - 2f);
 
         for (int i = 0; i < 5; i++)
         {
-            spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0.2f, 0.2f, 0.2f, 0f));
             deco.enabled = false;
             yield return new WaitForSeconds(0.2f);
             deco.enabled = true;
-            spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+            player.spriteRenderer.material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
             yield return new WaitForSeconds(0.2f);
         }
 
-        speed = 30f;
+        player.speed = 30f;
         deco.enabled = false;
         isItem = false;
         isTired = false;
@@ -332,5 +278,10 @@ public class PlayerMove : MonoBehaviour
         smallTime = PlayerPrefs.GetFloat("smallTime", 5);
         slowTime = PlayerPrefs.GetFloat("slowTime", 5);
         tiredTime = PlayerPrefs.GetFloat("tiredTime", 7);
+    }
+
+    private void OnDestroy()
+    {
+        InputEventManager.StopListening("MOVE", Move);
     }
 }
