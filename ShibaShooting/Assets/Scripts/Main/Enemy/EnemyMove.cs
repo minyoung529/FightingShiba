@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using DG.Tweening;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -8,8 +8,7 @@ public class EnemyMove : MonoBehaviour
     private float hp = 160;
 
     [Header("Enemy 빠르기")]
-    [SerializeField]
-    protected float speed = 5f;
+    [SerializeField] protected float speed = 5f;
 
     private bool isDamaged = false;
     protected bool isDead = false;
@@ -18,8 +17,7 @@ public class EnemyMove : MonoBehaviour
     private SpeechBubble speechBubble = null;
 
     [Header("총알 딜레이")]
-    [SerializeField]
-    private float fireRate = 1f;
+    [SerializeField] private float fireRate = 1f;
 
     private float circleTimer = 0f;
     private float randomTimer = 0f;
@@ -29,22 +27,12 @@ public class EnemyMove : MonoBehaviour
     private float rotationZ = 0f;
 
     [Header("적 생성시 필요한 변수")]
-    [SerializeField]
-    private Transform enemyBulletPosition = null;
-    [SerializeField]
-    private GameObject enemyBulletPrefab = null;
+    [SerializeField] private Transform enemyBulletPosition = null;
+    [SerializeField] private GameObject enemyBulletPrefab = null;
 
     [Header("스프라이트")]
-    [SerializeField]
-    private Sprite firstMinyoung;
-    [SerializeField]
-    private Sprite secondMinyoung;
-    [SerializeField]
-    private Sprite thirdMinyoung;
-    [SerializeField]
-    private Sprite fourthMinyoung;
-    [SerializeField]
-    private Sprite evolutionMinyoung;
+    [SerializeField] Sprite[] minyoungSprites;
+    [SerializeField] private Sprite evolutionMinyoung;
 
     BackgroundMove back;
     #endregion
@@ -57,26 +45,33 @@ public class EnemyMove : MonoBehaviour
         speechBubble = FindObjectOfType<SpeechBubble>();
 
         StartCoroutine(EnemyFire());
+        StartCoroutine(MoveUpDown());
     }
 
     protected virtual void Update()
     {
-        if (isDead)
-        {
-            return;
-        }
+        if (isDead) return;
 
         if (transform.position.x >= 6.5f)
-        {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
-        }
 
         if (!GameManager.Instance.tutorialManager.GetIsTutorial())
-        {
             EnemyAttack();
-        }
 
         ChangeSprite();
+    }
+
+    private IEnumerator MoveUpDown()
+    {
+        float second = 0.7f;
+        float distance = 0.7f;
+        while(true)
+        {
+            transform.DOMoveY(distance, second);
+            yield return new WaitForSeconds(second);
+            transform.DOMoveY(-distance, second);
+            yield return new WaitForSeconds(second);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -245,16 +240,16 @@ public class EnemyMove : MonoBehaviour
     private void ChangeSprite()
     {
         if (hp < 170)
-            spriteRenderer.sprite = firstMinyoung;
+            spriteRenderer.sprite = minyoungSprites[0];
 
         if (hp < 120)
-            spriteRenderer.sprite = secondMinyoung;
+            spriteRenderer.sprite = minyoungSprites[1];
 
         if (hp < 70)
-            spriteRenderer.sprite = thirdMinyoung;
+            spriteRenderer.sprite = minyoungSprites[2];
 
         if (hp < 40)
-            spriteRenderer.sprite = fourthMinyoung;
+            spriteRenderer.sprite = minyoungSprites[3];
 
         if (hp <= 0)
             spriteRenderer.sprite = evolutionMinyoung;
