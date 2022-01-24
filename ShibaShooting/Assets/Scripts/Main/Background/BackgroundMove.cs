@@ -43,7 +43,6 @@ public class BackgroundMove : MonoBehaviour
             meshRenderer.material = red;
         }
 
-        GameManager.Instance.playerMove.IsItem(false);
     }
 
     public void ChangeToRed()

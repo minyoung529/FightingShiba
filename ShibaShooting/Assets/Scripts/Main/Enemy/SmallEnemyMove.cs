@@ -34,14 +34,14 @@ public class SmallEnemyMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(ConstantManager.PLAYER_TAG))
         {
-            if(GameManager.Instance.playerMove.ReturnIsBig())
+            if(GameManager.Instance.player.playerState == PlayerState.Big)
             {
                 StartCoroutine(Dead());
                 return;
             }
 
             StartCoroutine(Dead());
-            GameManager.Instance.playerMove.StartCoroutine("Damage");
+            GameManager.Instance.player.StartCoroutine("Damage");
         }
 
         if (collision.gameObject.CompareTag(ConstantManager.BULLET_TAG))

@@ -13,7 +13,7 @@ public class PurchasePanel : MonoBehaviour
         priceText = GetComponentInChildren<Text>();
     }
 
-    public void Init(PurchaseItem item)
+    public void Init(ItemBase item)
     {
         priceText.text = item.price.ToString();
         image.sprite = item.sprite;

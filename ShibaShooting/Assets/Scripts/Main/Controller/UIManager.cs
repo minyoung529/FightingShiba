@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
         highScore = GameManager.Instance.CurrentUser.GetHighScore();
         UpdateUI();
         DontDestroyOnLoad(this);
-        InstantiatePanel();
+        //InstantiatePanel();
     }
 
     private void Update()
@@ -194,11 +194,6 @@ public class UIManager : MonoBehaviour
         enemyHPBar.value += damage;
     }
 
-
-    public void RandomItem(int randomNum)
-    {
-        item.sprite = itemSprites[randomNum];
-    }
 
 
     #region Tutorial

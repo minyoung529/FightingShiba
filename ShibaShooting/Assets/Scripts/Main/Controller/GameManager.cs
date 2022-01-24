@@ -7,12 +7,10 @@ using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField]
-    private User user;
+    [SerializeField] private User user;
     public User CurrentUser { get { return user; } }
 
-    [SerializeField] private List<PurchaseItem> skins = new List<PurchaseItem>();
-    [SerializeField] private List<PurchaseItem> items = new List<PurchaseItem>();
+    [SerializeField] private List<ItemBase> items = new List<ItemBase>();
 
     #region InGame
     [Header("æ∆¿Ã≈€")]
@@ -25,15 +23,15 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private GameObject sun;
     [SerializeField] private GameObject dark;
 
+    public CharacterBase player { get; private set; }
+
     public Vector2 MinPosition { get; private set; }
     public Vector2 MaxPosition { get; private set; }
-
     #endregion
 
     #region Controller
     public PoolManager poolManager;
     public UIManager UIManager { get; private set; }
-    public PlayerMove playerMove { get; private set; }
     public TutorialManager tutorialManager { get; private set; }
     #endregion
 
@@ -124,6 +122,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         poolManager ??= FindObjectOfType<PoolManager>();
         UIManager ??= FindObjectOfType<UIManager>();
+        player ??= FindObjectOfType<CharacterBase>();
     }
     public void GameStart()
     {
@@ -174,11 +173,13 @@ public class GameManager : MonoSingleton<GameManager>
         {
             randomY = Random.Range(-3.5f, 3.5f);
             randomDelay = Random.Range(6f, 7f);
+
             yield return new WaitForSeconds(randomDelay);
+
             if (isGameOver) yield break;
 
-            UIManager.RandomItem(Random.Range(0, 7));
-            Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
+            GameObject obj = Instantiate(itemPrefab, new Vector2(12f, randomY), Quaternion.identity);
+            obj.GetComponent<Item>().SetItem(items[Random.Range(0, items.Count)]);
         }
     }
 
@@ -245,15 +246,14 @@ public class GameManager : MonoSingleton<GameManager>
         yield return new WaitForSeconds(randomDelay);
     }
 
-    public void ItemHeart()
+    public void PlusHeart(int number)
     {
         if (Life < lifeCount)
         {
-            Life++;
+            Life += number;
             UIManager.ActiveHeart();
         }
     }
-
 
     public void SetLifeCount(int life)
     {
@@ -310,9 +310,9 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     //HACK:
-    public void SetPlayerMove(PlayerMove playerMove)
+    public void SetPlayerMove(CharacterBase playerMove)
     {
-        this.playerMove = playerMove;
+        this.player = playerMove;
     }
 
     //HACK:
@@ -331,7 +331,7 @@ public class GameManager : MonoSingleton<GameManager>
         SaveToJson();
     }
 
-    public List<PurchaseItem> GetPurchaseItems()
+    public List<ItemBase> GetPurchaseItems()
     {
         return items;
     }

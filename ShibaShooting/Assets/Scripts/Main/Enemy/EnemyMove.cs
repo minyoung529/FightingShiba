@@ -131,8 +131,7 @@ public class EnemyMove : MonoBehaviour
 
     private GameObject Fire(GameObject bullet)
     {
-        Debug.Log("Fire");
-        diff = GameManager.Instance.playerMove.transform.position - transform.position;
+        diff = GameManager.Instance.player.transform.position - transform.position;
         diff.Normalize();
 
         rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;

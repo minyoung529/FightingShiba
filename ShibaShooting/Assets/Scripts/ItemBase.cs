@@ -1,9 +1,10 @@
 using UnityEngine;
 
 [System.Serializable]
-public class PurchaseItem
+public class ItemBase
 {
     public string name;
+    public PlayerState state;
     public int price;
     public Sprite sprite;
     public string info;

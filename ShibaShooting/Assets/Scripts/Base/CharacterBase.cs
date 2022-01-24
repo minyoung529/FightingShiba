@@ -8,6 +8,8 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector] public Animator animator = null;
     public float speed = 0f;
 
+    public PlayerState playerState;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
