@@ -609,6 +609,7 @@ GameObject:
   - component: {fileID: 1628581182}
   - component: {fileID: 1628581186}
   - component: {fileID: 1628581187}
+  - component: {fileID: 1628581188}
   m_Layer: 0
   m_Name: Player_Shiba
   m_TagString: Player
@@ -715,8 +716,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deco: {fileID: 2139322375}
-  sleep: {fileID: 8144070438650234231, guid: ce17f596cc6613e43b7334494907a880, type: 3}
-  lightning: {fileID: -903540798210072471, guid: ce17f596cc6613e43b7334494907a880, type: 3}
 --- !u!61 &1628581183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -779,6 +778,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   animator: {fileID: 0}
   speed: 30
+  playerState: 0
 --- !u!114 &1628581186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,6 +804,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b1cdb26f340803448cc8b061860785d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1628581188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628581178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96adeb6b24bfeab42a0b92a3630f9b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1653683518

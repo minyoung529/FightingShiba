@@ -3,12 +3,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private CharacterBase player;
-    
     [Header("²Ù¹Ì±â")]
     [SerializeField] private SpriteRenderer deco;
-    [SerializeField] private Sprite sleep;
-    [SerializeField] private Sprite lightning;
 
     private Vector2 targetPosition = Vector2.zero;
     public BackgroundMove backMove { get; private set; }
@@ -17,14 +13,12 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.SetPlayerMove(player);
+        GameManager.Instance.SetPlayerMove(GetComponent<CharacterBase>());
     }
 
     void Start()
     {
-        player = GetComponent<CharacterBase>();
         backMove = FindObjectOfType<BackgroundMove>();
-
         InputEventManager.StartListening("MOVE", Move);
     }
 
@@ -39,22 +33,21 @@ public class PlayerMove : MonoBehaviour
         targetPosition.y = Mathf.Clamp(targetPosition.y, GameManager.Instance.MinPosition.y, GameManager.Instance.MaxPosition.y);
 
         transform.localPosition =
-        Vector2.MoveTowards(transform.localPosition, targetPosition, player.speed * Time.deltaTime);
+        Vector2.MoveTowards(transform.localPosition, targetPosition, GameManager.Instance.player.speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDamaged) return;
-        if (player.playerState == PlayerState.Big) return;
+        if (GameManager.Instance.player.playerState == PlayerState.Big) return;
 
         if (collision.CompareTag(ConstantManager.ENEMY_BULLET_TAG) || collision.CompareTag(ConstantManager.LIGHTNING_TAG))
         {
             Debug.Log(collision.gameObject.name);
             Destroy(collision.gameObject);
+            StartCoroutine(Damage());
+            Vibrate();
         }
-
-        Vibrate();
-        StartCoroutine(Damage());
     }
 
     private void Vibrate()
@@ -70,20 +63,14 @@ public class PlayerMove : MonoBehaviour
         GameManager.Instance.Dead();
         for (int i = 0; i < 5; i++)
         {
-            player.spriteRenderer.enabled = false;
+            GameManager.Instance.player.spriteRenderer.enabled = false;
             yield return new WaitForSeconds(0.2f);
-            player.spriteRenderer.enabled = true;
+            GameManager.Instance.player.spriteRenderer.enabled = true;
             yield return new WaitForSeconds(0.2f);
         }
 
         isDamaged = false;
         yield break;
-    }
-
-    public void DecoLightning(bool isTrue)
-    {
-        deco.enabled = isTrue;
-        deco.sprite = lightning;
     }
 
     private void OnDestroy()

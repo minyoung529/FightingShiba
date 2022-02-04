@@ -41,7 +41,6 @@ public class SmallEnemyMove : MonoBehaviour
             }
 
             StartCoroutine(Dead());
-            GameManager.Instance.player.StartCoroutine("Damage");
         }
 
         if (collision.gameObject.CompareTag(ConstantManager.BULLET_TAG))

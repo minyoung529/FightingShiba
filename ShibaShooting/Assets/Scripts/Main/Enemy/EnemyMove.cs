@@ -129,8 +129,9 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
-    private GameObject Fire(GameObject bullet)
+    private GameObject SetBulletPosition(GameObject bullet)
     {
+        if (GameManager.Instance.player == null) return null;
         diff = GameManager.Instance.player.transform.position - transform.position;
         diff.Normalize();
 
@@ -158,7 +159,7 @@ public class EnemyMove : MonoBehaviour
             result = Instantiate(enemyBulletPrefab, enemyBulletPosition.transform);
         }
 
-        result = Fire(result);
+        result = SetBulletPosition(result);
         return result;
     }
 
