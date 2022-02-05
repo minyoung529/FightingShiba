@@ -5,19 +5,12 @@ using UnityEngine;
 public class InputKeyManager : MonoBehaviour
 {
     EventParam eventParam;
-    Camera mainCam;
-
-    private void Start()
-    {
-        mainCam = Camera.main;
-    }
 
     private void Update()
     {
         if (Input.GetMouseButton(0) && !GameManager.Instance.isGameOver)
         {
-            //LATER:: Save Main Camera As Various
-            eventParam.vectorParam = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            eventParam.vectorParam = GameManager.Instance.mainCam.cam.ScreenToWorldPoint(Input.mousePosition);
             InputEventManager.TriggerEvent("MOVE", eventParam);
             ResetParam();
         }

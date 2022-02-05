@@ -54,7 +54,7 @@ public class PoolManager : MonoBehaviour
         return false;
     }
 
-    public void SetPoolObject(GameObject obj)
+    public void DespawnPoolObject(GameObject obj)
     {
         obj.transform.SetParent(transform);
         obj.SetActive(false);

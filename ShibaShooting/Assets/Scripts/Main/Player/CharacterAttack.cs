@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private Transform bulletPosition = null;
     [SerializeField] private GameObject bulletPrefab = null;

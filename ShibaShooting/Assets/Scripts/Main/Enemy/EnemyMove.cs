@@ -23,7 +23,7 @@ public class EnemyMove : MonoBehaviour
     private float randomTimer = 0f;
     private float circleMaxTime = 3f;
     private Vector3 diff = Vector3.zero;
-    private PlayerMove player = null;
+    private CharacterMove player = null;
     private float rotationZ = 0f;
 
     [Header("적 생성시 필요한 변수")]

@@ -44,7 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
     public int Life { get; private set; } = 3;
     public bool isGameOver = false;
 
-    public Camera mainCam;
+    public CameraMove mainCam;
 
     private void Awake()
     {
@@ -310,7 +310,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     //HACK:
-    public void SetPlayerMove(CharacterBase playerMove)
+    public void SetPlayer(CharacterBase playerMove)
     {
         this.player = playerMove;
     }
@@ -334,5 +334,13 @@ public class GameManager : MonoSingleton<GameManager>
     public List<ItemBase> GetPurchaseItems()
     {
         return items;
+    }
+
+    public void Vibrate()
+    {
+        if (CurrentUser.isVibrate)
+        {
+            Handheld.Vibrate();
+        }
     }
 }

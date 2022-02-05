@@ -16,7 +16,7 @@ public class CoinMove : BulletMove
         {
             SoundManager.Instance.CoinAudio();
             GameManager.Instance.UIManager.AddCoin(1);
-            GameManager.Instance.poolManager.SetPoolObject(gameObject);
+            GameManager.Instance.poolManager.DespawnPoolObject(gameObject);
         }
     }
 
@@ -24,7 +24,7 @@ public class CoinMove : BulletMove
     {
         if (transform.position.x < GameManager.Instance.MinPosition.x - 2f)
         {
-            GameManager.Instance.poolManager.SetPoolObject(gameObject);
+            GameManager.Instance.poolManager.DespawnPoolObject(gameObject);
         }
     }
 }
