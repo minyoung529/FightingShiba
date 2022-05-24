@@ -1,7 +1,7 @@
 # Fighting, Shiba!
+| 20210526 ~ 20210701
 
-* 우수상을 받은 1학년 1학기 엔진 기초 교과 과목 개인 프로젝트로 만든 'Fighting, Shiba!'입니다. 
-20210526 ~ 20210701
+* 학년 우수상을 받은 1학년 1학기 엔진 기초 교과 과목 개인 프로젝트로 만든 'Fighting, Shiba!'입니다. 기획, 개발, 그래픽, 배경음악 제작을 했습니다.
 
 [![Video Label](https://img.youtube.com/vi/d36qKLiICJA/0.jpg)](https://youtu.be/d36qKLiICJA)
 * 클릭시 영상으로 이동합니다.
@@ -13,6 +13,13 @@
 * 귀엽고 밝은 그래픽 콘셉트, 사운드 콘셉트
 * 다양한 버프, 디버프 아이템
 * 스킨 상점, 아이템 업그레이드 상점
+
+## 작업한 음원
+| 이미지를 클릭하면 음원 사이트로 이동합니다.
+[![ALG](https://user-images.githubusercontent.com/77655318/170060859-4536d649-a3df-4cc5-89e8-fb1f157abe59.png)](https://soundcloud.com/1cjgmuszzmxe/a-little-ghost?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing)<br/> 
+[![SS](https://user-images.githubusercontent.com/77655318/170061728-7e88493c-9f33-4e2d-b49f-75671a776fc4.png)](https://soundcloud.com/1cjgmuszzmxe/summer-storm?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing)<br/> 
+[![SPRITN](https://user-images.githubusercontent.com/77655318/170061741-d727f7ba-fac5-47e7-b94a-951ccde578b1.png)](https://soundcloud.com/1cjgmuszzmxe/mrtjd3liovoc?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing)<br/> 
+[![NIGHTYNIGHT](https://user-images.githubusercontent.com/77655318/170061755-cdbe5e12-cadf-4213-b206-847a8368eceb.png)](https://soundcloud.com/1cjgmuszzmxe/nighty-night?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing)
 
 ## 게임 플레이 화면
 ### 로비
