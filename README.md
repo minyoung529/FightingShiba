@@ -7,9 +7,50 @@
 * 클릭시 영상으로 이동합니다.
 
 ## 게임 소개
-게임의 보스인 '민영' 학생을 유니티 만점으로 만들기 위해 학생의 방해를 피해 유니티를 발사하는 슈팅 게임입니다. 
+학생의 방해를 뚫고 만점을 만들어라! 과제를 쏘고 숙제로 공격하자! 파이팅, 시바선생! 게임의 보스인 '민영' 학생을 유니티 만점으로 만들기 위해 학생의 방해를 피해 유니티를 발사하는 슈팅 게임입니다.
 
 ## 게임 특징
 * 귀엽고 밝은 그래픽 콘셉트, 사운드 콘셉트
 * 다양한 버프, 디버프 아이템
 * 스킨 상점, 아이템 업그레이드 상점
+
+## 게임 플레이 화면
+### 로비
+![Lobby](https://user-images.githubusercontent.com/77655318/170050941-e301c4b1-6c46-44ff-81df-4267e7f387a4.png)
+
+### 스토리 컷씬
+![story1](https://user-images.githubusercontent.com/77655318/170051070-cbceba0d-ae25-4f33-b33b-ebbec8fa5bf6.png)
+![story2](https://user-images.githubusercontent.com/77655318/170051093-c5fea62c-277a-44a9-aefb-e5914d538db5.png)
+![story3](https://user-images.githubusercontent.com/77655318/170051114-0b147090-6d13-4fc5-8525-3c93b0d50a32.png)
+![stroy4](https://user-images.githubusercontent.com/77655318/170051160-45f26c68-c4c3-4005-8ab9-8b03c36505d6.png)
+![story5](https://user-images.githubusercontent.com/77655318/170051126-37f2c06c-cf2f-4f74-8cfb-38b36dd75fd4.png)
+![story6](https://user-images.githubusercontent.com/77655318/170051137-9e34c915-85cd-4f9f-924d-e65eb48ce9ef.png)
+
+### 상점
+* 상점 튜토리얼
+![Store](https://user-images.githubusercontent.com/77655318/170051656-2244ba89-692e-4c05-8d5b-9b8b8cc33535.png)
+
+* 아이템 상점
+![ShibaSleepy](https://user-images.githubusercontent.com/77655318/170052411-5fa4a016-78de-4e57-8dde-7ad73df2b636.png)
+![Heart](https://user-images.githubusercontent.com/77655318/170051587-b4ce1c0c-c041-44b4-9b94-cb74869b3c04.png)
+![Skin](https://user-images.githubusercontent.com/77655318/170051566-8bdecb29-7b4e-4f07-aecd-d53afa78906b.png)
+![Money](https://user-images.githubusercontent.com/77655318/170052157-ac599784-28cd-4e88-aea3-8ef3edd85d0b.png)
+![SmallShiba](https://user-images.githubusercontent.com/77655318/170051570-e3a97069-5922-4eb1-a28f-916cc2208235.png)
+![Time](https://user-images.githubusercontent.com/77655318/170051573-4a3269e1-30d5-4f81-964c-47c4394f0891.png)
+![Ak](https://user-images.githubusercontent.com/77655318/170051579-3e68d958-99dd-4fdf-b2de-9418bb0ab034.png)
+
+* 스킨 상점
+![Skin](https://user-images.githubusercontent.com/77655318/170051774-0c004d85-6ceb-4e63-beaa-7126f15e93c8.png)
+
+### 플레이
+* 플레이 튜토리얼
+![Play1](https://user-images.githubusercontent.com/77655318/170051858-cd464847-9c35-4cc0-bcf7-f84c1814fcf4.png)
+* 플레이
+![Play2](https://user-images.githubusercontent.com/77655318/170051869-c1003541-07a6-48c0-ac29-3a7b8f523554.png)
+![Play3](https://user-images.githubusercontent.com/77655318/170051874-244a9874-a8d2-464d-8973-712a83bffc88.png)
+![Play4](https://user-images.githubusercontent.com/77655318/170051888-3b079466-b141-4a76-828d-5a8ed389adff.png)
+
+### 게임 오버, 클리어 씬
+![Clear](https://user-images.githubusercontent.com/77655318/170052228-d695fd56-25d9-40b2-8e88-c1fa4363732a.png)
+![GameOver](https://user-images.githubusercontent.com/77655318/170052239-0f440346-6d89-4b90-b424-04b94fa04261.png)
+
