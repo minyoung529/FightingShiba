@@ -1,6 +1,6 @@
 # Fighting, Shiba!
 
-* 우수상을 받은 1학년 1학기 엔진 기초 교과 과목 프로젝트로 만든 'Fighting, Shiba!'입니다. 
+* 우수상을 받은 1학년 1학기 엔진 기초 교과 과목 개인 프로젝트로 만든 'Fighting, Shiba!'입니다. 
 20210526 ~ 20210701
 
 [![Video Label](https://img.youtube.com/vi/d36qKLiICJA/0.jpg)](https://youtu.be/d36qKLiICJA)
